@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Button from "./Button"
 import Row from "./Row";
-import { initialState, dartNumbersArr } from "./dartCalculator";
+import { initialState, dartNumbersArr1 } from "./dartCalculator";
 
 export default class SinglePlayer extends Component {
   state = initialState;
@@ -28,13 +28,19 @@ export default class SinglePlayer extends Component {
         this.setState({secondPreviousValue: null});
         this.setState({previousValue: null});
     }
+
+    if(this.state.secondPreviousValue){
+      this.setState({thirdPreviousValue: null});
+      this.setState({secondPreviousValue: null});
+      this.setState({previousValue: null});
+    }
   };
 
   threeDartAverage = () => {
     let allDartsAverage = this.state.dartsAverage
     const averages = []
     let sum = 0;
-    let total = 0
+  
 
     for (let i = 0; i < allDartsAverage.length; i++){
         sum = sum + allDartsAverage[i];
@@ -43,11 +49,10 @@ export default class SinglePlayer extends Component {
           sum = 0;
         }
     }
-    for (let n = 0; n < averages.length; n++){
-        total = total + averages[i];
-    }
+    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+
     if (averages.length > 0){
-        return total / averages.length;
+        return allAverages;
 
     }
     return 0;
@@ -55,6 +60,7 @@ export default class SinglePlayer extends Component {
 
   ResetGame = () => {
     this.setState(initialState)
+    this.state.dartsAverage.length = 0
   }
 
   UndoLastDart = () => {
@@ -71,7 +77,7 @@ export default class SinglePlayer extends Component {
           <Text style={styles.value}>
             {parseFloat(this.state.currentValue).toLocaleString()}
           </Text>
-          <Text style={styles.threeDartValue}>3 Dart Average:{this.threeDartAverage()}</Text>
+          <Text style={styles.threeDartValue}>3 Dart Average: {this.threeDartAverage().toFixed(2)}</Text>
           <Text style={styles.legValue}>
             Legs Completed: {parseFloat(this.state.legsCompleted).toLocaleString()}
             </Text>
@@ -143,11 +149,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 57)}>
               <Text style={styles.textStyle}>Treble 19</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -182,11 +183,6 @@ export default class SinglePlayer extends Component {
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.HandleTap("number", 54)}>
               <Text style={styles.textStyle}>Treble 18</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
             </Pressable>
           </View>
         </View>
@@ -223,11 +219,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 51)}>
               <Text style={styles.textStyle}>Treble 17</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -262,11 +253,6 @@ export default class SinglePlayer extends Component {
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.HandleTap("number", 48)}>
               <Text style={styles.textStyle}>Treble 16</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
             </Pressable>
           </View>
         </View>
@@ -305,11 +291,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 45)}>
               <Text style={styles.textStyle}>Treble 15</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -344,11 +325,6 @@ export default class SinglePlayer extends Component {
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.HandleTap("number", 42)}>
               <Text style={styles.textStyle}>Treble 14</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
             </Pressable>
           </View>
         </View>
@@ -385,11 +361,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 39)}>
               <Text style={styles.textStyle}>Treble 13</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -425,11 +396,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 36)}>
               <Text style={styles.textStyle}>Treble 12</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -464,11 +430,6 @@ export default class SinglePlayer extends Component {
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.HandleTap("number", 33)}>
               <Text style={styles.textStyle}>Treble 11</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
             </Pressable>
           </View>
         </View>
@@ -507,11 +468,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 30)}>
               <Text style={styles.textStyle}>Treble 10</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -546,11 +502,6 @@ export default class SinglePlayer extends Component {
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.HandleTap("number", 27)}>
               <Text style={styles.textStyle}>Treble 9</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
             </Pressable>
           </View>
         </View>
@@ -587,11 +538,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 24)}>
               <Text style={styles.textStyle}>Treble 8</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -627,11 +573,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 21)}>
               <Text style={styles.textStyle}>Treble 7</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -666,11 +607,6 @@ export default class SinglePlayer extends Component {
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.HandleTap("number", 18)}>
               <Text style={styles.textStyle}>Treble 6</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
             </Pressable>
           </View>
         </View>
@@ -709,11 +645,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 15)}>
               <Text style={styles.textStyle}>Treble 5</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -748,11 +679,6 @@ export default class SinglePlayer extends Component {
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.HandleTap("number", 12)}>
               <Text style={styles.textStyle}>Treble 4</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
             </Pressable>
           </View>
         </View>
@@ -789,11 +715,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 9)}>
               <Text style={styles.textStyle}>Treble 3</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -829,11 +750,6 @@ export default class SinglePlayer extends Component {
               onPress={() => this.HandleTap("number", 6)}>
               <Text style={styles.textStyle}>Treble 2</Text>
             </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
-            </Pressable>
           </View>
         </View>
       </Modal>
@@ -868,11 +784,6 @@ export default class SinglePlayer extends Component {
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.HandleTap("number", 3)}>
               <Text style={styles.textStyle}>Treble 1</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setState({modalVisible: false})}>
-              <Text style={styles.textStyle}>Go Back</Text>
             </Pressable>
           </View>
         </View>

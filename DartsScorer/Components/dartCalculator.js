@@ -9,10 +9,18 @@ export const initialState = {
     dartsAverage: [],
   };
 
-  export const dartNumbersArr = [
-    1, 2, 3
+  export const dartNumbersArr1 = [
+    20, 19, 18, 17, 16
   ]
-
+  export const dartNumbersArr2 = [
+    15, 14, 13, 12, 11
+  ]
+  export const dartNumbersArr3 = [
+    10, 9, 8, 7, 6
+  ]
+  export const dartNumbersArr4 = [
+    5, 4, 3, 2, 1
+  ]
   
 //   export const handleNumber = (value, state) => {
 //     if (state.currentValue === "501") {
