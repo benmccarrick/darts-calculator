@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Button from "./Button"
 import Row from "./Row";
-import { initialState, dartNumbersArr1 } from "./dartCalculator";
+import { initialState, possibleOuts } from "./dartCalculator";
 
 export default class SinglePlayer extends Component {
   state = initialState;
@@ -12,15 +12,80 @@ export default class SinglePlayer extends Component {
     this.setState({thirdPreviousValue: this.state.secondPreviousValue});
     this.setState({secondPreviousValue: this.state.previousValue});
     this.setState({previousValue: value});
-    this.setState({modalVisible: false});
+    if (this.state.modalVisible20){
+      this.setState({modalVisible20: false});
+    }
+    if (this.state.modalVisible19){
+      this.setState({modalVisible19: false});
+    }
+    if (this.state.modalVisible18){
+      this.setState({modalVisible18: false});
+    }
+    if (this.state.modalVisible17){
+      this.setState({modalVisible17: false});
+    }
+    if (this.state.modalVisible16){
+      this.setState({modalVisible16: false});
+    }
+    if (this.state.modalVisible15){
+      this.setState({modalVisible15: false});
+    }
+    if (this.state.modalVisible14){
+      this.setState({modalVisible14: false});
+    }
+    if (this.state.modalVisible13){
+      this.setState({modalVisible13: false});
+    }
+    if (this.state.modalVisible12){
+      this.setState({modalVisible12: false});
+    }
+    if (this.state.modalVisible11){
+      this.setState({modalVisible11: false});
+    }
+    if (this.state.modalVisible10){
+      this.setState({modalVisible10: false});
+    }
+    if (this.state.modalVisible9){
+      this.setState({modalVisible9: false});
+    }
+    if (this.state.modalVisible8){
+      this.setState({modalVisible8: false});
+    }
+    if (this.state.modalVisible7){
+      this.setState({modalVisible7: false});
+    }
+    if (this.state.modalVisible6){
+      this.setState({modalVisible6: false});
+    }
+    if (this.state.modalVisible5){
+      this.setState({modalVisible5: false});
+    }
+    if (this.state.modalVisible4){
+      this.setState({modalVisible4: false});
+    }
+    if (this.state.modalVisible3){
+      this.setState({modalVisible3: false});
+    }
+    if (this.state.modalVisible2){
+      this.setState({modalVisible2: false});
+    }
+    if (this.state.modalVisible1){
+      this.setState({modalVisible1: false});
+    }
     
     this.state.dartsAverage.push(value)
     
-
-    if(this.state.currentValue <= 0){
+    if(this.state.currentValue - value <= 40){
+      this.setState({possibleOutShot: null})
+    }
+    if(this.state.currentValue - value <= 0){
         this.setState({currentValue: 501});
         this.setState({legsCompleted: parseFloat(this.state.legsCompleted) + 1});
+        this.setState({thirdPreviousValue: null});
+        this.setState({secondPreviousValue: null});
+        this.setState({previousValue: null});
     }
+
 
     if(value + this.state.previousValue + this.state.secondPreviousValue === 180){
         this.setState({total180s: parseFloat(this.state.total180s) + 1})
@@ -34,6 +99,14 @@ export default class SinglePlayer extends Component {
       this.setState({secondPreviousValue: null});
       this.setState({previousValue: null});
     }
+
+    const outs = Object.keys(possibleOuts)
+
+    for(let i = 0; i < outs.length; i++){
+      if (parseFloat(outs[i]) === this.state.currentValue){
+        this.setState({possibleOutShot: possibleOuts[outs[i]]})
+      }
+    }
   };
 
   threeDartAverage = () => {
@@ -45,7 +118,7 @@ export default class SinglePlayer extends Component {
     for (let i = 0; i < allDartsAverage.length; i++){
         sum = sum + allDartsAverage[i];
         if ((i + 1) % 3 == 0) {
-          averages.push(sum / 3);
+          averages.push(sum);
           sum = 0;
         }
     }
@@ -84,6 +157,7 @@ export default class SinglePlayer extends Component {
             <Text style={styles.legValue}>
             Total 180s: {parseFloat(this.state.total180s).toLocaleString()}
             </Text>
+            <Text style={styles.textStyle}>Possible Out: {this.state.possibleOutShot}</Text>
             <Text style={styles.legValue}>
             {this.state.previousValue}{" "}{this.state.secondPreviousValue}{" "}{this.state.thirdPreviousValue}
             </Text>
@@ -92,10 +166,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible20}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible20: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -119,7 +193,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible20: true})}>
         <Text style={styles.textStyle}>20/D20/T20</Text>
       </Pressable>
     </View>
@@ -127,10 +201,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible19}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible19: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -154,7 +228,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible19: true})}>
         <Text style={styles.textStyle}>19/D19/T19</Text>
       </Pressable>
     </View>
@@ -162,10 +236,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible18}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible18: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -189,7 +263,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible18: true})}>
         <Text style={styles.textStyle}>18/D18/T18</Text>
       </Pressable>
     </View>
@@ -197,10 +271,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible17}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible17: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -224,7 +298,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible17: true})}>
         <Text style={styles.textStyle}>17/D17/T17</Text>
       </Pressable>
     </View>
@@ -232,10 +306,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible16}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible16: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -259,7 +333,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible16: true})}>
         <Text style={styles.textStyle}>16/D16/T16</Text>
       </Pressable>
     </View>
@@ -269,10 +343,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible15}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible15: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -296,7 +370,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible15: true})}>
         <Text style={styles.textStyle}>15/D15/T15</Text>
       </Pressable>
     </View>
@@ -304,10 +378,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible14}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible14: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -331,7 +405,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible14: true})}>
         <Text style={styles.textStyle}>14/D14/T14</Text>
       </Pressable>
     </View>
@@ -339,10 +413,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible13}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible13: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -366,7 +440,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible13: true})}>
         <Text style={styles.textStyle}>13/D13/T13</Text>
       </Pressable>
     </View>
@@ -374,10 +448,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible12}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible12: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -401,7 +475,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible12: true})}>
         <Text style={styles.textStyle}>12/D12/T12</Text>
       </Pressable>
     </View>
@@ -409,10 +483,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible11}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible11: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -436,7 +510,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible11: true})}>
         <Text style={styles.textStyle}>11/D11/T11</Text>
       </Pressable>
     </View>
@@ -446,10 +520,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible10}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible10: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -473,7 +547,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible10: true})}>
         <Text style={styles.textStyle}>10/D10/T10</Text>
       </Pressable>
     </View>
@@ -481,10 +555,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible9}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible9: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -508,7 +582,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible9: true})}>
         <Text style={styles.textStyle}>9/D9/T9</Text>
       </Pressable>
     </View>
@@ -516,10 +590,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible8}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible8: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -543,7 +617,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible8: true})}>
         <Text style={styles.textStyle}>8/D8/T8</Text>
       </Pressable>
     </View>
@@ -551,10 +625,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible7}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible7: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -578,7 +652,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible7: true})}>
         <Text style={styles.textStyle}>7/D7/T7</Text>
       </Pressable>
     </View>
@@ -586,10 +660,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible6}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible6: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -613,7 +687,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible6: true})}>
         <Text style={styles.textStyle}>6/D6/T6</Text>
       </Pressable>
     </View>
@@ -623,10 +697,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible5}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible5: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -650,7 +724,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible5: true})}>
         <Text style={styles.textStyle}>5/D5/T5</Text>
       </Pressable>
     </View>
@@ -658,10 +732,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible4}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible4: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -685,7 +759,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible4: true})}>
         <Text style={styles.textStyle}>4/D4/T4</Text>
       </Pressable>
     </View>
@@ -693,10 +767,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible3}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible3: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -720,7 +794,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible3: true})}>
         <Text style={styles.textStyle}>3/D3/T3</Text>
       </Pressable>
     </View>
@@ -728,10 +802,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible2}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible2: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -755,7 +829,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible2: true})}>
         <Text style={styles.textStyle}>2/D2/T2</Text>
       </Pressable>
     </View>
@@ -763,10 +837,10 @@ export default class SinglePlayer extends Component {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.state.modalVisible1}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          this.setState({modalVisible: false});
+          this.setState({modalVisible1: false});
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -790,7 +864,7 @@ export default class SinglePlayer extends Component {
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() =>  this.setState({modalVisible: true})}>
+        onPress={() =>  this.setState({modalVisible1: true})}>
         <Text style={styles.textStyle}>1/D1/T1</Text>
       </Pressable>
     </View>
