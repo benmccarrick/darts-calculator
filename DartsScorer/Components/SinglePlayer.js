@@ -8,10 +8,36 @@ export default class SinglePlayer extends Component {
   state = initialState;
 
   HandleTap = (type, value) => {
-    this.setState({currentValue: this.state.currentValue - value});
-    this.setState({thirdPreviousValue: this.state.secondPreviousValue});
-    this.setState({secondPreviousValue: this.state.previousValue});
-    this.setState({previousValue: value});
+    this.state.currentValue = this.state.currentValue - value
+    this.setState({firstDart: value});
+    this.setState({previousValue: this.state.currentValue});
+
+    this.state.all3Darts.push(value)
+
+    if(this.state.all3Darts.length === 3){
+      setTimeout(
+        function() {
+            this.setState({timePassed: true});
+            this.setState({all3Darts: []})
+        }
+        .bind(this),
+        2500
+      );
+    }
+
+    if(this.state.currentValue === 1){
+      this.setState({all3Darts: []});
+      this.state.dartsAverage.pop();
+      this.state.dartsAverage.push(0);
+    }
+    if(this.state.currentValue < 0){
+      this.state.currentValue = this.state.previousValue
+      this.setState({all3Darts: []});
+      this.state.dartsAverage.pop();
+      this.state.dartsAverage.push(0);
+      this.setState({previousValue: this.state.currentValue})
+    }
+
     if (this.state.modalVisible20){
       this.setState({modalVisible20: false});
     }
@@ -75,29 +101,39 @@ export default class SinglePlayer extends Component {
     
     this.state.dartsAverage.push(value)
     
-    if(this.state.currentValue - value <= 40){
+    if(this.state.currentValue <= 40){
       this.setState({possibleOutShot: null})
     }
-    if(this.state.currentValue - value <= 0){
+    if(this.state.currentValue === 0){
+      if(this.state.all3Darts.length === 3){
+        this.state.checkouts.push(this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
+      }
+      if(this.state.all3Darts.length === 2){
+        this.state.checkouts.push(this.state.all3Darts[0] + this.state.all3Darts[1])
+      }
+      if(this.state.all3Darts.length === 1){
+        this.state.checkouts.push(this.state.all3Darts[0])
+      }
         this.setState({currentValue: 501});
         this.setState({legsCompleted: parseFloat(this.state.legsCompleted) + 1});
-        this.setState({thirdPreviousValue: null});
-        this.setState({secondPreviousValue: null});
-        this.setState({previousValue: null});
+        this.setState({showOuts: false});
+        this.setState({all3Darts: []})
+
     }
 
-
-    if(value + this.state.previousValue + this.state.secondPreviousValue === 180){
-        this.setState({total180s: parseFloat(this.state.total180s) + 1})
-        this.setState({thirdPreviousValue: null});
-        this.setState({secondPreviousValue: null});
-        this.setState({previousValue: null});
+    if(this.state.checkouts.length){
+      let highestCheckout = this.state.checkouts[0]
+      for (let i = 0; i < this.state.checkouts.length; i++) {
+        if (this.state.checkouts[i] > highestCheckout ) {
+          highestCheckout = this.state.checkouts[i];
+        }
+      }
+      this.setState({highestOut: highestCheckout})
     }
 
-    if(this.state.secondPreviousValue){
-      this.setState({thirdPreviousValue: null});
-      this.setState({secondPreviousValue: null});
-      this.setState({previousValue: null});
+    if(this.state.all3Darts.length === 3 && this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2] === 180){
+      this.setState({total180s: parseFloat(this.state.total180s) + 1})
+
     }
 
     const outs = Object.keys(possibleOuts)
@@ -105,6 +141,7 @@ export default class SinglePlayer extends Component {
     for(let i = 0; i < outs.length; i++){
       if (parseFloat(outs[i]) === this.state.currentValue){
         this.setState({possibleOutShot: possibleOuts[outs[i]]})
+        this.state.showOuts = true
       }
     }
   };
@@ -113,15 +150,15 @@ export default class SinglePlayer extends Component {
     let allDartsAverage = this.state.dartsAverage
     const averages = []
     let sum = 0;
-  
-
+    
     for (let i = 0; i < allDartsAverage.length; i++){
-        sum = sum + allDartsAverage[i];
-        if ((i + 1) % 3 == 0) {
-          averages.push(sum);
-          sum = 0;
-        }
+      sum = sum + allDartsAverage[i];
+      if ((i + 1) % 3 == 0) {
+        averages.push(sum);
+        sum = 0;
+      }
     }
+    
     const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
 
     if (averages.length > 0){
@@ -133,13 +170,19 @@ export default class SinglePlayer extends Component {
 
   ResetGame = () => {
     this.setState(initialState)
-    this.state.dartsAverage.length = 0
+    this.setState({currentValue: "501"})
+    this.setState({dartsAverage: []})
+    this.setState({all3Darts: []})
+    this.setState({showOuts: false})
   }
 
   UndoLastDart = () => {
-    if(this.state.currentValue < 501){
-    this.setState({currentValue: this.state.currentValue + this.state.previousValue});
-
+    if(this.state.currentValue <= 501){
+    this.setState({currentValue: (this.state.currentValue + this.state.dartsAverage.pop())});
+    this.state.all3Darts.pop();
+    }
+    if (this.state.currentValue + this.state.dartsAverage.pop() > 170){
+      this.state.showOuts = false;
     }
   }
 
@@ -157,9 +200,14 @@ export default class SinglePlayer extends Component {
             <Text style={styles.legValue}>
             Total 180s: {parseFloat(this.state.total180s).toLocaleString()}
             </Text>
-            <Text style={styles.textStyle}>Possible Out: {this.state.possibleOutShot}</Text>
             <Text style={styles.legValue}>
-            {this.state.previousValue}{" "}{this.state.secondPreviousValue}{" "}{this.state.thirdPreviousValue}
+            Highest Checkout: {parseFloat(this.state.highestOut).toLocaleString()}
+            </Text>
+            { this.state.showOuts && 
+            <Text style={styles.textStyle}>Possible Out: {this.state.possibleOutShot}</Text>
+            }
+            <Text style={styles.legValue}>
+            First Dart: {this.state.all3Darts[0]}{" "}Second Dart: {this.state.all3Darts[1]}{" "}Third Dart: {this.state.all3Darts[2]}
             </Text>
           <Row>
           <View style={styles.centeredView}>
@@ -904,7 +952,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 22,
     textAlign: "center",
-    marginBottom: 40,
+    marginBottom: 10,
   },
   centeredView: {
     flex: 1,
