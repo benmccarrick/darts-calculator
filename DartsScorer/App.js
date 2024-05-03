@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomePage from './Components/HomePage';
 import SinglePlayer from './Components/SinglePlayer';
 import MultiPlayer from './Components/MultiPlayer';
+import MultiPlayer2 from './Components/Multiplayer2';
 
 
 export default function App() {
@@ -25,8 +26,13 @@ export default function App() {
         options={{headerShown: 'false'}}
         />
         <Stack.Screen
-        name="Multiplayer Game"
+        name="Multiplayer Game Player 1"
         component={MultiPlayer}
+        options={{headerShown: 'false'}}
+        />
+        <Stack.Screen
+        name="Multiplayer Game Player 2"
+        component={MultiPlayer2}
         options={{headerShown: 'false'}}
         />
       </Stack.Navigator>

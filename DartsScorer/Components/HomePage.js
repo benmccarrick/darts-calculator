@@ -11,15 +11,15 @@ const HomePage = () => {
 
     return (
         <View style={styles.container}>
-      <Text>For a single player game, enter your name and click start!</Text>
+      <Text>For a single player game:  </Text>
       <Button
-      title='start'
+      title='Play Darts'
       onPress={() => {navigation.navigate("Single Player Game")}}/>
       <StatusBar style="auto" />
-      <Text>For a  multiplayer game, enter your names and click start game!</Text>
+      <Text>For a  multiplayer game:</Text>
       <Button
-      title='start game'
-      onPress={() => {navigation.navigate("Multiplayer Game")}}/>
+      title="Let's play darts!"
+      onPress={() => {navigation.navigate("Multiplayer Game Player 1")}}/>
     </View>
 
 );

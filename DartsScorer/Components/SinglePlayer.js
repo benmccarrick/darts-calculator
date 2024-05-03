@@ -103,6 +103,7 @@ export default class SinglePlayer extends Component {
     
     if(this.state.currentValue <= 40){
       this.setState({possibleOutShot: null})
+      this.setState({showOuts: false})
     }
     if(this.state.currentValue === 0){
       if(this.state.all3Darts.length === 3){
@@ -181,7 +182,15 @@ export default class SinglePlayer extends Component {
     this.setState({currentValue: (this.state.currentValue + this.state.dartsAverage.pop())});
     this.state.all3Darts.pop();
     }
-    if (this.state.currentValue + this.state.dartsAverage.pop() > 170){
+    if (this.state.currentValue + this.state.dartsAverage.slice(-1) > 170
+     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 159
+     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 162
+     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 163
+     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 165
+     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 166
+     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 168
+     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 169
+    ){
       this.state.showOuts = false;
     }
   }
@@ -206,8 +215,7 @@ export default class SinglePlayer extends Component {
             { this.state.showOuts && 
             <Text style={styles.textStyle}>Possible Out: {this.state.possibleOutShot}</Text>
             }
-            <Text style={styles.legValue}>
-            First Dart: {this.state.all3Darts[0]}{" "}Second Dart: {this.state.all3Darts[1]}{" "}Third Dart: {this.state.all3Darts[2]}
+            <Text style={styles.threeDarts}>{this.state.all3Darts[0]}{" "}{" "}{this.state.all3Darts[1]}{" "}{" "}{this.state.all3Darts[2]}
             </Text>
           <Row>
           <View style={styles.centeredView}>
@@ -919,7 +927,7 @@ export default class SinglePlayer extends Component {
           </Row>
           <Row>
             <Button text="25" onPress={() => this.HandleTap("number", 25)} />
-            <Button text="50" onPress={() => this.HandleTap("number", 50)} />
+            <Button text="BULL" onPress={() => this.HandleTap("number", 50)} />
             <Button text="Miss" onPress={() => this.HandleTap("number", 0)} />
             <Button text="Undo" onPress={() => this.UndoLastDart()} />
             <Button text="Reset" onPress={() => this.ResetGame()} />
@@ -995,6 +1003,12 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
+  threeDarts: {
+    color: 'red',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 32,
+  }
 });
 
   
