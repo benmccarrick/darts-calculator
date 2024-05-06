@@ -304,7 +304,7 @@ export default class MultiPlayer extends Component {
       const outs = Object.keys(possibleOuts)
   
       for(let i = 0; i < outs.length; i++){
-        if (parseFloat(outs[i]) === this.state.currentValue){
+        if (parseFloat(outs[i]) === this.state.currentValue2){
           this.setState({possibleOutShot2: possibleOuts[outs[i]]})
           this.state.showOuts2 = true
         }

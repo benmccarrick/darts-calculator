@@ -12,7 +12,7 @@ export const initialState = {
     timePassed: false,
     showOuts: false,
     showOuts2: false,
-    startingLeg: 0,
+    startingLeg: "0",
     legsWon: "0",
     legsWon2: "0",
     total180s: "0",
