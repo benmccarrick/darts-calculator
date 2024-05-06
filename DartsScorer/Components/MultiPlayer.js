@@ -28,25 +28,36 @@ export default class MultiPlayer extends Component {
         );
       }
   
-      if(this.state.currentValue === 1){
-        this.setState({all3Darts: []});
-        this.state.dartsAverage.pop();
-        this.state.dartsAverage.push(0);
-      }
-      if(this.state.currentValue < 0){
+      if(this.state.currentValue < 0 || this.state.currentValue === 1){
         this.state.currentValue = this.state.previousValue
-        this.setState({all3Darts: []});
         this.state.dartsAverage.pop();
-        this.state.dartsAverage.push(0);
+        if(this.state.all3Darts.length === 3){
+          this.state.dartsAverage.push(0);
+        }
+        if(this.state.all3Darts.length === 2){
+          this.state.dartsAverage.push(0, 0);
+        }
+        if(this.state.all3Darts.length === 1){
+          this.state.dartsAverage.push(0, 0, 0);
+        }
+        this.setState({all3Darts: []});
         this.setState({previousValue: this.state.currentValue})
         this.setState({player1Throw: false});
         this.setState({player2Throw: true});
       }
       if(type !== "double" && this.state.currentValue <= 0){
         this.state.currentValue = this.state.previousValue
-        this.setState({all3Darts: []});
         this.state.dartsAverage.pop();
-        this.state.dartsAverage.push(0);
+        if(this.state.all3Darts.length === 3){
+          this.state.dartsAverage.push(0);
+        }
+        if(this.state.all3Darts.length === 2){
+          this.state.dartsAverage.push(0, 0);
+        }
+        if(this.state.all3Darts.length === 1){
+          this.state.dartsAverage.push(0, 0, 0);
+        }
+        this.setState({all3Darts: []});
         this.setState({previousValue: this.state.currentValue})
         this.setState({player1Throw: false});
         this.setState({player2Throw: true});
@@ -132,8 +143,10 @@ export default class MultiPlayer extends Component {
           this.setState({currentValue: 501});
           this.setState({currentValue2: 501});
           this.setState({legsWon: parseFloat(this.state.legsWon) + 1});
-          this.setState({showOuts: false});
+          this.setState({showOuts2: false});
+          this.setState({possibleOutShot2: null});
           this.setState({all3Darts: []})
+
           if(this.state.startingLeg % 2 === 0){
             this.setState({player1Throw: false})
             this.setState({player2Throw: true})
@@ -190,25 +203,36 @@ export default class MultiPlayer extends Component {
         );
       }
   
-      if(this.state.currentValue2 === 1){
-        this.setState({all3Darts2: []});
-        this.state.dartsAverage2.pop();
-        this.state.dartsAverage2.push(0);
-      }
-      if(this.state.currentValue2 < 0){
+      if(this.state.currentValue2 < 0 || this.state.currentValue2 === 1){
         this.state.currentValue2 = this.state.previousValue2
-        this.setState({all3Darts2: []});
         this.state.dartsAverage2.pop();
-        this.state.dartsAverage2.push(0);
+        if(this.state.all3Darts2.length === 3){
+          this.state.dartsAverage2.push(0);
+        }
+        if(this.state.all3Darts2.length === 2){
+          this.state.dartsAverage2.push(0, 0);
+        }
+        if(this.state.all3Darts2.length === 1){
+          this.state.dartsAverage2.push(0, 0, 0);
+        }
+        this.setState({all3Darts2: []});
         this.setState({previousValue2: this.state.currentValue2})
         this.setState({player2Throw: false});
         this.setState({player1Throw: true});
       }
       if(type !== "double" && this.state.currentValue2 <= 0){
         this.state.currentValue2 = this.state.previousValue2
-        this.setState({all3Darts2: []});
         this.state.dartsAverage2.pop();
-        this.state.dartsAverage2.push(0);
+        if(this.state.all3Darts2.length === 3){
+          this.state.dartsAverage2.push(0);
+        }
+        if(this.state.all3Darts2.length === 2){
+          this.state.dartsAverage2.push(0, 0);
+        }
+        if(this.state.all3Darts2.length === 1){
+          this.state.dartsAverage2.push(0, 0, 0);
+        }
+        this.setState({all3Darts2: []});
         this.setState({previousValue2: this.state.currentValue2})
         this.setState({player2Throw: false});
         this.setState({player1Throw: true});
@@ -295,6 +319,7 @@ export default class MultiPlayer extends Component {
           this.setState({currentValue: 501});
           this.setState({legsWon2: parseFloat(this.state.legsWon2) + 1});
           this.setState({showOuts: false});
+          this.setState({possibleOutShot1: null});
           this.setState({all3Darts2: []});
 
           if(this.state.startingLeg % 2 === 0){
@@ -390,9 +415,19 @@ export default class MultiPlayer extends Component {
     this.setState({startingLeg: 0})
     this.setState({highestOut: "0"})
     this.setState({highestOut2: "0"})
+    this.setState({checkouts: []})
+    this.setState({checkouts2: []})
   }
 
   UndoLastDart = () => {
+    if(!this.state.all3Darts2.length){
+      this.setState({player1Throw: true})
+      this.setState({player2Throw: false})
+    }
+    if(!this.state.all3Darts.length){
+      this.setState({player2Throw: true})
+      this.setState({player1Throw: false})
+    }
     if(this.state.player1Throw){
       if(this.state.currentValue <= 501){
       this.setState({currentValue: (this.state.currentValue + this.state.dartsAverage.pop())});
@@ -433,25 +468,54 @@ export default class MultiPlayer extends Component {
     return (
       <View style={styles.container}>
         <SafeAreaView>
+          <Row>
+          <View style={styles.columns}>
+          <Text style={styles.value}>{" "}</Text>
+          <Text style={styles.value}>Score:</Text>
+          <Text style={styles.value}>Legs:</Text>
+          <Text style={styles.value}>3 Dart Average:</Text>
+          <Text style={styles.value}>Total 180s:</Text>
+          <Text style={styles.value}>Highest Checkout:</Text>
+            </View>
+            <View style={styles.columns2}>
+          <Text style={styles.value}>Player 1</Text>
           <Text style={styles.value}>
-            Player 1 Score: {parseFloat(this.state.currentValue).toLocaleString()}{" "}Player 2 Score: {parseFloat(this.state.currentValue2).toLocaleString()}
+          {parseFloat(this.state.currentValue).toLocaleString()}
           </Text>
           <Text style={styles.legValue}>
-            Match Score: Player 1:{parseFloat(this.state.legsWon).toLocaleString()}{" "}Player 2:{parseFloat(this.state.legsWon2).toLocaleString()}
+            {parseFloat(this.state.legsWon).toLocaleString()}
             </Text>
-          <Text style={styles.threeDartValue}>3 Dart Average: Player 1 - {this.threeDartAverage().toFixed(2)}{" "}Player 2 - {this.threeDartAverage2().toFixed(2)}</Text>
+            <Text style={styles.threeDartValue}>{this.threeDartAverage().toFixed(2)}</Text>
             <Text style={styles.legValue}>
-            Total 180s: Player 1 - {parseFloat(this.state.total180s).toLocaleString()}{" "}Player 2 - {parseFloat(this.state.total180s2).toLocaleString()}
+            {parseFloat(this.state.total180s).toLocaleString()}
             </Text>
             <Text style={styles.legValue}>
-            Highest Checkout: Player 1 - {parseFloat(this.state.highestOut).toLocaleString()}{" "}Player 2 - {parseFloat(this.state.highestOut2).toLocaleString()}
+            {parseFloat(this.state.highestOut).toLocaleString()}
             </Text>
+            </View>
+            <View style={styles.columns3}>
+          <Text style={styles.value}>Player 2</Text>
+          <Text style={styles.value}>
+          {parseFloat(this.state.currentValue2).toLocaleString()}
+          </Text>
+          <Text style={styles.legValue}>
+            {parseFloat(this.state.legsWon2).toLocaleString()}
+            </Text>
+          <Text style={styles.threeDartValue}>{this.threeDartAverage2().toFixed(2)}</Text>
+            <Text style={styles.legValue}>
+            {parseFloat(this.state.total180s2).toLocaleString()}
+            </Text>
+            <Text style={styles.legValue}>
+            {parseFloat(this.state.highestOut2).toLocaleString()}
+            </Text>
+            </View>
+            </Row>
             { this.state.showOuts && 
             <Text style={styles.textStyle}>Possible Out: Player 1 - {this.state.possibleOutShot}</Text>
-            }
+          }
              { this.state.showOuts2 && 
             <Text style={styles.textStyle}>Possible Out: Player 2 - {this.state.possibleOutShot2}</Text>
-            }
+          }
             <Text style={styles.threeDarts}>{this.state.all3Darts[0]}{" "}{" "}{this.state.all3Darts[1]}{" "}{" "}{this.state.all3Darts[2]}
             </Text>
             <Text style={styles.threeDarts}>{this.state.all3Darts2[0]}{" "}{" "}{this.state.all3Darts2[1]}{" "}{" "}{this.state.all3Darts2[2]}
@@ -1182,6 +1246,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#202020",
     justifyContent: "flex-end",
+  },
+  columns: {
+    justifyContent: 'left',
+    alignItems: 'left',
+    marginLeft: 30,
+  },
+  columns2: {
+    justifyContent: 'center', 
+    alignItems: 'center',
+    marginLeft: 35,
+  },
+  columns3: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 65,
   },
   value: {
     color: "#fff",

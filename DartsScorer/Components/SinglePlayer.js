@@ -21,27 +21,38 @@ export default class SinglePlayer extends Component {
             this.setState({all3Darts: []})
         }
         .bind(this),
-        2500
+        1500
       );
     }
 
-    if(this.state.currentValue === 1){
-      this.setState({all3Darts: []});
-      this.state.dartsAverage.pop();
-      this.state.dartsAverage.push(0);
-    }
-    if(this.state.currentValue < 0){
+    if(this.state.currentValue < 0 || this.state.currentValue === 1){
       this.state.currentValue = this.state.previousValue
-      this.setState({all3Darts: []});
       this.state.dartsAverage.pop();
-      this.state.dartsAverage.push(0);
+        if(this.state.all3Darts.length === 3){
+          this.state.dartsAverage.push(0);
+        }
+        if(this.state.all3Darts.length === 2){
+          this.state.dartsAverage.push(0, 0);
+        }
+        if(this.state.all3Darts.length === 1){
+          this.state.dartsAverage.push(0, 0, 0);
+        }
+        this.setState({all3Darts: []});
       this.setState({previousValue: this.state.currentValue})
     }
     if(type !== "double" && this.state.currentValue <= 0){
       this.state.currentValue = this.state.previousValue
-      this.setState({all3Darts: []});
       this.state.dartsAverage.pop();
-      this.state.dartsAverage.push(0);
+      if(this.state.all3Darts.length === 3){
+        this.state.dartsAverage.push(0);
+      }
+      if(this.state.all3Darts.length === 2){
+        this.state.dartsAverage.push(0, 0);
+      }
+      if(this.state.all3Darts.length === 1){
+        this.state.dartsAverage.push(0, 0, 0);
+      }
+      this.setState({all3Darts: []});
       this.setState({previousValue: this.state.currentValue})
     }
 
@@ -179,9 +190,14 @@ export default class SinglePlayer extends Component {
   ResetGame = () => {
     this.setState(initialState)
     this.setState({currentValue: "501"})
+    this.setState({total180s: "0"})
+    this.setState({legsWon: "0"})
+    this.setState({previousValue: null})
     this.setState({dartsAverage: []})
     this.setState({all3Darts: []})
     this.setState({showOuts: false})
+    this.setState({possibleOutShot: null})
+    this.setState({checkouts: []})
   }
 
   UndoLastDart = () => {

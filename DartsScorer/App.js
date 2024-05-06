@@ -22,7 +22,7 @@ export default function App() {
         options={{headerShown: 'false'}}
         />
         <Stack.Screen
-        name="Multiplayer Game Player 1"
+        name="Multiplayer Game"
         component={MultiPlayer}
         options={{headerShown: 'false'}}
         />

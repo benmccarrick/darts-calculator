@@ -19,7 +19,7 @@ const HomePage = () => {
       <Text>For a  multiplayer game:</Text>
       <Button
       title="Let's play darts!"
-      onPress={() => {navigation.navigate("Multiplayer Game Player 1")}}/>
+      onPress={() => {navigation.navigate("Multiplayer Game")}}/>
     </View>
 
 );
