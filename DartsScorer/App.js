@@ -4,8 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomePage from './Components/HomePage';
 import SinglePlayer from './Components/SinglePlayer';
-import MultiPlayer from './Components/MultiPlayer';
 import MultiPlayer2 from './Components/Multiplayer2';
+import MultiPlayer from './Components/MultiPlayer';
+
 
 
 export default function App() {

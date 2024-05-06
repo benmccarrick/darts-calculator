@@ -116,7 +116,7 @@ export default class SinglePlayer extends Component {
         this.state.checkouts.push(this.state.all3Darts[0])
       }
         this.setState({currentValue: 501});
-        this.setState({legsCompleted: parseFloat(this.state.legsCompleted) + 1});
+        this.setState({legsWon: parseFloat(this.state.legsWon) + 1});
         this.setState({showOuts: false});
         this.setState({all3Darts: []})
 
@@ -204,7 +204,7 @@ export default class SinglePlayer extends Component {
           </Text>
           <Text style={styles.threeDartValue}>3 Dart Average: {this.threeDartAverage().toFixed(2)}</Text>
           <Text style={styles.legValue}>
-            Legs Completed: {parseFloat(this.state.legsCompleted).toLocaleString()}
+            Legs Completed: {parseFloat(this.state.legsWon).toLocaleString()}
             </Text>
             <Text style={styles.legValue}>
             Total 180s: {parseFloat(this.state.total180s).toLocaleString()}

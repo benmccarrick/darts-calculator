@@ -1,15 +1,28 @@
 export const initialState = {
     currentValue: "501",
+    currentValue2: "501",
     previousValue: null,
+    previousValue2: null,
     checkouts: [],
+    checkouts2: [],
     highestOut: "0",
+    highestOut2: "0",
     all3Darts: [],
+    all3Darts2: [],
     timePassed: false,
     showOuts: false,
-    legsCompleted: "0",
+    showOuts2: false,
+    startingLeg: 0,
+    legsWon: "0",
+    legsWon2: "0",
     total180s: "0",
+    total180s2: "0",
     dartsAverage: [],
+    dartsAverage2: [],
     possibleOutShot: null,
+    possibleOutShot2: null,
+    player1Throw: true,
+    player2Throw: false,
     modalVisible20: false,
     modalVisible19: false,
     modalVisible18: false,
@@ -31,19 +44,6 @@ export const initialState = {
     modalVisible2: false,
     modalVisible1: false,
   };
-
-  export const dartNumbersArr1 = [
-    20, 19, 18, 17, 16
-  ]
-  export const dartNumbersArr2 = [
-    15, 14, 13, 12, 11
-  ]
-  export const dartNumbersArr3 = [
-    10, 9, 8, 7, 6
-  ]
-  export const dartNumbersArr4 = [
-    5, 4, 3, 2, 1
-  ]
 
   export const possibleOuts = {
     40 : ['D20'],
@@ -171,4 +171,3 @@ export const initialState = {
     167 : ['T20 + T19 + BULL'],
     170 : ['T20 + T20 + BULL']
 };
-  
