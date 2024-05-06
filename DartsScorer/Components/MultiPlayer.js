@@ -39,6 +39,17 @@ export default class MultiPlayer extends Component {
         this.state.dartsAverage.pop();
         this.state.dartsAverage.push(0);
         this.setState({previousValue: this.state.currentValue})
+        this.setState({player1Throw: false});
+        this.setState({player2Throw: true});
+      }
+      if(type !== "double" && this.state.currentValue <= 0){
+        this.state.currentValue = this.state.previousValue
+        this.setState({all3Darts: []});
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.push(0);
+        this.setState({previousValue: this.state.currentValue})
+        this.setState({player1Throw: false});
+        this.setState({player2Throw: true});
       }
   
       if (this.state.modalVisible20){
@@ -108,7 +119,7 @@ export default class MultiPlayer extends Component {
         this.setState({possibleOutShot: null})
         this.setState({showOuts: false})
       }
-      if(this.state.currentValue === 0){
+      if(type === "double" && this.state.currentValue === 0){
         if(this.state.all3Darts.length === 3){
           this.state.checkouts.push(this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
         }
@@ -190,6 +201,17 @@ export default class MultiPlayer extends Component {
         this.state.dartsAverage2.pop();
         this.state.dartsAverage2.push(0);
         this.setState({previousValue2: this.state.currentValue2})
+        this.setState({player2Throw: false});
+        this.setState({player1Throw: true});
+      }
+      if(type !== "double" && this.state.currentValue2 <= 0){
+        this.state.currentValue2 = this.state.previousValue2
+        this.setState({all3Darts2: []});
+        this.state.dartsAverage2.pop();
+        this.state.dartsAverage2.push(0);
+        this.setState({previousValue2: this.state.currentValue2})
+        this.setState({player2Throw: false});
+        this.setState({player1Throw: true});
       }
   
       if (this.state.modalVisible20){
@@ -259,7 +281,7 @@ export default class MultiPlayer extends Component {
         this.setState({possibleOutShot2: null})
         this.setState({showOuts2: false})
       }
-      if(this.state.currentValue2 === 0){
+      if(type === "double" && this.state.currentValue2 === 0){
         if(this.state.all3Darts2.length === 3){
           this.state.checkouts2.push(this.state.all3Darts2[0] + this.state.all3Darts2[1] + this.state.all3Darts2[2])
         }
@@ -453,7 +475,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 40)}>
+              onPress={() => this.HandleTap("double", 40)}>
               <Text style={styles.textStyle}>Double 20</Text>
             </Pressable>
             <Pressable
@@ -488,7 +510,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 38)}>
+              onPress={() => this.HandleTap("double", 38)}>
               <Text style={styles.textStyle}>Double 19</Text>
             </Pressable>
             <Pressable
@@ -523,7 +545,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 36)}>
+              onPress={() => this.HandleTap("double", 36)}>
               <Text style={styles.textStyle}>Double 18</Text>
             </Pressable>
             <Pressable
@@ -558,7 +580,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 34)}>
+              onPress={() => this.HandleTap("double", 34)}>
               <Text style={styles.textStyle}>Double 17</Text>
             </Pressable>
             <Pressable
@@ -593,7 +615,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 32)}>
+              onPress={() => this.HandleTap("double", 32)}>
               <Text style={styles.textStyle}>Double 16</Text>
             </Pressable>
             <Pressable
@@ -630,7 +652,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 30)}>
+              onPress={() => this.HandleTap("double", 30)}>
               <Text style={styles.textStyle}>Double 15</Text>
             </Pressable>
             <Pressable
@@ -665,7 +687,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 28)}>
+              onPress={() => this.HandleTap("double", 28)}>
               <Text style={styles.textStyle}>Double 14</Text>
             </Pressable>
             <Pressable
@@ -700,7 +722,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 26)}>
+              onPress={() => this.HandleTap("double", 26)}>
               <Text style={styles.textStyle}>Double 13</Text>
             </Pressable>
             <Pressable
@@ -735,7 +757,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 24)}>
+              onPress={() => this.HandleTap("double", 24)}>
               <Text style={styles.textStyle}>Double 12</Text>
             </Pressable>
             <Pressable
@@ -770,7 +792,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 22)}>
+              onPress={() => this.HandleTap("double", 22)}>
               <Text style={styles.textStyle}>Double 11</Text>
             </Pressable>
             <Pressable
@@ -807,7 +829,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 20)}>
+              onPress={() => this.HandleTap("double", 20)}>
               <Text style={styles.textStyle}>Double 10</Text>
             </Pressable>
             <Pressable
@@ -842,7 +864,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 18)}>
+              onPress={() => this.HandleTap("double", 18)}>
               <Text style={styles.textStyle}>Double 9</Text>
             </Pressable>
             <Pressable
@@ -877,7 +899,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 16)}>
+              onPress={() => this.HandleTap("double", 16)}>
               <Text style={styles.textStyle}>Double 8</Text>
             </Pressable>
             <Pressable
@@ -912,7 +934,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 14)}>
+              onPress={() => this.HandleTap("double", 14)}>
               <Text style={styles.textStyle}>Double 7</Text>
             </Pressable>
             <Pressable
@@ -947,7 +969,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 12)}>
+              onPress={() => this.HandleTap("double", 12)}>
               <Text style={styles.textStyle}>Double 6</Text>
             </Pressable>
             <Pressable
@@ -984,7 +1006,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 10)}>
+              onPress={() => this.HandleTap("double", 10)}>
               <Text style={styles.textStyle}>Double 5</Text>
             </Pressable>
             <Pressable
@@ -1019,7 +1041,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 8)}>
+              onPress={() => this.HandleTap("double", 8)}>
               <Text style={styles.textStyle}>Double 4</Text>
             </Pressable>
             <Pressable
@@ -1054,7 +1076,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 6)}>
+              onPress={() => this.HandleTap("double", 6)}>
               <Text style={styles.textStyle}>Double 3</Text>
             </Pressable>
             <Pressable
@@ -1089,7 +1111,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 4)}>
+              onPress={() => this.HandleTap("double", 4)}>
               <Text style={styles.textStyle}>Double 2</Text>
             </Pressable>
             <Pressable
@@ -1124,7 +1146,7 @@ export default class MultiPlayer extends Component {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.HandleTap("number", 2)}>
+              onPress={() => this.HandleTap("double", 2)}>
               <Text style={styles.textStyle}>Double 1</Text>
             </Pressable>
             <Pressable
@@ -1144,7 +1166,7 @@ export default class MultiPlayer extends Component {
           </Row>
           <Row>
             <Button text="25" onPress={() => this.HandleTap("number", 25)} />
-            <Button text="BULL" onPress={() => this.HandleTap("number", 50)} />
+            <Button text="BULL" onPress={() => this.HandleTap("double", 50)} />
             <Button text="Miss" onPress={() => this.HandleTap("number", 0)} />
             <Button text="Undo" onPress={() => this.UndoLastDart()} />
             <Button text="Reset" onPress={() => this.ResetGame()} />
