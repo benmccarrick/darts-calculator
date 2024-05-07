@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Image, Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Button from "./Button"
 import Row from "./Row";
 import { initialState, possibleOuts } from "./dartCalculator";
@@ -10,7 +10,6 @@ export default class MultiPlayer extends Component {
   HandleTap = (type, value) => {
     if(this.state.player1Throw){
       this.state.currentValue = this.state.currentValue - value
-      this.setState({firstDart: value});
       this.setState({previousValue: this.state.currentValue});
   
       this.state.all3Darts.push(value)
@@ -21,11 +20,14 @@ export default class MultiPlayer extends Component {
               this.setState({timePassed: true});
               this.setState({player1Throw: false});
               this.setState({player2Throw: true});
-              this.setState({all3Darts: []});
           }
           .bind(this),
           1500
         );
+      }
+
+      if(this.state.all3Darts.length === 1){
+        this.setState({all3Darts2: []})
       }
   
       if(this.state.currentValue < 0 || this.state.currentValue === 1){
@@ -196,11 +198,14 @@ export default class MultiPlayer extends Component {
               this.setState({timePassed: true});
               this.setState({player2Throw: false});
               this.setState({player1Throw: true});
-              this.setState({all3Darts2: []});
           }
           .bind(this),
           1500
         );
+      }
+
+      if(this.state.all3Darts2.length === 1){
+        this.setState({all3Darts: []})
       }
   
       if(this.state.currentValue2 < 0 || this.state.currentValue2 === 1){
@@ -420,47 +425,149 @@ export default class MultiPlayer extends Component {
   }
 
   UndoLastDart = () => {
-    if(!this.state.all3Darts2.length){
-      this.setState({player1Throw: true})
-      this.setState({player2Throw: false})
-    }
-    if(!this.state.all3Darts.length){
-      this.setState({player2Throw: true})
-      this.setState({player1Throw: false})
-    }
-    if(this.state.player1Throw){
+    if(this.state.player1Throw && this.state.all3Darts.length){
       if(this.state.currentValue <= 501){
-      this.setState({currentValue: (this.state.currentValue + this.state.dartsAverage.pop())});
+        this.setState({currentValue: (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)))});
+        this.state.currentValue =  (this.state.currentValue + this.state.dartsAverage.pop());
       this.state.all3Darts.pop();
       }
-      if (this.state.currentValue + this.state.dartsAverage.slice(-1) > 170
-       || this.state.currentValue + this.state.dartsAverage.slice(-1) === 159
-       || this.state.currentValue + this.state.dartsAverage.slice(-1) === 162
-       || this.state.currentValue + this.state.dartsAverage.slice(-1) === 163
-       || this.state.currentValue + this.state.dartsAverage.slice(-1) === 165
-       || this.state.currentValue + this.state.dartsAverage.slice(-1) === 166
-       || this.state.currentValue + this.state.dartsAverage.slice(-1) === 168
-       || this.state.currentValue + this.state.dartsAverage.slice(-1) === 169
+      if (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) > 170
+       || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 159
+       || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 162
+       || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 163
+       || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 165
+       || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 166
+       || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 168
+       || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 169
       ){
         this.state.showOuts = false;
       }
+      const outs = Object.keys(possibleOuts)
+
+    for(let i = 0; i < outs.length; i++){
+      if (parseFloat(outs[i]) === this.state.currentValue){
+        this.setState({possibleOutShot: possibleOuts[outs[i]]})
+        this.state.showOuts = true
+      }
     }
-    if(this.state.player2Throw){
+    }
+    if(this.state.player1Throw && !this.state.all3Darts.length){
       if(this.state.currentValue2 <= 501){
-        this.setState({currentValue2: (this.state.currentValue2 + this.state.dartsAverage2.pop())});
+        this.setState({currentValue2: (this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)))});
+        this.state.currentValue2 =  (this.state.currentValue2 + this.state.dartsAverage2.pop());
         this.state.all3Darts2.pop();
         }
-        if (this.state.currentValue2 + this.state.dartsAverage2.slice(-1) > 170
-         || this.state.currentValue2 + this.state.dartsAverage2.slice(-1) === 159
-         || this.state.currentValue2 + this.state.dartsAverage2.slice(-1) === 162
-         || this.state.currentValue2 + this.state.dartsAverage2.slice(-1) === 163
-         || this.state.currentValue2 + this.state.dartsAverage2.slice(-1) === 165
-         || this.state.currentValue2 + this.state.dartsAverage2.slice(-1) === 166
-         || this.state.currentValue2 + this.state.dartsAverage2.slice(-1) === 168
-         || this.state.currentValue2 + this.state.dartsAverage2.slice(-1) === 169
+        if (this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) > 170
+         || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 159
+         || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 162
+         || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 163
+         || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 165
+         || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 166
+         || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 168
+         || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 169
         ){
-          this.state.showOuts = false;
+          this.state.showOuts2 = false;
         }
+        this.setState({player1Throw: false})
+        this.setState({player2Throw: true})
+
+        const outs = Object.keys(possibleOuts)
+
+      for(let i = 0; i < outs.length; i++){
+      if (parseFloat(outs[i]) === this.state.currentValue2){
+        this.setState({possibleOutShot2: possibleOuts[outs[i]]})
+        this.state.showOuts2 = true
+      }
+    }
+    }
+    if(this.state.player2Throw && this.state.all3Darts2.length){
+      if(this.state.currentValue2 <= 501){
+        this.setState({currentValue2: (this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)))});
+        this.state.currentValue2 =  (this.state.currentValue2 + this.state.dartsAverage2.pop());
+        this.state.all3Darts2.pop();
+        }
+        if (this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) > 170
+        || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 159
+        || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 162
+        || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 163
+        || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 165
+        || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 166
+        || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 168
+        || this.state.currentValue2 + parseFloat(this.state.dartsAverage2.slice(-1)) === 169
+        ){
+          this.state.showOuts2 = false;
+        }
+        const outs = Object.keys(possibleOuts)
+
+    for(let i = 0; i < outs.length; i++){
+      if (parseFloat(outs[i]) === this.state.currentValue2){
+        this.setState({possibleOutShot2: possibleOuts[outs[i]]})
+        this.state.showOuts2 = true
+      }
+    }
+    }
+    if(this.state.player2Throw && !this.state.all3Darts2.length){
+      if(this.state.currentValue <= 501){
+        this.setState({currentValue: (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)))});
+        this.state.currentValue =  (this.state.currentValue + this.state.dartsAverage.pop());
+        this.state.all3Darts.pop();
+        }
+        if (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) > 170
+        || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 159
+        || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 162
+        || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 163
+        || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 165
+        || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 166
+        || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 168
+        || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 169
+       ){
+         this.state.showOuts = false;
+       }
+       this.setState({player2Throw: false})
+       this.setState({player1Throw: true})
+
+       const outs = Object.keys(possibleOuts)
+
+      for(let i = 0; i < outs.length; i++){
+      if (parseFloat(outs[i]) === this.state.currentValue){
+        this.setState({possibleOutShot: possibleOuts[outs[i]]})
+        this.state.showOuts = true
+      }
+    }
+    }
+  }
+  player1Text = () => {
+    if(this.state.player1Throw){
+      return {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: '900',
+        textAlign: "center",
+        marginBottom: 10,
+      }
+    }
+    return {
+      color: "#fff",
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 10,
+    }
+  }
+  player2Text = () => {
+    if(this.state.player2Throw){
+      return {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: '900',
+        textAlign: "center",
+        marginBottom: 10,
+      }
+    }
+    return {
+      color: "#fff",
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 10,
     }
   }
 
@@ -468,6 +575,10 @@ export default class MultiPlayer extends Component {
     return (
       <View style={styles.container}>
         <SafeAreaView>
+              {this.state.player1Throw &&
+              <Text style={styles.player1Text}>Player 1's Throw</Text>}
+              {this.state.player2Throw &&
+              <Text style={styles.player2Text}>Player 2's Throw</Text>}
           <Row>
           <View style={styles.columns}>
           <Text style={styles.value}>{" "}</Text>
@@ -478,43 +589,43 @@ export default class MultiPlayer extends Component {
           <Text style={styles.value}>Highest Checkout:</Text>
             </View>
             <View style={styles.columns2}>
-          <Text style={styles.value}>Player 1</Text>
-          <Text style={styles.value}>
+          <Text style={this.player1Text()}>Player 1</Text>
+          <Text style={this.player1Text()}>
           {parseFloat(this.state.currentValue).toLocaleString()}
           </Text>
-          <Text style={styles.legValue}>
+          <Text style={this.player1Text()}>
             {parseFloat(this.state.legsWon).toLocaleString()}
             </Text>
-            <Text style={styles.threeDartValue}>{this.threeDartAverage().toFixed(2)}</Text>
-            <Text style={styles.legValue}>
+            <Text style={this.player1Text()}>{this.threeDartAverage().toFixed(2)}</Text>
+            <Text style={this.player1Text()}>
             {parseFloat(this.state.total180s).toLocaleString()}
             </Text>
-            <Text style={styles.legValue}>
+            <Text style={this.player1Text()}>
             {parseFloat(this.state.highestOut).toLocaleString()}
             </Text>
             </View>
             <View style={styles.columns3}>
-          <Text style={styles.value}>Player 2</Text>
-          <Text style={styles.value}>
+          <Text style={this.player2Text()}>Player 2</Text>
+          <Text style={this.player2Text()}>
           {parseFloat(this.state.currentValue2).toLocaleString()}
           </Text>
-          <Text style={styles.legValue}>
+          <Text style={this.player2Text()}>
             {parseFloat(this.state.legsWon2).toLocaleString()}
             </Text>
-          <Text style={styles.threeDartValue}>{this.threeDartAverage2().toFixed(2)}</Text>
-            <Text style={styles.legValue}>
+          <Text style={this.player2Text()}>{this.threeDartAverage2().toFixed(2)}</Text>
+            <Text style={this.player2Text()}>
             {parseFloat(this.state.total180s2).toLocaleString()}
             </Text>
-            <Text style={styles.legValue}>
+            <Text style={this.player2Text()}>
             {parseFloat(this.state.highestOut2).toLocaleString()}
             </Text>
             </View>
             </Row>
             { this.state.showOuts && 
-            <Text style={styles.textStyle}>Possible Out: Player 1 - {this.state.possibleOutShot}</Text>
+            <Text style={styles.outText}>Player 1 Possible Out: {" "}{this.state.possibleOutShot}</Text>
           }
-             { this.state.showOuts2 && 
-            <Text style={styles.textStyle}>Possible Out: Player 2 - {this.state.possibleOutShot2}</Text>
+            { this.state.showOuts2 && 
+            <Text style={styles.outText}>Player 2 Possible Out: {" "}{this.state.possibleOutShot2}</Text>
           }
             <Text style={styles.threeDarts}>{this.state.all3Darts[0]}{" "}{" "}{this.state.all3Darts[1]}{" "}{" "}{this.state.all3Darts[2]}
             </Text>
@@ -533,17 +644,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 20)}>
               <Text style={styles.textStyle}>Single 20</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 40)}>
               <Text style={styles.textStyle}>Double 20</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 60)}>
               <Text style={styles.textStyle}>Treble 20</Text>
             </Pressable>
@@ -551,7 +662,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible20: true})}>
         <Text style={styles.textStyle}>20/D20/T20</Text>
       </Pressable>
@@ -568,17 +679,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 19)}>
               <Text style={styles.textStyle}>Single 19</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 38)}>
               <Text style={styles.textStyle}>Double 19</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 57)}>
               <Text style={styles.textStyle}>Treble 19</Text>
             </Pressable>
@@ -586,7 +697,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible19: true})}>
         <Text style={styles.textStyle}>19/D19/T19</Text>
       </Pressable>
@@ -603,17 +714,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 18)}>
               <Text style={styles.textStyle}>Single 18</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 36)}>
               <Text style={styles.textStyle}>Double 18</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 54)}>
               <Text style={styles.textStyle}>Treble 18</Text>
             </Pressable>
@@ -621,7 +732,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible18: true})}>
         <Text style={styles.textStyle}>18/D18/T18</Text>
       </Pressable>
@@ -638,17 +749,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 17)}>
               <Text style={styles.textStyle}>Single 17</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 34)}>
               <Text style={styles.textStyle}>Double 17</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 51)}>
               <Text style={styles.textStyle}>Treble 17</Text>
             </Pressable>
@@ -656,7 +767,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible17: true})}>
         <Text style={styles.textStyle}>17/D17/T17</Text>
       </Pressable>
@@ -673,17 +784,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 16)}>
               <Text style={styles.textStyle}>Single 16</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 32)}>
               <Text style={styles.textStyle}>Double 16</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 48)}>
               <Text style={styles.textStyle}>Treble 16</Text>
             </Pressable>
@@ -691,7 +802,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible16: true})}>
         <Text style={styles.textStyle}>16/D16/T16</Text>
       </Pressable>
@@ -710,17 +821,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 15)}>
               <Text style={styles.textStyle}>Single 15</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 30)}>
               <Text style={styles.textStyle}>Double 15</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 45)}>
               <Text style={styles.textStyle}>Treble 15</Text>
             </Pressable>
@@ -728,7 +839,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible15: true})}>
         <Text style={styles.textStyle}>15/D15/T15</Text>
       </Pressable>
@@ -745,17 +856,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 14)}>
               <Text style={styles.textStyle}>Single 14</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 28)}>
               <Text style={styles.textStyle}>Double 14</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 42)}>
               <Text style={styles.textStyle}>Treble 14</Text>
             </Pressable>
@@ -763,7 +874,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible14: true})}>
         <Text style={styles.textStyle}>14/D14/T14</Text>
       </Pressable>
@@ -780,17 +891,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 13)}>
               <Text style={styles.textStyle}>Single 13</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 26)}>
               <Text style={styles.textStyle}>Double 13</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 39)}>
               <Text style={styles.textStyle}>Treble 13</Text>
             </Pressable>
@@ -798,7 +909,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible13: true})}>
         <Text style={styles.textStyle}>13/D13/T13</Text>
       </Pressable>
@@ -815,17 +926,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 12)}>
               <Text style={styles.textStyle}>Single 12</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 24)}>
               <Text style={styles.textStyle}>Double 12</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 36)}>
               <Text style={styles.textStyle}>Treble 12</Text>
             </Pressable>
@@ -833,7 +944,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible12: true})}>
         <Text style={styles.textStyle}>12/D12/T12</Text>
       </Pressable>
@@ -850,17 +961,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 11)}>
               <Text style={styles.textStyle}>Single 11</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 22)}>
               <Text style={styles.textStyle}>Double 11</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 33)}>
               <Text style={styles.textStyle}>Treble 11</Text>
             </Pressable>
@@ -868,7 +979,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible11: true})}>
         <Text style={styles.textStyle}>11/D11/T11</Text>
       </Pressable>
@@ -887,17 +998,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 10)}>
               <Text style={styles.textStyle}>Single 10</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 20)}>
               <Text style={styles.textStyle}>Double 10</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 30)}>
               <Text style={styles.textStyle}>Treble 10</Text>
             </Pressable>
@@ -905,7 +1016,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible10: true})}>
         <Text style={styles.textStyle}>10/D10/T10</Text>
       </Pressable>
@@ -922,17 +1033,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 9)}>
               <Text style={styles.textStyle}>Single 9</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 18)}>
               <Text style={styles.textStyle}>Double 9</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 27)}>
               <Text style={styles.textStyle}>Treble 9</Text>
             </Pressable>
@@ -940,7 +1051,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible9: true})}>
         <Text style={styles.textStyle}>9/D9/T9</Text>
       </Pressable>
@@ -957,17 +1068,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 8)}>
               <Text style={styles.textStyle}>Single 8</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 16)}>
               <Text style={styles.textStyle}>Double 8</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 24)}>
               <Text style={styles.textStyle}>Treble 8</Text>
             </Pressable>
@@ -975,7 +1086,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible8: true})}>
         <Text style={styles.textStyle}>8/D8/T8</Text>
       </Pressable>
@@ -992,17 +1103,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 7)}>
               <Text style={styles.textStyle}>Single 7</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 14)}>
               <Text style={styles.textStyle}>Double 7</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 21)}>
               <Text style={styles.textStyle}>Treble 7</Text>
             </Pressable>
@@ -1010,7 +1121,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible7: true})}>
         <Text style={styles.textStyle}>7/D7/T7</Text>
       </Pressable>
@@ -1027,17 +1138,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 6)}>
               <Text style={styles.textStyle}>Single 6</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 12)}>
               <Text style={styles.textStyle}>Double 6</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 18)}>
               <Text style={styles.textStyle}>Treble 6</Text>
             </Pressable>
@@ -1045,7 +1156,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible6: true})}>
         <Text style={styles.textStyle}>6/D6/T6</Text>
       </Pressable>
@@ -1064,17 +1175,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 5)}>
               <Text style={styles.textStyle}>Single 5</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 10)}>
               <Text style={styles.textStyle}>Double 5</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 15)}>
               <Text style={styles.textStyle}>Treble 5</Text>
             </Pressable>
@@ -1082,7 +1193,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible5: true})}>
         <Text style={styles.textStyle}>5/D5/T5</Text>
       </Pressable>
@@ -1099,17 +1210,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 4)}>
               <Text style={styles.textStyle}>Single 4</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 8)}>
               <Text style={styles.textStyle}>Double 4</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 12)}>
               <Text style={styles.textStyle}>Treble 4</Text>
             </Pressable>
@@ -1117,7 +1228,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible4: true})}>
         <Text style={styles.textStyle}>4/D4/T4</Text>
       </Pressable>
@@ -1134,17 +1245,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 3)}>
               <Text style={styles.textStyle}>Single 3</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 6)}>
               <Text style={styles.textStyle}>Double 3</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 9)}>
               <Text style={styles.textStyle}>Treble 3</Text>
             </Pressable>
@@ -1152,7 +1263,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible3: true})}>
         <Text style={styles.textStyle}>3/D3/T3</Text>
       </Pressable>
@@ -1169,17 +1280,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 2)}>
               <Text style={styles.textStyle}>Single 2</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 4)}>
               <Text style={styles.textStyle}>Double 2</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 6)}>
               <Text style={styles.textStyle}>Treble 2</Text>
             </Pressable>
@@ -1187,7 +1298,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible2: true})}>
         <Text style={styles.textStyle}>2/D2/T2</Text>
       </Pressable>
@@ -1204,17 +1315,17 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 1)}>
               <Text style={styles.textStyle}>Single 1</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 2)}>
               <Text style={styles.textStyle}>Double 1</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 3)}>
               <Text style={styles.textStyle}>Treble 1</Text>
             </Pressable>
@@ -1222,7 +1333,7 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible1: true})}>
         <Text style={styles.textStyle}>1/D1/T1</Text>
       </Pressable>
@@ -1268,17 +1379,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 10,
   },
-  threeDartValue: {
-    color: "#fff",
-    fontSize: 16,
+  player1Text: {
+    color: "red",
+    fontSize: 26,
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 30,
   },
-  legValue: {
-    color: "#fff",
-    fontSize: 16,
+  player2Text: {
+    color: "red",
+    fontSize: 26,
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 30,
   },
   centeredView: {
     flex: 1,
@@ -1303,19 +1414,49 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
-    elevation: 2,
+    padding: 9,
+    elevation: 0,
   },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
+  buttonOpenGreen: {
+    backgroundColor: 'green',
   },
-  buttonClose: {
-    backgroundColor: '#2196F3',
+  buttonOpenRed: {
+    backgroundColor: 'red',
+  },
+  buttonCloseBlack: {
+    backgroundColor: 'black',
+    marginBottom: 8,
+  },
+  buttonCloseCream: {
+    backgroundColor: '#F0E68C',
+    marginBottom: 8,
+  },
+  buttonCloseRedDouble: {
+    backgroundColor: 'red',
+    marginBottom: 8,
+  },
+  buttonCloseRedTreble: {
+    backgroundColor: 'darkred',
+    marginBottom: 8,
+  },
+  buttonCloseGreenDouble: {
+    backgroundColor: 'lime',
+    marginBottom: 8,
+  },
+  buttonCloseGreenTreble: {
+    backgroundColor: 'green',
+    marginBottom: 8,
   },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  outText: {
+    color: "white",
+    fontSize: 15,
+    textAlign: "center",
+    marginBottom: 3,
   },
   modalText: {
     marginBottom: 10,

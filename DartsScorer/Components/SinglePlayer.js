@@ -9,7 +9,6 @@ export default class SinglePlayer extends Component {
 
   HandleTap = (type, value) => {
     this.state.currentValue = this.state.currentValue - value
-    this.setState({firstDart: value});
     this.setState({previousValue: this.state.currentValue});
 
     this.state.all3Darts.push(value)
@@ -154,7 +153,7 @@ export default class SinglePlayer extends Component {
       this.setState({total180s: parseFloat(this.state.total180s) + 1})
 
     }
-
+    
     const outs = Object.keys(possibleOuts)
 
     for(let i = 0; i < outs.length; i++){
@@ -202,19 +201,28 @@ export default class SinglePlayer extends Component {
 
   UndoLastDart = () => {
     if(this.state.currentValue <= 501){
-    this.setState({currentValue: (this.state.currentValue + this.state.dartsAverage.pop())});
+    this.setState({currentValue: (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)))});
+    this.state.currentValue =  (this.state.currentValue + this.state.dartsAverage.pop());
     this.state.all3Darts.pop();
     }
-    if (this.state.currentValue + this.state.dartsAverage.slice(-1) > 170
-     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 159
-     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 162
-     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 163
-     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 165
-     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 166
-     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 168
-     || this.state.currentValue + this.state.dartsAverage.slice(-1) === 169
+    if (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) > 170
+     || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 159
+     || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 162
+     || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 163
+     || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 165
+     || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 166
+     || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 168
+     || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 169
     ){
       this.state.showOuts = false;
+    }
+    const outs = Object.keys(possibleOuts)
+
+    for(let i = 0; i < outs.length; i++){
+      if (parseFloat(outs[i]) === this.state.currentValue){
+        this.setState({possibleOutShot: possibleOuts[outs[i]]})
+        this.state.showOuts = true
+      }
     }
   }
 
@@ -225,14 +233,14 @@ export default class SinglePlayer extends Component {
           <Text style={styles.value}>
             {parseFloat(this.state.currentValue).toLocaleString()}
           </Text>
-          <Text style={styles.threeDartValue}>3 Dart Average: {this.threeDartAverage().toFixed(2)}</Text>
+          <Text style={styles.legValue}>3 Dart Average: {this.threeDartAverage().toFixed(2)}</Text>
           <Text style={styles.legValue}>
             Legs Completed: {parseFloat(this.state.legsWon).toLocaleString()}
             </Text>
             <Text style={styles.legValue}>
             Total 180s: {parseFloat(this.state.total180s).toLocaleString()}
             </Text>
-            <Text style={styles.legValue}>
+            <Text style={styles.threeDartValue}>
             Highest Checkout: {parseFloat(this.state.highestOut).toLocaleString()}
             </Text>
             { this.state.showOuts && 
@@ -253,17 +261,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 20)}>
               <Text style={styles.textStyle}>Single 20</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 40)}>
               <Text style={styles.textStyle}>Double 20</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 60)}>
               <Text style={styles.textStyle}>Treble 20</Text>
             </Pressable>
@@ -271,7 +279,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible20: true})}>
         <Text style={styles.textStyle}>20/D20/T20</Text>
       </Pressable>
@@ -288,17 +296,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 19)}>
               <Text style={styles.textStyle}>Single 19</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 38)}>
               <Text style={styles.textStyle}>Double 19</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 57)}>
               <Text style={styles.textStyle}>Treble 19</Text>
             </Pressable>
@@ -306,7 +314,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible19: true})}>
         <Text style={styles.textStyle}>19/D19/T19</Text>
       </Pressable>
@@ -323,17 +331,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 18)}>
               <Text style={styles.textStyle}>Single 18</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 36)}>
               <Text style={styles.textStyle}>Double 18</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 54)}>
               <Text style={styles.textStyle}>Treble 18</Text>
             </Pressable>
@@ -341,7 +349,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible18: true})}>
         <Text style={styles.textStyle}>18/D18/T18</Text>
       </Pressable>
@@ -358,17 +366,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 17)}>
               <Text style={styles.textStyle}>Single 17</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 34)}>
               <Text style={styles.textStyle}>Double 17</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 51)}>
               <Text style={styles.textStyle}>Treble 17</Text>
             </Pressable>
@@ -376,7 +384,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible17: true})}>
         <Text style={styles.textStyle}>17/D17/T17</Text>
       </Pressable>
@@ -393,17 +401,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 16)}>
               <Text style={styles.textStyle}>Single 16</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 32)}>
               <Text style={styles.textStyle}>Double 16</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 48)}>
               <Text style={styles.textStyle}>Treble 16</Text>
             </Pressable>
@@ -411,7 +419,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible16: true})}>
         <Text style={styles.textStyle}>16/D16/T16</Text>
       </Pressable>
@@ -430,17 +438,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 15)}>
               <Text style={styles.textStyle}>Single 15</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 30)}>
               <Text style={styles.textStyle}>Double 15</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 45)}>
               <Text style={styles.textStyle}>Treble 15</Text>
             </Pressable>
@@ -448,7 +456,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible15: true})}>
         <Text style={styles.textStyle}>15/D15/T15</Text>
       </Pressable>
@@ -465,17 +473,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 14)}>
               <Text style={styles.textStyle}>Single 14</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 28)}>
               <Text style={styles.textStyle}>Double 14</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 42)}>
               <Text style={styles.textStyle}>Treble 14</Text>
             </Pressable>
@@ -483,7 +491,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible14: true})}>
         <Text style={styles.textStyle}>14/D14/T14</Text>
       </Pressable>
@@ -500,17 +508,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 13)}>
               <Text style={styles.textStyle}>Single 13</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 26)}>
               <Text style={styles.textStyle}>Double 13</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 39)}>
               <Text style={styles.textStyle}>Treble 13</Text>
             </Pressable>
@@ -518,7 +526,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible13: true})}>
         <Text style={styles.textStyle}>13/D13/T13</Text>
       </Pressable>
@@ -535,17 +543,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 12)}>
               <Text style={styles.textStyle}>Single 12</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 24)}>
               <Text style={styles.textStyle}>Double 12</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 36)}>
               <Text style={styles.textStyle}>Treble 12</Text>
             </Pressable>
@@ -553,7 +561,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible12: true})}>
         <Text style={styles.textStyle}>12/D12/T12</Text>
       </Pressable>
@@ -570,17 +578,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 11)}>
               <Text style={styles.textStyle}>Single 11</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 22)}>
               <Text style={styles.textStyle}>Double 11</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 33)}>
               <Text style={styles.textStyle}>Treble 11</Text>
             </Pressable>
@@ -588,7 +596,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible11: true})}>
         <Text style={styles.textStyle}>11/D11/T11</Text>
       </Pressable>
@@ -607,17 +615,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 10)}>
               <Text style={styles.textStyle}>Single 10</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 20)}>
               <Text style={styles.textStyle}>Double 10</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 30)}>
               <Text style={styles.textStyle}>Treble 10</Text>
             </Pressable>
@@ -625,7 +633,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible10: true})}>
         <Text style={styles.textStyle}>10/D10/T10</Text>
       </Pressable>
@@ -642,17 +650,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 9)}>
               <Text style={styles.textStyle}>Single 9</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 18)}>
               <Text style={styles.textStyle}>Double 9</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 27)}>
               <Text style={styles.textStyle}>Treble 9</Text>
             </Pressable>
@@ -660,7 +668,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible9: true})}>
         <Text style={styles.textStyle}>9/D9/T9</Text>
       </Pressable>
@@ -677,17 +685,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 8)}>
               <Text style={styles.textStyle}>Single 8</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 16)}>
               <Text style={styles.textStyle}>Double 8</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 24)}>
               <Text style={styles.textStyle}>Treble 8</Text>
             </Pressable>
@@ -695,7 +703,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible8: true})}>
         <Text style={styles.textStyle}>8/D8/T8</Text>
       </Pressable>
@@ -712,17 +720,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 7)}>
               <Text style={styles.textStyle}>Single 7</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 14)}>
               <Text style={styles.textStyle}>Double 7</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 21)}>
               <Text style={styles.textStyle}>Treble 7</Text>
             </Pressable>
@@ -730,7 +738,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible7: true})}>
         <Text style={styles.textStyle}>7/D7/T7</Text>
       </Pressable>
@@ -747,17 +755,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 6)}>
               <Text style={styles.textStyle}>Single 6</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 12)}>
               <Text style={styles.textStyle}>Double 6</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 18)}>
               <Text style={styles.textStyle}>Treble 6</Text>
             </Pressable>
@@ -765,7 +773,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible6: true})}>
         <Text style={styles.textStyle}>6/D6/T6</Text>
       </Pressable>
@@ -784,17 +792,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 5)}>
               <Text style={styles.textStyle}>Single 5</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 10)}>
               <Text style={styles.textStyle}>Double 5</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 15)}>
               <Text style={styles.textStyle}>Treble 5</Text>
             </Pressable>
@@ -802,7 +810,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible5: true})}>
         <Text style={styles.textStyle}>5/D5/T5</Text>
       </Pressable>
@@ -819,17 +827,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 4)}>
               <Text style={styles.textStyle}>Single 4</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("double", 8)}>
               <Text style={styles.textStyle}>Double 4</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 12)}>
               <Text style={styles.textStyle}>Treble 4</Text>
             </Pressable>
@@ -837,7 +845,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible4: true})}>
         <Text style={styles.textStyle}>4/D4/T4</Text>
       </Pressable>
@@ -854,17 +862,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 3)}>
               <Text style={styles.textStyle}>Single 3</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 6)}>
               <Text style={styles.textStyle}>Double 3</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 9)}>
               <Text style={styles.textStyle}>Treble 3</Text>
             </Pressable>
@@ -872,7 +880,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible3: true})}>
         <Text style={styles.textStyle}>3/D3/T3</Text>
       </Pressable>
@@ -889,17 +897,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseBlack]}
               onPress={() => this.HandleTap("number", 2)}>
               <Text style={styles.textStyle}>Single 2</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedDouble]}
               onPress={() => this.HandleTap("double", 4)}>
               <Text style={styles.textStyle}>Double 2</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseRedTreble]}
               onPress={() => this.HandleTap("number", 6)}>
               <Text style={styles.textStyle}>Treble 2</Text>
             </Pressable>
@@ -907,7 +915,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenRed]}
         onPress={() =>  this.setState({modalVisible2: true})}>
         <Text style={styles.textStyle}>2/D2/T2</Text>
       </Pressable>
@@ -924,17 +932,17 @@ export default class SinglePlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseCream]}
               onPress={() => this.HandleTap("number", 1)}>
               <Text style={styles.textStyle}>Single 1</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenDouble]}
               onPress={() => this.HandleTap("number", 2)}>
               <Text style={styles.textStyle}>Double 1</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCloseGreenTreble]}
               onPress={() => this.HandleTap("number", 3)}>
               <Text style={styles.textStyle}>Treble 1</Text>
             </Pressable>
@@ -942,7 +950,7 @@ export default class SinglePlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.button, styles.buttonOpenGreen]}
         onPress={() =>  this.setState({modalVisible1: true})}>
         <Text style={styles.textStyle}>1/D1/T1</Text>
       </Pressable>
@@ -971,13 +979,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 42,
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 60,
   },
   threeDartValue: {
     color: "#fff",
     fontSize: 22,
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 40,
   },
   legValue: {
     color: "#fff",
@@ -1011,11 +1019,30 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
+  buttonOpenGreen: {
+    backgroundColor: 'green',
   },
-  buttonClose: {
-    backgroundColor: '#2196F3',
+  buttonOpenRed: {
+    backgroundColor: 'red',
+  },
+  buttonCloseBlack: {
+    backgroundColor: 'black',
+  },
+  buttonCloseCream: {
+    backgroundColor: '#F0E68C',
+    color: "green"
+  },
+  buttonCloseRedDouble: {
+    backgroundColor: 'red',
+  },
+  buttonCloseRedTreble: {
+    backgroundColor: 'darkred',
+  },
+  buttonCloseGreenDouble: {
+    backgroundColor: 'lime',
+  },
+  buttonCloseGreenTreble: {
+    backgroundColor: 'green',
   },
   textStyle: {
     color: 'white',
