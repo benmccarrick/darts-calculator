@@ -17,7 +17,7 @@ export default class SinglePlayer extends Component {
       setTimeout(
         function() {
             this.setState({timePassed: true});
-            this.setState({all3Darts: []})
+            this.setState({all3Darts: []});
         }
         .bind(this),
         1500
@@ -200,10 +200,15 @@ export default class SinglePlayer extends Component {
   }
 
   UndoLastDart = () => {
-    if(this.state.currentValue <= 501){
+    if(this.state.currentValue <= 501 && this.state.all3Darts.length){
     this.setState({currentValue: (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)))});
     this.state.currentValue =  (this.state.currentValue + this.state.dartsAverage.pop());
     this.state.all3Darts.pop();
+    }
+    if(this.state.currentValue <= 501 && !this.state.all3Darts.length){
+      this.setState({currentValue: (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)))});
+      this.state.currentValue =  (this.state.currentValue + this.state.dartsAverage.pop());
+      this.state.all3Darts.push(parseFloat(this.state.dartsAverage.slice(-1)), parseFloat(this.state.dartsAverage.slice(-2)));
     }
     if (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) > 170
      || this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)) === 159
