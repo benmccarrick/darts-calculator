@@ -644,17 +644,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 20)}>
               <Text style={styles.textStyle}>Single 20</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 40)}>
               <Text style={styles.textStyle}>Double 20</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+             style={({pressed}) => [
+              {
+                backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                borderRadius: 20,
+                padding: 9,
+                elevation: 0,
+                marginBottom: 10,
+              }]}
               onPress={() => this.HandleTap("number", 60)}>
               <Text style={styles.textStyle}>Treble 20</Text>
             </Pressable>
@@ -662,7 +683,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+       style={({pressed}) => [
+        {
+          backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+          borderRadius: 20,
+          padding: 9,
+          elevation: 0,
+        }]}
         onPress={() =>  this.setState({modalVisible20: true})}>
         <Text style={styles.textStyle}>20/D20/T20</Text>
       </Pressable>
@@ -679,17 +706,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 19)}>
               <Text style={styles.textStyle}>Single 19</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 38)}>
               <Text style={styles.textStyle}>Double 19</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 57)}>
               <Text style={styles.textStyle}>Treble 19</Text>
             </Pressable>
@@ -697,7 +745,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible19: true})}>
         <Text style={styles.textStyle}>19/D19/T19</Text>
       </Pressable>
@@ -714,17 +768,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 18)}>
               <Text style={styles.textStyle}>Single 18</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 36)}>
               <Text style={styles.textStyle}>Double 18</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 54)}>
               <Text style={styles.textStyle}>Treble 18</Text>
             </Pressable>
@@ -732,7 +807,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible18: true})}>
         <Text style={styles.textStyle}>18/D18/T18</Text>
       </Pressable>
@@ -749,17 +830,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 17)}>
               <Text style={styles.textStyle}>Single 17</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 34)}>
               <Text style={styles.textStyle}>Double 17</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 51)}>
               <Text style={styles.textStyle}>Treble 17</Text>
             </Pressable>
@@ -767,7 +869,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible17: true})}>
         <Text style={styles.textStyle}>17/D17/T17</Text>
       </Pressable>
@@ -784,17 +892,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 16)}>
               <Text style={styles.textStyle}>Single 16</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 32)}>
               <Text style={styles.textStyle}>Double 16</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 48)}>
               <Text style={styles.textStyle}>Treble 16</Text>
             </Pressable>
@@ -802,7 +931,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible16: true})}>
         <Text style={styles.textStyle}>16/D16/T16</Text>
       </Pressable>
@@ -821,17 +956,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 15)}>
               <Text style={styles.textStyle}>Single 15</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 30)}>
               <Text style={styles.textStyle}>Double 15</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 45)}>
               <Text style={styles.textStyle}>Treble 15</Text>
             </Pressable>
@@ -839,7 +995,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+         style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible15: true})}>
         <Text style={styles.textStyle}>15/D15/T15</Text>
       </Pressable>
@@ -856,17 +1018,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 14)}>
               <Text style={styles.textStyle}>Single 14</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 28)}>
               <Text style={styles.textStyle}>Double 14</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 42)}>
               <Text style={styles.textStyle}>Treble 14</Text>
             </Pressable>
@@ -874,7 +1057,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+         style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible14: true})}>
         <Text style={styles.textStyle}>14/D14/T14</Text>
       </Pressable>
@@ -891,17 +1080,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 13)}>
               <Text style={styles.textStyle}>Single 13</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 26)}>
               <Text style={styles.textStyle}>Double 13</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 39)}>
               <Text style={styles.textStyle}>Treble 13</Text>
             </Pressable>
@@ -909,7 +1119,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+         style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible13: true})}>
         <Text style={styles.textStyle}>13/D13/T13</Text>
       </Pressable>
@@ -926,17 +1142,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 12)}>
               <Text style={styles.textStyle}>Single 12</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 24)}>
               <Text style={styles.textStyle}>Double 12</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 36)}>
               <Text style={styles.textStyle}>Treble 12</Text>
             </Pressable>
@@ -944,7 +1181,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+         style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible12: true})}>
         <Text style={styles.textStyle}>12/D12/T12</Text>
       </Pressable>
@@ -961,17 +1204,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 11)}>
               <Text style={styles.textStyle}>Single 11</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 22)}>
               <Text style={styles.textStyle}>Double 11</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 33)}>
               <Text style={styles.textStyle}>Treble 11</Text>
             </Pressable>
@@ -979,7 +1243,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+         style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible11: true})}>
         <Text style={styles.textStyle}>11/D11/T11</Text>
       </Pressable>
@@ -998,17 +1268,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 10)}>
               <Text style={styles.textStyle}>Single 10</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 20)}>
               <Text style={styles.textStyle}>Double 10</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 30)}>
               <Text style={styles.textStyle}>Treble 10</Text>
             </Pressable>
@@ -1016,7 +1307,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+         style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible10: true})}>
         <Text style={styles.textStyle}>10/D10/T10</Text>
       </Pressable>
@@ -1033,17 +1330,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 9)}>
               <Text style={styles.textStyle}>Single 9</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 18)}>
               <Text style={styles.textStyle}>Double 9</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 27)}>
               <Text style={styles.textStyle}>Treble 9</Text>
             </Pressable>
@@ -1051,7 +1369,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible9: true})}>
         <Text style={styles.textStyle}>9/D9/T9</Text>
       </Pressable>
@@ -1068,17 +1392,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 8)}>
               <Text style={styles.textStyle}>Single 8</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 16)}>
               <Text style={styles.textStyle}>Double 8</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 24)}>
               <Text style={styles.textStyle}>Treble 8</Text>
             </Pressable>
@@ -1086,7 +1431,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+         style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible8: true})}>
         <Text style={styles.textStyle}>8/D8/T8</Text>
       </Pressable>
@@ -1103,17 +1454,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 7)}>
               <Text style={styles.textStyle}>Single 7</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 14)}>
               <Text style={styles.textStyle}>Double 7</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+               style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 21)}>
               <Text style={styles.textStyle}>Treble 7</Text>
             </Pressable>
@@ -1121,7 +1493,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+         style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible7: true})}>
         <Text style={styles.textStyle}>7/D7/T7</Text>
       </Pressable>
@@ -1138,17 +1516,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 6)}>
               <Text style={styles.textStyle}>Single 6</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 12)}>
               <Text style={styles.textStyle}>Double 6</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 18)}>
               <Text style={styles.textStyle}>Treble 6</Text>
             </Pressable>
@@ -1156,7 +1555,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible6: true})}>
         <Text style={styles.textStyle}>6/D6/T6</Text>
       </Pressable>
@@ -1175,17 +1580,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 5)}>
               <Text style={styles.textStyle}>Single 5</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 10)}>
               <Text style={styles.textStyle}>Double 5</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 15)}>
               <Text style={styles.textStyle}>Treble 5</Text>
             </Pressable>
@@ -1193,7 +1619,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible5: true})}>
         <Text style={styles.textStyle}>5/D5/T5</Text>
       </Pressable>
@@ -1210,17 +1642,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#F0E68C',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 4)}>
               <Text style={styles.textStyle}>Single 4</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 8)}>
               <Text style={styles.textStyle}>Double 4</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 12)}>
               <Text style={styles.textStyle}>Treble 4</Text>
             </Pressable>
@@ -1228,7 +1681,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible4: true})}>
         <Text style={styles.textStyle}>4/D4/T4</Text>
       </Pressable>
@@ -1245,17 +1704,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 3)}>
               <Text style={styles.textStyle}>Single 3</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 6)}>
               <Text style={styles.textStyle}>Double 3</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 9)}>
               <Text style={styles.textStyle}>Treble 3</Text>
             </Pressable>
@@ -1263,7 +1743,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible3: true})}>
         <Text style={styles.textStyle}>3/D3/T3</Text>
       </Pressable>
@@ -1280,17 +1766,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseBlack]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 2)}>
               <Text style={styles.textStyle}>Single 2</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 4)}>
               <Text style={styles.textStyle}>Double 2</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseRedTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 6)}>
               <Text style={styles.textStyle}>Treble 2</Text>
             </Pressable>
@@ -1298,7 +1805,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenRed]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible2: true})}>
         <Text style={styles.textStyle}>2/D2/T2</Text>
       </Pressable>
@@ -1315,17 +1828,38 @@ export default class MultiPlayer extends Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonCloseCream]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 1)}>
               <Text style={styles.textStyle}>Single 1</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenDouble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("double", 2)}>
               <Text style={styles.textStyle}>Double 1</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonCloseGreenTreble]}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  borderRadius: 20,
+                  padding: 9,
+                  elevation: 0,
+                  marginBottom: 10,
+                }]}
               onPress={() => this.HandleTap("number", 3)}>
               <Text style={styles.textStyle}>Treble 1</Text>
             </Pressable>
@@ -1333,7 +1867,13 @@ export default class MultiPlayer extends Component {
         </View>
       </Modal>
       <Pressable
-        style={[styles.button, styles.buttonOpenGreen]}
+        style={({pressed}) => [
+          {
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            borderRadius: 20,
+            padding: 9,
+            elevation: 0,
+          }]}
         onPress={() =>  this.setState({modalVisible1: true})}>
         <Text style={styles.textStyle}>1/D1/T1</Text>
       </Pressable>
@@ -1412,41 +1952,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  button: {
-    borderRadius: 20,
-    padding: 9,
-    elevation: 0,
-  },
-  buttonOpenGreen: {
-    backgroundColor: 'green',
-  },
-  buttonOpenRed: {
-    backgroundColor: 'red',
-  },
-  buttonCloseBlack: {
-    backgroundColor: 'black',
-    marginBottom: 8,
-  },
-  buttonCloseCream: {
-    backgroundColor: '#F0E68C',
-    marginBottom: 8,
-  },
-  buttonCloseRedDouble: {
-    backgroundColor: 'red',
-    marginBottom: 8,
-  },
-  buttonCloseRedTreble: {
-    backgroundColor: 'darkred',
-    marginBottom: 8,
-  },
-  buttonCloseGreenDouble: {
-    backgroundColor: 'lime',
-    marginBottom: 8,
-  },
-  buttonCloseGreenTreble: {
-    backgroundColor: 'green',
-    marginBottom: 8,
-  },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
@@ -1457,6 +1962,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     marginBottom: 3,
+    marginLeft: 20,
+    marginRight: 20,
   },
   modalText: {
     marginBottom: 10,
