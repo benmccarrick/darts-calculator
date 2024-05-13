@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: Math.floor(buttonWidth),
     margin: 5,
+    marginTop: 15,
   },
   text: {
     color: "#fff",

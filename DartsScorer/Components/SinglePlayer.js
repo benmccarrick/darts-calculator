@@ -151,7 +151,14 @@ export default class SinglePlayer extends Component {
 
     if(this.state.all3Darts.length === 3 && this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2] === 180){
       this.setState({total180s: parseFloat(this.state.total180s) + 1})
-
+      this.setState({ modalVisible180: true})
+      setTimeout(
+        function () {
+          this.setState({ timePassed: true });
+          this.setState({ modalVisible180: false})
+        }.bind(this),
+        3000
+      );
     }
     
     const outs = Object.keys(possibleOuts)
@@ -253,6 +260,26 @@ export default class SinglePlayer extends Component {
             }
             <Text style={styles.threeDarts}>{this.state.all3Darts[0]}{" "}{" "}{this.state.all3Darts[1]}{" "}{" "}{this.state.all3Darts[2]}
             </Text>
+            {this.state.modalVisible180 && 
+            <View style={styles.centeredView}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={this.state.modalVisible180}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                  this.setState({ modalVisible180: false });
+                }}
+              >
+            <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                  <Text style={styles.modalText}>!!!180!!!</Text>
+                  </View>
+                  </View>
+
+            </Modal>
+            </View>
+          }
           <Row>
           <View style={styles.centeredView}>
       <Modal
@@ -1564,39 +1591,17 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
-  buttonOpenGreen: {
-    backgroundColor: 'green',
-  },
-  buttonOpenRed: {
-    backgroundColor: 'red',
-  },
-  buttonCloseBlack: {
-    backgroundColor: 'black',
-  },
-  buttonCloseCream: {
-    backgroundColor: '#F0E68C',
-    color: "green"
-  },
-  buttonCloseRedDouble: {
-    backgroundColor: 'red',
-  },
-  buttonCloseRedTreble: {
-    backgroundColor: 'darkred',
-  },
-  buttonCloseGreenDouble: {
-    backgroundColor: 'lime',
-  },
-  buttonCloseGreenTreble: {
-    backgroundColor: 'green',
-  },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
+    marginBottom: 10,
+    textAlign: "center",
+    fontSize: 50,
+    fontWeight: 'bold',
+    color: 'red',
   },
   threeDarts: {
     color: 'red',
