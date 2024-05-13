@@ -4,6 +4,13 @@ A react-native front end mobile application that gives the user the ability to s
 
 The app also has the functionality to keep track of statistics such as 3-Dart Average, Highest Checkout and Total 180s to enhance the user experience.
 
+I have completed the MVP for this project, but have ideas to add more features to this in the future including:
+
+- Add up to a 6 player scoring game
+- Pop ups for 180 hit and a win of a leg (just for multiplayer)
+- More stats available to the user including a checkout success percentage, an average for every first, second and third darts thrown in every visit, and favourite double
+- Improve the general design and usuability of the app
+
 ### How to run the app locally
 
 Firstly, clone the repository and change to the correct directory:
