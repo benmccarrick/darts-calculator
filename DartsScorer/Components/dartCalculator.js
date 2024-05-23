@@ -1,4 +1,6 @@
 export const initialState = {
+    player1Name: "Player 1",
+    player2Name: "Player 2",
     currentValue: "501",
     currentValue2: "501",
     previousValue: null,

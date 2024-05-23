@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 
 const HomePage = () => {
 
+
+    const [nameTextPlayer1, setNameTextPlayer1] = useState("Player 1");
+    const [nameTextPlayer2, setNameTextPlayer2] = useState("Player 2");
     const navigation = useNavigation();
+    
 
 
     return (
         <View style={styles.container}>
+      <View style= {styles.multiPlayer}>
+        <Text style={styles.textStyle}>For a multiplayer game:</Text>
+        <TextInput
+          style={styles.textStyle}
+          placeholder='Player 1'
+          onChangeText={(newNameTextPlayer1) => setNameTextPlayer1(newNameTextPlayer1)}
+          defaultValue='Player 1'
+        />
+        <TextInput
+          style={styles.textStyle}
+          placeholder='Player 2'
+          onChangeText={(newNameTextPlayer2) => setNameTextPlayer2(newNameTextPlayer2)}
+          defaultValue='Player 2'
+        />
+        <Pressable
+              onPress={() => {navigation.navigate("Multiplayer Game", {
+                player1Name: nameTextPlayer1,
+                player2Name: nameTextPlayer2,
+              })}}>
+              <Text style={styles.buttonStyle2}>LET'S PLAY DARTS!</Text>
+            </Pressable>
+      </View>
           <View style= {styles.singlePlayer}>
       <Text style={styles.textStyle}>For a single player game:  </Text>
       <Pressable
@@ -19,13 +44,6 @@ const HomePage = () => {
             </Pressable>
       <StatusBar style="auto" />
           </View>
-      <View style= {styles.multiPlayer}>
-        <Text style={styles.textStyle}>For a  multiplayer game:</Text>
-        <Pressable
-              onPress={() => {navigation.navigate("Multiplayer Game")}}>
-              <Text style={styles.buttonStyle2}>LET'S PLAY DARTS!</Text>
-            </Pressable>
-      </View>
         </View>
 
 );
@@ -64,6 +82,7 @@ const styles = StyleSheet.create({
   },
   multiPlayer: {
     marginTop: 40,
+    marginBottom: 220
   },
 });
 

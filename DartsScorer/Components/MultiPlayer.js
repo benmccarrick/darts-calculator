@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Image,
   Modal,
   Pressable,
   SafeAreaView,
@@ -713,16 +712,16 @@ export default class MultiPlayer extends Component {
       marginBottom: 10,
     };
   };
-
+  
   render() {
     return (
       <View style={styles.container}>
         <SafeAreaView>
           {this.state.player1Throw && (
-            <Text style={styles.player1Text}>Player 1's Throw</Text>
+            <Text style={styles.player1Text}>{this.props.route.params.player1Name}'s Throw</Text>
           )}
           {this.state.player2Throw && (
-            <Text style={styles.player2Text}>Player 2's Throw</Text>
+            <Text style={styles.player2Text}>{this.props.route.params.player2Name}'s Throw</Text>
           )}
           <Row>
             <View style={styles.columns}>
@@ -734,7 +733,7 @@ export default class MultiPlayer extends Component {
               <Text style={styles.value}>Highest Checkout:</Text>
             </View>
             <View style={styles.columns2}>
-              <Text style={this.player1Text()}>Player 1</Text>
+              <Text style={this.player1Text()}>{this.props.route.params.player1Name}</Text>
               <Text style={this.player1Text()}>
                 {parseFloat(this.state.currentValue).toLocaleString()}
               </Text>
@@ -752,7 +751,7 @@ export default class MultiPlayer extends Component {
               </Text>
             </View>
             <View style={styles.columns3}>
-              <Text style={this.player2Text()}>Player 2</Text>
+              <Text style={this.player2Text()}>{this.props.route.params.player2Name}</Text>
               <Text style={this.player2Text()}>
                 {parseFloat(this.state.currentValue2).toLocaleString()}
               </Text>
@@ -772,12 +771,12 @@ export default class MultiPlayer extends Component {
           </Row>
           {this.state.showOuts ? (
             <Text style={styles.outText}>
-              Player 1 Possible Out:{" "}{this.state.possibleOutShot}
+              {this.props.route.params.player1Name}'s' Possible Out:{" "}{this.state.possibleOutShot}
             </Text>
           ) : null}
           {this.state.showOuts2 ? (
             <Text style={styles.outText}>
-              Player 2 Possible Out:{" "}{this.state.possibleOutShot2}
+              {this.props.route.params.player2Name}'s' Possible Out:{" "}{this.state.possibleOutShot2}
             </Text>
           ): null}
           {this.state.all3Darts.length ? (
@@ -825,7 +824,7 @@ export default class MultiPlayer extends Component {
               >
             <View style={styles.centeredView}>
                   <View style={styles.modalView}>
-                  <Text style={styles.modalText}>LEG WINNER - Player 1!!</Text>
+                  <Text style={styles.modalText}>{this.props.route.params.player1Name} WINS THE LEG!!</Text>
                   </View>
                   </View>
 
@@ -845,7 +844,7 @@ export default class MultiPlayer extends Component {
               >
             <View style={styles.centeredView}>
                   <View style={styles.modalView}>
-                  <Text style={styles.modalText}>LEG WINNER - Player 2!!</Text>
+                  <Text style={styles.modalText}>{this.props.route.params.player2Name} WINS THE LEG!!</Text>
                   </View>
                   </View>
 
