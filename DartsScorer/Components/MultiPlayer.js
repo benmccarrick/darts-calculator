@@ -749,6 +749,12 @@ export default class MultiPlayer extends Component {
     if(this.props.route.params.player2StartingScore === 301 && this.state.currentValue2 === "501"){
       this.state.currentValue2 -= 200
     }
+    if(!this.props.route.params.player1Name.length){
+      this.props.route.params.player1Name = "Player 1"
+    }
+    if(!this.props.route.params.player2Name.length){
+      this.props.route.params.player2Name = "Player 2"
+    }
 
     return (
       <View style={styles.container}>
