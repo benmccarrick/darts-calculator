@@ -25,30 +25,44 @@ export default class SinglePlayer extends Component {
     }
 
     if(this.state.currentValue < 0 || this.state.currentValue === 1){
-      this.state.currentValue = this.state.previousValue
-      this.state.dartsAverage.pop();
-        if(this.state.all3Darts.length === 3){
-          this.state.dartsAverage.push(0);
-        }
-        if(this.state.all3Darts.length === 2){
-          this.state.dartsAverage.push(0, 0);
-        }
-        if(this.state.all3Darts.length === 1){
-          this.state.dartsAverage.push(0, 0, 0);
-        }
+      if (this.state.all3Darts.length === 3) {
+        this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.push(0, 0, 0);
+      }
+      if (this.state.all3Darts.length === 2) {
+        this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1])
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.push(0, 0, 0);
+      }
+      if (this.state.all3Darts.length === 1) {
+        this.state.currentValue = this.state.currentValue + this.state.all3Darts[0]
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.push(0, 0, 0);
+      }
         this.setState({all3Darts: []});
       this.setState({previousValue: this.state.currentValue})
     }
     if(type !== "double" && this.state.currentValue <= 0){
-      this.state.currentValue = this.state.previousValue
-      this.state.dartsAverage.pop();
-      if(this.state.all3Darts.length === 3){
-        this.state.dartsAverage.push(0);
+      if (this.state.all3Darts.length === 3) {
+        this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.push(0, 0, 0);
       }
-      if(this.state.all3Darts.length === 2){
-        this.state.dartsAverage.push(0, 0);
+      if (this.state.all3Darts.length === 2) {
+        this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1])
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.pop();
+        this.state.dartsAverage.push(0, 0, 0);
       }
-      if(this.state.all3Darts.length === 1){
+      if (this.state.all3Darts.length === 1) {
+        this.state.currentValue = this.state.currentValue + this.state.all3Darts[0]
+        this.state.dartsAverage.pop();
         this.state.dartsAverage.push(0, 0, 0);
       }
       this.setState({all3Darts: []});
@@ -1489,7 +1503,7 @@ export default class SinglePlayer extends Component {
             <Pressable
               style={({pressed}) => [
                 {
-                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'black',
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : "#F0E68C",
                   borderRadius: 20,
                   padding: 9,
                   elevation: 0,
@@ -1501,7 +1515,7 @@ export default class SinglePlayer extends Component {
             <Pressable
               style={({pressed}) => [
                 {
-                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'lime',
                   borderRadius: 20,
                   padding: 9,
                   elevation: 0,
@@ -1513,7 +1527,7 @@ export default class SinglePlayer extends Component {
             <Pressable
               style={({pressed}) => [
                 {
-                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'darkred',
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
                   borderRadius: 20,
                   padding: 9,
                   elevation: 0,
@@ -1528,7 +1542,7 @@ export default class SinglePlayer extends Component {
       <Pressable
         style={({pressed}) => [
           {
-            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
+            backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'green',
             borderRadius: 20,
             padding: 9,
             elevation: 0,

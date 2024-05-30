@@ -38,15 +38,22 @@ export default class MultiPlayer extends Component {
       }
 
       if (this.state.currentValue < 0 || this.state.currentValue === 1) {
-        this.state.currentValue = this.state.previousValue;
-        this.state.dartsAverage.pop();
         if (this.state.all3Darts.length === 3) {
-          this.state.dartsAverage.push(0);
+          this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.push(0, 0, 0);
         }
         if (this.state.all3Darts.length === 2) {
-          this.state.dartsAverage.push(0, 0);
+          this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1])
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.push(0, 0, 0);
         }
         if (this.state.all3Darts.length === 1) {
+          this.state.currentValue = this.state.currentValue + this.state.all3Darts[0]
+          this.state.dartsAverage.pop();
           this.state.dartsAverage.push(0, 0, 0);
         }
         this.setState({ all3Darts: [] });
@@ -55,15 +62,22 @@ export default class MultiPlayer extends Component {
         this.setState({ player2Throw: true });
       }
       if (type !== "double" && this.state.currentValue <= 0) {
-        this.state.currentValue = this.state.previousValue;
-        this.state.dartsAverage.pop();
         if (this.state.all3Darts.length === 3) {
-          this.state.dartsAverage.push(0);
+          this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.push(0, 0, 0);
         }
         if (this.state.all3Darts.length === 2) {
-          this.state.dartsAverage.push(0, 0);
+          this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1])
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.pop();
+          this.state.dartsAverage.push(0, 0, 0);
         }
         if (this.state.all3Darts.length === 1) {
+          this.state.currentValue = this.state.currentValue + this.state.all3Darts[0]
+          this.state.dartsAverage.pop();
           this.state.dartsAverage.push(0, 0, 0);
         }
         this.setState({ all3Darts: [] });
@@ -254,15 +268,22 @@ export default class MultiPlayer extends Component {
       }
 
       if (this.state.currentValue2 < 0 || this.state.currentValue2 === 1) {
-        this.state.currentValue2 = this.state.previousValue2;
-        this.state.dartsAverage2.pop();
         if (this.state.all3Darts2.length === 3) {
-          this.state.dartsAverage2.push(0);
+          this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1] + this.state.all3Darts2[2])
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.push(0, 0, 0);
         }
         if (this.state.all3Darts2.length === 2) {
-          this.state.dartsAverage2.push(0, 0);
+          this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1])
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.push(0, 0, 0);
         }
         if (this.state.all3Darts2.length === 1) {
+          this.state.currentValue2 = this.state.currentValue2 + this.state.all3Darts2[0]
+          this.state.dartsAverage2.pop();
           this.state.dartsAverage2.push(0, 0, 0);
         }
         this.setState({ all3Darts2: [] });
@@ -271,15 +292,22 @@ export default class MultiPlayer extends Component {
         this.setState({ player1Throw: true });
       }
       if (type !== "double" && this.state.currentValue2 <= 0) {
-        this.state.currentValue2 = this.state.previousValue2;
-        this.state.dartsAverage2.pop();
         if (this.state.all3Darts2.length === 3) {
-          this.state.dartsAverage2.push(0);
+          this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1] + this.state.all3Darts2[2])
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.push(0, 0, 0);
         }
         if (this.state.all3Darts2.length === 2) {
-          this.state.dartsAverage2.push(0, 0);
+          this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1])
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.pop();
+          this.state.dartsAverage2.push(0, 0, 0);
         }
         if (this.state.all3Darts2.length === 1) {
+          this.state.currentValue2 = this.state.currentValue2 + this.state.all3Darts2[0]
+          this.state.dartsAverage2.pop();
           this.state.dartsAverage2.push(0, 0, 0);
         }
         this.setState({ all3Darts2: [] });
@@ -2380,7 +2408,7 @@ export default class MultiPlayer extends Component {
                         {
                           backgroundColor: pressed
                             ? "rgb(210, 230, 255)"
-                            : "black",
+                            : "#F0E68C",
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
@@ -2396,7 +2424,7 @@ export default class MultiPlayer extends Component {
                         {
                           backgroundColor: pressed
                             ? "rgb(210, 230, 255)"
-                            : "red",
+                            : "lime",
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
@@ -2412,7 +2440,7 @@ export default class MultiPlayer extends Component {
                         {
                           backgroundColor: pressed
                             ? "rgb(210, 230, 255)"
-                            : "darkred",
+                            : "green",
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
@@ -2429,7 +2457,7 @@ export default class MultiPlayer extends Component {
               <Pressable
                 style={({ pressed }) => [
                   {
-                    backgroundColor: pressed ? "rgb(210, 230, 255)" : "red",
+                    backgroundColor: pressed ? "rgb(210, 230, 255)" : "green",
                     borderRadius: 20,
                     padding: 9,
                     elevation: 0,
