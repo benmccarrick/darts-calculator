@@ -132,7 +132,12 @@ export default class SinglePlayer extends Component {
       if(this.state.all3Darts.length === 1){
         this.state.checkouts.push(this.state.all3Darts[0])
       }
-        this.setState({currentValue: 501});
+      if(this.props.route.params.player1StartingScore === 301){
+        this.setState({ currentValue: 301 });
+      }
+      if(this.props.route.params.player1StartingScore === 501){
+        this.setState({ currentValue: 501 });
+      }
         this.setState({legsWon: parseFloat(this.state.legsWon) + 1});
         this.setState({showOuts: false});
         this.setState({all3Darts: []})
@@ -239,6 +244,11 @@ export default class SinglePlayer extends Component {
   }
 
   render() {
+
+    if(this.props.route.params.player1StartingScore === 301 && this.state.currentValue === "501"){
+      this.state.currentValue -= 200
+    }
+
     return (
       <View style={styles.container}>
         <SafeAreaView>

@@ -163,8 +163,22 @@ export default class MultiPlayer extends Component {
         if (this.state.all3Darts.length === 1) {
           this.state.checkouts.push(this.state.all3Darts[0]);
         }
-        this.setState({ currentValue: 501 });
-        this.setState({ currentValue2: 501 });
+        if(this.props.route.params.player1StartingScore === 301 && this.props.route.params.player2StartingScore === 301){
+          this.setState({ currentValue2: 301 });
+          this.setState({ currentValue: 301 });
+        }
+        if(this.props.route.params.player1StartingScore === 501 && this.props.route.params.player2StartingScore === 301){
+          this.setState({ currentValue2: 301 });
+          this.setState({ currentValue: 501 });
+        }
+        if(this.props.route.params.player1StartingScore === 501 && this.props.route.params.player2StartingScore === 501){
+          this.setState({ currentValue2: 501 });
+          this.setState({ currentValue: 501 });
+        }
+        if(this.props.route.params.player1StartingScore === 301 && this.props.route.params.player2StartingScore === 501){
+          this.setState({ currentValue2: 501 });
+          this.setState({ currentValue: 301 });
+        }
         this.setState({ legsWon: parseFloat(this.state.legsWon) + 1 });
         this.setState({ showOuts2: false });
         this.setState({ possibleOutShot2: null });
@@ -365,8 +379,22 @@ export default class MultiPlayer extends Component {
         if (this.state.all3Darts2.length === 1) {
           this.state.checkouts2.push(this.state.all3Darts2[0]);
         }
-        this.setState({ currentValue2: 501 });
-        this.setState({ currentValue: 501 });
+        if(this.props.route.params.player1StartingScore === 301 && this.props.route.params.player2StartingScore === 301){
+          this.setState({ currentValue2: 301 });
+          this.setState({ currentValue: 301 });
+        }
+        if(this.props.route.params.player1StartingScore === 501 && this.props.route.params.player2StartingScore === 301){
+          this.setState({ currentValue2: 301 });
+          this.setState({ currentValue: 501 });
+        }
+        if(this.props.route.params.player1StartingScore === 501 && this.props.route.params.player2StartingScore === 501){
+          this.setState({ currentValue2: 501 });
+          this.setState({ currentValue: 501 });
+        }
+        if(this.props.route.params.player1StartingScore === 301 && this.props.route.params.player2StartingScore === 501){
+          this.setState({ currentValue2: 501 });
+          this.setState({ currentValue: 301 });
+        }
         this.setState({ legsWon2: parseFloat(this.state.legsWon2) + 1 });
         this.setState({ showOuts: false });
         this.setState({ possibleOutShot1: null });
@@ -714,6 +742,14 @@ export default class MultiPlayer extends Component {
   };
   
   render() {
+    
+    if(this.props.route.params.player1StartingScore === 301 && this.state.currentValue === "501"){
+      this.state.currentValue -= 200
+    }
+    if(this.props.route.params.player2StartingScore === 301 && this.state.currentValue2 === "501"){
+      this.state.currentValue2 -= 200
+    }
+
     return (
       <View style={styles.container}>
         <SafeAreaView>
@@ -771,12 +807,12 @@ export default class MultiPlayer extends Component {
           </Row>
           {this.state.showOuts ? (
             <Text style={styles.outText}>
-              {this.props.route.params.player1Name}'s' Possible Out:{" "}{this.state.possibleOutShot}
+              {this.props.route.params.player1Name}'s Possible Out:{" "}{this.state.possibleOutShot}
             </Text>
           ) : null}
           {this.state.showOuts2 ? (
             <Text style={styles.outText}>
-              {this.props.route.params.player2Name}'s' Possible Out:{" "}{this.state.possibleOutShot2}
+              {this.props.route.params.player2Name}'s Possible Out:{" "}{this.state.possibleOutShot2}
             </Text>
           ): null}
           {this.state.all3Darts.length ? (
