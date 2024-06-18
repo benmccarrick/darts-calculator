@@ -52,7 +52,7 @@ const HomePage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.multiPlayer}>
-        <Text style={styles.textStyle}>For a multiplayer game:</Text>
+        <Text style={styles.textStyle}>For a 2 player game:</Text>
         <Row>
           <TextInput
             style={styles.textStyle}
