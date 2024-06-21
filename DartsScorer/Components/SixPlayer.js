@@ -1713,18 +1713,12 @@ export default class SixPlayer extends Component {
 
   ResetGame = () => {
     this.setState(initialState);
-    this.setState({ currentValue: "501" });
-    this.setState({ currentValue2: "501" });
+    this.setState({ currentValue: "501", currentValue2: "501", currentValue3: "501", currentValue4: "501", currentValue5: "501", currentValue6: "501"});
     this.setState({ dartsAverage: [] });
     this.setState({ dartsAverage2: [] });
-    this.setState({ all3Darts: [] });
-    this.setState({ all3Darts2: [] });
-    this.setState({ showOuts: false });
+    this.setState({ all3Darts: [], all3Darts2: [], all3Darts3: [], all3Darts4: [], all3Darts5: [], all3Darts6: []});
+    this.setState({ showOuts: false, showOuts2: false, showOuts3: false, showOuts4: false, showOuts5: false, showOuts6: false, });
     this.setState({ startingLeg: 0 });
-    this.setState({ highestOut: "0" });
-    this.setState({ highestOut2: "0" });
-    this.setState({ checkouts: [] });
-    this.setState({ checkouts2: [] });
   };
 
   UndoLastDart = () => {
@@ -1970,6 +1964,18 @@ export default class SixPlayer extends Component {
     if(this.props.route.params.player2StartingScore === 301 && this.state.currentValue2 === "501"){
       this.state.currentValue2 -= 200
     }
+    if(this.props.route.params.player3StartingScore === 301 && this.state.currentValue3 === "501"){
+      this.state.currentValue2 -= 200
+    }
+    if(this.props.route.params.player4StartingScore === 301 && this.state.currentValue4 === "501"){
+      this.state.currentValue2 -= 200
+    }
+    if(this.props.route.params.player5StartingScore === 301 && this.state.currentValue5 === "501"){
+      this.state.currentValue2 -= 200
+    }
+    if(this.props.route.params.player6StartingScore === 301 && this.state.currentValue6 === "501"){
+      this.state.currentValue2 -= 200
+    }
     const numOfPlayers = []
     if(this.props.route.params.player1Name.length){
       numOfPlayers.push(this.props.route.params.player1Name)
@@ -2028,28 +2034,12 @@ export default class SixPlayer extends Component {
               <Text style={this.player1Text()}>
                 {parseFloat(this.state.legsWon).toLocaleString()}
               </Text>
-              <Text style={this.player2Text()}>{this.props.route.params.player4Name}</Text>
-              <Text style={this.player2Text()}>
-                {parseFloat(this.state.currentValue4).toLocaleString()}
-              </Text>
-              <Text style={this.player2Text()}>
-                {parseFloat(this.state.legsWon4).toLocaleString()}
-              </Text>
-            </View>
-            <View style={styles.columns3}>
               <Text style={this.player2Text()}>{this.props.route.params.player2Name}</Text>
               <Text style={this.player2Text()}>
                 {parseFloat(this.state.currentValue2).toLocaleString()}
               </Text>
               <Text style={this.player2Text()}>
                 {parseFloat(this.state.legsWon2).toLocaleString()}
-              </Text>
-              <Text style={this.player2Text()}>{this.props.route.params.player5Name}</Text>
-              <Text style={this.player2Text()}>
-                {parseFloat(this.state.currentValue5).toLocaleString()}
-              </Text>
-              <Text style={this.player2Text()}>
-                {parseFloat(this.state.legsWon5).toLocaleString()}
               </Text>
             </View>
             <View style={styles.columns3}>
@@ -2059,6 +2049,22 @@ export default class SixPlayer extends Component {
               </Text>
               <Text style={this.player2Text()}>
                 {parseFloat(this.state.legsWon3).toLocaleString()}
+              </Text>
+              <Text style={this.player2Text()}>{this.props.route.params.player4Name}</Text>
+              <Text style={this.player2Text()}>
+                {parseFloat(this.state.currentValue4).toLocaleString()}
+              </Text>
+              <Text style={this.player2Text()}>
+                {parseFloat(this.state.legsWon4).toLocaleString()}
+              </Text>
+            </View>
+            <View style={styles.columns3}>
+              <Text style={this.player2Text()}>{this.props.route.params.player5Name}</Text>
+              <Text style={this.player2Text()}>
+                {parseFloat(this.state.currentValue5).toLocaleString()}
+              </Text>
+              <Text style={this.player2Text()}>
+                {parseFloat(this.state.legsWon5).toLocaleString()}
               </Text>
               <Text style={this.player2Text()}>{this.props.route.params.player6Name}</Text>
               <Text style={this.player2Text()}>
