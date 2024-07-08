@@ -20,9 +20,8 @@ export default class SixPlayer extends Component {
       this.setState({ previousValue: this.state.currentValue });
 
       this.state.all3Darts.push(value);
-     
 
-       if (this.state.all3Darts.length === 3) {
+       if (this.state.all3Darts.length === 3 && this.state.currentValue !== 0) {
         setTimeout(
           function () {
             this.setState({ timePassed: true });
@@ -33,8 +32,17 @@ export default class SixPlayer extends Component {
         );9
       }
 
-      if (this.state.all3Darts.length === 1) {
-        this.setState({ all3Darts2: [] });
+      if (this.state.all3Darts.length === 1 && this.props.route.params.numOfPlayers === 3) {
+        this.setState({ all3Darts3: [] });
+      }
+      if (this.state.all3Darts.length === 1 && this.props.route.params.numOfPlayers === 4) {
+        this.setState({ all3Darts4: [] });
+      }
+      if (this.state.all3Darts.length === 1 && this.props.route.params.numOfPlayers === 5) {
+        this.setState({ all3Darts5: [] });
+      }
+      if (this.state.all3Darts.length === 1 && this.props.route.params.numOfPlayers === 6) {
+        this.setState({ all3Darts6: [] });
       }
 
       if (this.state.currentValue < 0 || this.state.currentValue === 1) {
@@ -202,8 +210,9 @@ export default class SixPlayer extends Component {
         this.setState({ showOuts2: false, showOuts3: false, showOuts4: false, showOuts5: false, showOuts6: false});
         this.setState({ possibleOutShot2: null, possibleOutShot3: null, possibleOutShot4: null, possibleOutShot5: null, possibleOutShot6: null});
         this.setState({ all3Darts: [] });
+        this.state.startingLeg++;
 
-        if (this.state.startingLeg === numOfPlayers.length){
+        if (this.state.startingLeg === this.props.route.params.numOfPlayers){
             this.state.startingLeg = 0;
           }
 
@@ -255,7 +264,6 @@ export default class SixPlayer extends Component {
             this.setState({ player5Throw: false });
             this.setState({ player6Throw: true });
           }
-        this.state.startingLeg++;
       }
 
       if (
@@ -290,12 +298,12 @@ export default class SixPlayer extends Component {
 
       this.state.all3Darts2.push(value);
 
-      if (this.state.all3Darts2.length === 3) {
+      if (this.state.all3Darts2.length === 3 && this.state.currentValue2 !== 0) {
         setTimeout(
           function () {
             this.setState({ timePassed: true });
             this.setState({ player2Throw: false });
-            this.setState({ player1Throw: true });
+            this.setState({ player3Throw: true });
           }.bind(this),
           1500
         );
@@ -470,8 +478,9 @@ export default class SixPlayer extends Component {
         this.setState({ showOuts: false, showOuts3: false, showOuts4: false, showOuts5: false, showOuts6: false});
         this.setState({ possibleOutShot1: null, possibleOutShot3: null, possibleOutShot4: null, possibleOutShot5: null, possibleOutShot6: null});
         this.setState({ all3Darts2: [] });
+        this.state.startingLeg++;
 
-        if (this.state.startingLeg === numOfPlayers.length){
+        if (this.state.startingLeg === this.props.route.params.numOfPlayers){
             this.state.startingLeg = 0;
           }
 
@@ -523,7 +532,6 @@ export default class SixPlayer extends Component {
             this.setState({ player5Throw: false });
             this.setState({ player6Throw: true });
           }
-        this.state.startingLeg++;
       }
 
       if (
@@ -557,13 +565,14 @@ export default class SixPlayer extends Component {
         this.setState({ previousValue3: this.state.currentValue3 });
   
         this.state.all3Darts3.push(value);
+        
   
-        if (this.state.all3Darts3.length === 3) {
+        if (this.state.all3Darts3.length === 3 && this.state.currentValue3 !== 0) {
           setTimeout(
             function () {
               this.setState({ timePassed: true });
               this.setState({ player3Throw: false });
-              if(numOfPlayers.length > 3){
+              if(this.props.route.params.numOfPlayers > 3){
                   this.setState({ player4Throw: true });
               }
               else {
@@ -581,26 +590,26 @@ export default class SixPlayer extends Component {
         if (this.state.currentValue3 < 0 || this.state.currentValue3 === 1) {
           if (this.state.all3Darts3.length === 3) {
             this.state.currentValue3 = this.state.currentValue3 + (this.state.all3Darts3[0] + this.state.all3Darts3[1] + this.state.all3Darts3[2])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.push(0, 0, 0);
           }
           if (this.state.all3Darts3.length === 2) {
             this.state.currentValue3 = this.state.currentValue3 + (this.state.all3Darts3[0] + this.state.all3Darts3[1])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.push(0, 0, 0);
           }
           if (this.state.all3Darts3.length === 1) {
             this.state.currentValue3 = this.state.currentValue3 + this.state.all3Darts3[0]
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.push(0, 0, 0);
           }
           this.setState({ all3Darts3: [] });
           this.setState({ previousValue3: this.state.currentValue3 });
           this.setState({ player3Throw: false });
-          if(numOfPlayers.length > 3){
+          if(this.props.route.params.numOfPlayers > 3){
             this.setState({ player4Throw: true });
         }
         else {
@@ -610,25 +619,25 @@ export default class SixPlayer extends Component {
         if (type !== "double" && this.state.currentValue3 <= 0) {
           if (this.state.all3Darts3.length === 3) {
             this.state.currentValue3 = this.state.currentValue3 + (this.state.all3Darts3[0] + this.state.all3Darts3[1] + this.state.all3Darts3[2])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.push(0, 0, 0);
           }
           if (this.state.all3Darts3.length === 2) {
             this.state.currentValue3 = this.state.currentValue3 + (this.state.all3Darts3[0] + this.state.all3Darts3[1])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.push(0, 0, 0);
           }
           if (this.state.all3Darts3.length === 1) {
             this.state.currentValue3 = this.state.currentValue3 + this.state.all3Darts3[0]
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage3.pop();
+            this.state.dartsAverage3.push(0, 0, 0);
           }
           this.setState({ all3Darts3: [] });
           this.setState({ previousValue3: this.state.currentValue3 });
-          if(numOfPlayers.length > 3){
+          if(this.props.route.params.numOfPlayers > 3){
             this.setState({ player4Throw: true });
         }
         else {
@@ -697,7 +706,7 @@ export default class SixPlayer extends Component {
           this.setState({ modalVisible1: false });
         }
   
-        // this.state.dartsAverage2.push(value);
+        this.state.dartsAverage3.push(value);
   
         if (this.state.currentValue3 <= 40) {
           this.setState({ possibleOutShot3: null });
@@ -752,8 +761,9 @@ export default class SixPlayer extends Component {
           this.setState({ showOuts: false, showOuts2: false, showOuts4: false, showOuts5: false, showOuts6: false});
           this.setState({ possibleOutShot1: null, possibleOutShot2: null, possibleOutShot4: null, possibleOutShot5: null, possibleOutShot6: null});
           this.setState({ all3Darts3: [] });
+          this.state.startingLeg++;
   
-          if (this.state.startingLeg === numOfPlayers.length){
+          if (this.state.startingLeg === this.props.route.params.numOfPlayers){
             this.state.startingLeg = 0;
           }
 
@@ -805,7 +815,6 @@ export default class SixPlayer extends Component {
             this.setState({ player5Throw: false });
             this.setState({ player6Throw: true });
           }
-          this.state.startingLeg++;
         }
   
         if (
@@ -840,12 +849,12 @@ export default class SixPlayer extends Component {
   
         this.state.all3Darts4.push(value);
   
-        if (this.state.all3Darts4.length === 3) {
+        if (this.state.all3Darts4.length === 3 && this.state.currentValue4 !== 0) {
           setTimeout(
             function () {
               this.setState({ timePassed: true });
               this.setState({ player4Throw: false });
-              if(numOfPlayers.length > 4){
+              if(this.props.route.params.numOfPlayers > 4){
                 this.setState({ player5Throw: true });
             }
             else {
@@ -863,26 +872,26 @@ export default class SixPlayer extends Component {
         if (this.state.currentValue4 < 0 || this.state.currentValue4 === 1) {
           if (this.state.all3Darts4.length === 3) {
             this.state.currentValue4 = this.state.currentValue4 + (this.state.all3Darts4[0] + this.state.all3Darts4[1] + this.state.all3Darts4[2])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.push(0, 0, 0);
           }
           if (this.state.all3Darts4.length === 2) {
             this.state.currentValue4 = this.state.currentValue4 + (this.state.all3Darts4[0] + this.state.all3Darts4[1])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.push(0, 0, 0);
           }
           if (this.state.all3Darts4.length === 1) {
             this.state.currentValue4 = this.state.currentValue4 + this.state.all3Darts4[0]
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.push(0, 0, 0);
           }
           this.setState({ all3Darts4: [] });
           this.setState({ previousValue4: this.state.currentValue4 });
           this.setState({ player4Throw: false });
-          if(numOfPlayers.length > 4){
+          if(this.props.route.params.numOfPlayers > 4){
             this.setState({ player5Throw: true });
         }
         else {
@@ -892,26 +901,26 @@ export default class SixPlayer extends Component {
         if (type !== "double" && this.state.currentValue4 <= 0) {
           if (this.state.all3Darts4.length === 3) {
             this.state.currentValue4 = this.state.currentValue4 + (this.state.all3Darts4[0] + this.state.all3Darts4[1] + this.state.all3Darts4[2])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.push(0, 0, 0);
           }
           if (this.state.all3Darts2.length === 2) {
             this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.push(0, 0, 0);
           }
           if (this.state.all3Darts4.length === 1) {
             this.state.currentValue4 = this.state.currentValue4 + this.state.all3Darts4[0]
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage4.pop();
+            this.state.dartsAverage4.push(0, 0, 0);
           }
           this.setState({ all3Darts4: [] });
           this.setState({ previousValue4: this.state.currentValue4 });
           this.setState({ player4Throw: false });
-          if(numOfPlayers.length > 4){
+          if(this.props.route.params.numOfPlayers > 4){
             this.setState({ player5Throw: true });
         }
         else {
@@ -980,7 +989,7 @@ export default class SixPlayer extends Component {
           this.setState({ modalVisible1: false });
         }
   
-        // this.state.dartsAverage2.push(value);
+        this.state.dartsAverage4.push(value);
   
         if (this.state.currentValue4 <= 40) {
           this.setState({ possibleOutShot4: null });
@@ -1035,8 +1044,9 @@ export default class SixPlayer extends Component {
           this.setState({ showOuts: false, showOuts2: false, showOuts3: false, showOuts5: false, showOuts6: false});
           this.setState({ possibleOutShot1: null, possibleOutShot2: null, possibleOutShot3: null, possibleOutShot5: null, possibleOutShot6: null});
           this.setState({ all3Darts4: [] });
+          this.state.startingLeg++;
   
-          if (this.state.startingLeg === numOfPlayers.length){
+          if (this.state.startingLeg === this.props.route.params.numOfPlayers){
             this.state.startingLeg = 0;
           }
 
@@ -1088,7 +1098,6 @@ export default class SixPlayer extends Component {
             this.setState({ player5Throw: false });
             this.setState({ player6Throw: true });
           }
-          this.state.startingLeg++;
         }
   
         if (
@@ -1123,12 +1132,12 @@ export default class SixPlayer extends Component {
   
         this.state.all3Darts5.push(value);
   
-        if (this.state.all3Darts5.length === 3) {
+        if (this.state.all3Darts5.length === 3 && this.state.currentValue5 !== 0) {
           setTimeout(
             function () {
               this.setState({ timePassed: true });
               this.setState({ player5Throw: false });
-              if(numOfPlayers.length > 5){
+              if(this.props.route.params.numOfPlayers > 5){
                 this.setState({ player6Throw: true });
             }
             else {
@@ -1146,26 +1155,26 @@ export default class SixPlayer extends Component {
         if (this.state.currentValue5 < 0 || this.state.currentValue5 === 1) {
           if (this.state.all3Darts5.length === 3) {
             this.state.currentValue5 = this.state.currentValue5 + (this.state.all3Darts5[0] + this.state.all3Darts5[1] + this.state.all3Darts5[2])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage5.pop();
+            this.state.dartsAverage5.pop();
+            this.state.dartsAverage5.pop();
+            this.state.dartsAverage5.push(0, 0, 0);
           }
           if (this.state.all3Darts5.length === 2) {
             this.state.currentValue5 = this.state.currentValue5 + (this.state.all3Darts5[0] + this.state.all3Darts5[1])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage5.pop();
+            this.state.dartsAverage5.pop();
+            this.state.dartsAverage5.push(0, 0, 0);
           }
           if (this.state.all3Darts5.length === 1) {
             this.state.currentValue5 = this.state.currentValue5 + this.state.all3Darts5[0]
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage5.pop();
+            this.state.dartsAverage5.push(0, 0, 0);
           }
           this.setState({ all3Darts5: [] });
           this.setState({ previousValue5: this.state.currentValue5 });
           this.setState({ player5Throw: false });
-          if(numOfPlayers.length > 5){
+          if(this.props.route.params.numOfPlayers > 5){
             this.setState({ player6Throw: true });
         }
         else {
@@ -1175,26 +1184,26 @@ export default class SixPlayer extends Component {
         if (type !== "double" && this.state.currentValue5 <= 0) {
             if (this.state.all3Darts5.length === 3) {
                 this.state.currentValue5 = this.state.currentValue5 + (this.state.all3Darts5[0] + this.state.all3Darts5[1] + this.state.all3Darts5[2])
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.push(0, 0, 0);
+                this.state.dartsAverage5.pop();
+                this.state.dartsAverage5.pop();
+                this.state.dartsAverage5.pop();
+                this.state.dartsAverage5.push(0, 0, 0);
               }
               if (this.state.all3Darts5.length === 2) {
                 this.state.currentValue5 = this.state.currentValue5 + (this.state.all3Darts5[0] + this.state.all3Darts5[1])
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.push(0, 0, 0);
+                this.state.dartsAverage5.pop();
+                this.state.dartsAverage5.pop();
+                this.state.dartsAverage5.push(0, 0, 0);
               }
               if (this.state.all3Darts5.length === 1) {
                 this.state.currentValue5 = this.state.currentValue5 + this.state.all3Darts5[0]
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.push(0, 0, 0);
+                this.state.dartsAverage5.pop();
+                this.state.dartsAverage5.push(0, 0, 0);
               }
               this.setState({ all3Darts5: [] });
               this.setState({ previousValue5: this.state.currentValue5 });
               this.setState({ player5Throw: false });
-              if(numOfPlayers.length > 5){
+              if(this.props.route.params.numOfPlayers > 5){
                 this.setState({ player6Throw: true });
             }
             else {
@@ -1263,7 +1272,7 @@ export default class SixPlayer extends Component {
           this.setState({ modalVisible1: false });
         }
   
-        // this.state.dartsAverage2.push(value);
+        this.state.dartsAverage5.push(value);
   
         if (this.state.currentValue5 <= 40) {
           this.setState({ possibleOutShot5: null });
@@ -1318,8 +1327,9 @@ export default class SixPlayer extends Component {
           this.setState({ showOuts: false, showOuts2: false, showOuts3: false, showOuts4: false, showOuts6: false});
           this.setState({ possibleOutShot1: null, possibleOutShot2: null, possibleOutShot3: null, possibleOutShot4: null, possibleOutShot6: null});
           this.setState({ all3Darts2: [] });
+          this.state.startingLeg++;
   
-          if (this.state.startingLeg === numOfPlayers.length){
+          if (this.state.startingLeg === this.props.route.params.numOfPlayers){
             this.state.startingLeg = 0;
           }
 
@@ -1371,7 +1381,6 @@ export default class SixPlayer extends Component {
             this.setState({ player5Throw: false });
             this.setState({ player6Throw: true });
           }
-          this.state.startingLeg++;
         }
   
         if (
@@ -1406,7 +1415,7 @@ export default class SixPlayer extends Component {
   
         this.state.all3Darts6.push(value);
   
-        if (this.state.all3Darts6.length === 3) {
+        if (this.state.all3Darts6.length === 3 && this.state.currentValue6 !== 0) {
           setTimeout(
             function () {
               this.setState({ timePassed: true });
@@ -1424,21 +1433,21 @@ export default class SixPlayer extends Component {
         if (this.state.currentValue6 < 0 || this.state.currentValue6 === 1) {
           if (this.state.all3Darts6.length === 3) {
             this.state.currentValue6 = this.state.currentValue6 + (this.state.all3Darts6[0] + this.state.all3Darts6[1] + this.state.all3Darts6[2])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage6.pop();
+            this.state.dartsAverage6.pop();
+            this.state.dartsAverage6.pop();
+            this.state.dartsAverage6.push(0, 0, 0);
           }
           if (this.state.all3Darts6.length === 2) {
             this.state.currentValue6 = this.state.currentValue6 + (this.state.all3Darts6[0] + this.state.all3Darts6[1])
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage6.pop();
+            this.state.dartsAverage6.pop();
+            this.state.dartsAverage6.push(0, 0, 0);
           }
           if (this.state.all3Darts6.length === 1) {
             this.state.currentValue6 = this.state.currentValue6 + this.state.all3Darts6[0]
-            // this.state.dartsAverage2.pop();
-            // this.state.dartsAverage2.push(0, 0, 0);
+            this.state.dartsAverage6.pop();
+            this.state.dartsAverage6.push(0, 0, 0);
           }
           this.setState({ all3Darts6: [] });
           this.setState({ previousValue6: this.state.currentValue6 });
@@ -1448,21 +1457,21 @@ export default class SixPlayer extends Component {
         if (type !== "double" && this.state.currentValue6 <= 0) {
             if (this.state.all3Darts6.length === 3) {
                 this.state.currentValue6 = this.state.currentValue6 + (this.state.all3Darts6[0] + this.state.all3Darts6[1] + this.state.all3Darts6[2])
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.push(0, 0, 0);
+                this.state.dartsAverage6.pop();
+                this.state.dartsAverage6.pop();
+                this.state.dartsAverage6.pop();
+                this.state.dartsAverage6.push(0, 0, 0);
               }
               if (this.state.all3Darts6.length === 2) {
                 this.state.currentValue6 = this.state.currentValue6 + (this.state.all3Darts6[0] + this.state.all3Darts6[1])
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.push(0, 0, 0);
+                this.state.dartsAverage6.pop();
+                this.state.dartsAverage6.pop();
+                this.state.dartsAverage6.push(0, 0, 0);
               }
               if (this.state.all3Darts6.length === 1) {
                 this.state.currentValue6 = this.state.currentValue6 + this.state.all3Darts6[0]
-                // this.state.dartsAverage2.pop();
-                // this.state.dartsAverage2.push(0, 0, 0);
+                this.state.dartsAverage6.pop();
+                this.state.dartsAverage6.push(0, 0, 0);
               }
               this.setState({ all3Darts6: [] });
               this.setState({ previousValue6: this.state.currentValue6 });
@@ -1531,7 +1540,7 @@ export default class SixPlayer extends Component {
           this.setState({ modalVisible1: false });
         }
   
-        // this.state.dartsAverage2.push(value);
+        this.state.dartsAverage6.push(value);
   
         if (this.state.currentValue6 <= 40) {
           this.setState({ possibleOutShot6: null });
@@ -1586,8 +1595,9 @@ export default class SixPlayer extends Component {
           this.setState({ showOuts: false, showOuts2: false, showOuts3: false, showOuts4: false, showOuts5: false});
           this.setState({ possibleOutShot1: null, possibleOutShot2: null, possibleOutShot3: null, possibleOutShot4: null, possibleOutShot5: null});
           this.setState({ all3Darts6: [] });
+          this.state.startingLeg++;
 
-          if (this.state.startingLeg === numOfPlayers.length){
+          if (this.state.startingLeg === this.props.route.params.numOfPlayers){
             this.state.startingLeg = 0;
           }
 
@@ -1639,7 +1649,6 @@ export default class SixPlayer extends Component {
             this.setState({ player5Throw: false });
             this.setState({ player6Throw: true });
           }
-          this.state.startingLeg++;
         }
   
         if (
@@ -1670,111 +1679,263 @@ export default class SixPlayer extends Component {
       }
   };
 
-  threeDartAverage = () => {
-    let allDartsAverage = this.state.dartsAverage;
-    const averages = [];
-    let sum = 0;
+  // threeDartAverage = () => {
+  //   let allDartsAverage = this.state.dartsAverage;
+  //   const averages = [];
+  //   let sum = 0;
 
-    for (let i = 0; i < allDartsAverage.length; i++) {
-      sum = sum + allDartsAverage[i];
-      if ((i + 1) % 3 == 0) {
-        averages.push(sum);
-        sum = 0;
-      }
-    }
+  //   for (let i = 0; i < allDartsAverage.length; i++) {
+  //     sum = sum + allDartsAverage[i];
+  //     if ((i + 1) % 3 == 0) {
+  //       averages.push(sum);
+  //       sum = 0;
+  //     }
+  //   }
 
-    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+  //   const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
 
-    if (averages.length > 0) {
-      return allAverages;
-    }
-    return 0;
-  };
-  threeDartAverage2 = () => {
-    let allDartsAverage = this.state.dartsAverage2;
-    const averages = [];
-    let sum = 0;
+  //   if (averages.length > 0) {
+  //     return allAverages;
+  //   }
+  //   return 0;
+  // };
+  // threeDartAverage2 = () => {
+  //   let allDartsAverage = this.state.dartsAverage2;
+  //   const averages = [];
+  //   let sum = 0;
 
-    for (let i = 0; i < allDartsAverage.length; i++) {
-      sum = sum + allDartsAverage[i];
-      if ((i + 1) % 3 == 0) {
-        averages.push(sum);
-        sum = 0;
-      }
-    }
+  //   for (let i = 0; i < allDartsAverage.length; i++) {
+  //     sum = sum + allDartsAverage[i];
+  //     if ((i + 1) % 3 == 0) {
+  //       averages.push(sum);
+  //       sum = 0;
+  //     }
+  //   }
 
-    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+  //   const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
 
-    if (averages.length > 0) {
-      return allAverages;
-    }
-    return 0;
-  };
+  //   if (averages.length > 0) {
+  //     return allAverages;
+  //   }
+  //   return 0;
+  // };
 
   ResetGame = () => {
     this.setState(initialState);
     this.setState({ currentValue: "501", currentValue2: "501", currentValue3: "501", currentValue4: "501", currentValue5: "501", currentValue6: "501"});
-    this.setState({ dartsAverage: [] });
-    this.setState({ dartsAverage2: [] });
+    this.setState({ dartsAverage: [], dartsAverage2: [], dartsAverage3: [], dartsAverage4: [], dartsAverage5: [], dartsAverage6: [],});
     this.setState({ all3Darts: [], all3Darts2: [], all3Darts3: [], all3Darts4: [], all3Darts5: [], all3Darts6: []});
     this.setState({ showOuts: false, showOuts2: false, showOuts3: false, showOuts4: false, showOuts5: false, showOuts6: false, });
     this.setState({ startingLeg: 0 });
   };
 
   UndoLastDart = () => {
-    if (this.state.player1Throw && !this.state.all3Darts.length) {
-      if (this.state.currentValue2 <= 501) {
+    if (this.state.player1Throw && !this.state.all3Darts.length && this.props.route.params.numOfPlayers === 6) {
+      if (this.state.currentValue6 <= this.props.route.params.player6StartingScore) {
         this.setState({
-          currentValue2:
-            this.state.currentValue2 +
-            parseFloat(this.state.dartsAverage2.slice(-1)),
+          currentValue6:
+            this.state.currentValue6 +
+            parseFloat(this.state.dartsAverage6.slice(-1)),
         });
-        this.state.currentValue2 =
-          this.state.currentValue2 + this.state.dartsAverage2.pop();
-        this.state.all3Darts2.pop();
+        this.state.currentValue6 =
+          this.state.currentValue6 + this.state.dartsAverage6.pop();
+        this.state.all3Darts6.pop();
       }
       if (
-        this.state.currentValue2 +
-          parseFloat(this.state.dartsAverage2.slice(-1)) >
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) >
           170 ||
-        this.state.currentValue2 +
-          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
           159 ||
-        this.state.currentValue2 +
-          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
           162 ||
-        this.state.currentValue2 +
-          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
           163 ||
-        this.state.currentValue2 +
-          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
           165 ||
-        this.state.currentValue2 +
-          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
           166 ||
-        this.state.currentValue2 +
-          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
           168 ||
-        this.state.currentValue2 +
-          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
           169
       ) {
-        this.state.showOuts2 = false;
+        this.state.showOuts6 = false;
       }
       this.setState({ player1Throw: false });
-      this.setState({ player2Throw: true });
+      this.setState({ player6Throw: true });
 
       const outs = Object.keys(possibleOuts);
 
       for (let i = 0; i < outs.length; i++) {
-        if (parseFloat(outs[i]) === this.state.currentValue2) {
-          this.setState({ possibleOutShot2: possibleOuts[outs[i]] });
-          this.state.showOuts2 = true;
+        if (parseFloat(outs[i]) === this.state.currentValue6) {
+          this.setState({ possibleOutShot6: possibleOuts[outs[i]] });
+          this.state.showOuts6 = true;
+        }
+      }
+    }
+    if (this.state.player1Throw && !this.state.all3Darts.length && this.props.route.params.numOfPlayers === 5) {
+      if (this.state.currentValue5 <= this.props.route.params.player5StartingScore) {
+        this.setState({
+          currentValue5:
+            this.state.currentValue5 +
+            parseFloat(this.state.dartsAverage5.slice(-1)),
+        });
+        this.state.currentValue5 =
+          this.state.currentValue5 + this.state.dartsAverage5.pop();
+        this.state.all3Darts5.pop();
+      }
+      if (
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) >
+          170 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          159 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          162 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          163 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          165 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          166 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          168 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts5 = false;
+      }
+      this.setState({ player1Throw: false });
+      this.setState({ player5Throw: true });
+
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue5) {
+          this.setState({ possibleOutShot5: possibleOuts[outs[i]] });
+          this.state.showOuts5 = true;
+        }
+      }
+    }
+    if (this.state.player1Throw && !this.state.all3Darts.length && this.props.route.params.numOfPlayers === 4) {
+      if (this.state.currentValue4 <= this.props.route.params.player4StartingScore) {
+        this.setState({
+          currentValue4:
+            this.state.currentValue4 +
+            parseFloat(this.state.dartsAverage4.slice(-1)),
+        });
+        this.state.currentValue4 =
+          this.state.currentValue4 + this.state.dartsAverage4.pop();
+        this.state.all3Darts4.pop();
+      }
+      if (
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) >
+          170 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          159 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          162 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          163 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          165 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          166 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          168 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts4 = false;
+      }
+      this.setState({ player1Throw: false });
+      this.setState({ player4Throw: true });
+
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue4) {
+          this.setState({ possibleOutShot4: possibleOuts[outs[i]] });
+          this.state.showOuts4 = true;
+        }
+      }
+    }
+    if (this.state.player1Throw && !this.state.all3Darts.length && this.props.route.params.numOfPlayers === 3) {
+      if (this.state.currentValue3 <= this.props.route.params.player3StartingScore) {
+        this.setState({
+          currentValue3:
+            this.state.currentValue3 +
+            parseFloat(this.state.dartsAverage3.slice(-1)),
+        });
+        this.state.currentValue3 =
+          this.state.currentValue3 + this.state.dartsAverage3.pop();
+        this.state.all3Darts3.pop();
+      }
+      if (
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) >
+          170 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          159 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          162 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          163 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          165 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          166 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          168 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts3 = false;
+      }
+      this.setState({ player1Throw: false });
+      this.setState({ player3Throw: true });
+
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue3) {
+          this.setState({ possibleOutShot3: possibleOuts[outs[i]] });
+          this.state.showOuts3 = true;
         }
       }
     }
     if (this.state.player2Throw && !this.state.all3Darts2.length) {
-      if (this.state.currentValue <= 501) {
+      if (this.state.currentValue <= this.props.route.params.player1StartingScore) {
         this.setState({
           currentValue:
             this.state.currentValue +
@@ -1824,8 +1985,213 @@ export default class SixPlayer extends Component {
         }
       }
     }
+    if (this.state.player3Throw && !this.state.all3Darts3.length) {
+      if (this.state.currentValue2 <= this.props.route.params.player2StartingScore) {
+        this.setState({
+          currentValue2:
+            this.state.currentValue2 +
+            parseFloat(this.state.dartsAverage2.slice(-1)),
+        });
+        this.state.currentValue2 =
+          this.state.currentValue2 + this.state.dartsAverage2.pop();
+        this.state.all3Darts2.pop();
+      }
+      if (
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) >
+          170 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          159 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          162 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          163 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          165 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          166 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          168 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts2 = false;
+      }
+      this.setState({ player3Throw: false });
+      this.setState({ player2Throw: true });
+      
+
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue2) {
+          this.setState({ possibleOutShot2: possibleOuts[outs[i]] });
+          this.state.showOuts2 = true;
+        }
+      }
+    }
+    if (this.state.player4Throw && !this.state.all3Darts4.length) {
+      if (this.state.currentValue3 <= this.props.route.params.player3StartingScore) {
+        this.setState({
+          currentValue3:
+            this.state.currentValue3 +
+            parseFloat(this.state.dartsAverage3.slice(-1)),
+        });
+        this.state.currentValue3 =
+          this.state.currentValue3 + this.state.dartsAverage3.pop();
+        this.state.all3Darts3.pop();
+      }
+      if (
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) >
+          170 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          159 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          162 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          163 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          165 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          166 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          168 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts3 = false;
+      }
+      this.setState({ player4Throw: false });
+      this.setState({ player3Throw: true });
+
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue3) {
+          this.setState({ possibleOutShot3: possibleOuts[outs[i]] });
+          this.state.showOuts3 = true;
+        }
+      }
+    }
+    if (this.state.player5Throw && !this.state.all3Darts5.length) {
+      if (this.state.currentValue4 <= this.props.route.params.player4StartingScore) {
+        this.setState({
+          currentValue4:
+            this.state.currentValue4 +
+            parseFloat(this.state.dartsAverage4.slice(-1)),
+        });
+        this.state.currentValue4 =
+          this.state.currentValue4 + this.state.dartsAverage4.pop();
+        this.state.all3Darts4.pop();
+      }
+      if (
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) >
+          170 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          159 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          162 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          163 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          165 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          166 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          168 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts4 = false;
+      }
+      this.setState({ player5Throw: false });
+      this.setState({ player4Throw: true });
+
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue4) {
+          this.setState({ possibleOutShot4: possibleOuts[outs[i]] });
+          this.state.showOuts4 = true;
+        }
+      }
+    }
+    if (this.state.player6Throw && !this.state.all3Darts6.length) {
+      if (this.state.currentValue5 <= this.props.route.params.player5StartingScore) {
+        this.setState({
+          currentValue5:
+            this.state.currentValue5 +
+            parseFloat(this.state.dartsAverage5.slice(-1)),
+        });
+        this.state.currentValue5 =
+          this.state.currentValue5 + this.state.dartsAverage5.pop();
+        this.state.all3Darts5.pop();
+      }
+      if (
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) >
+          170 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          159 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          162 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          163 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          165 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          166 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          168 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts5 = false;
+      }
+      this.setState({ player6Throw: false });
+      this.setState({ player5Throw: true });
+
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue5) {
+          this.setState({ possibleOutShot5: possibleOuts[outs[i]] });
+          this.state.showOuts5 = true;
+        }
+      }
+    }
     if (this.state.player1Throw && this.state.all3Darts.length) {
-      if (this.state.currentValue <= 501) {
+      if (this.state.currentValue <= this.props.route.params.player1StartingScore) {
         this.setState({
           currentValue:
             this.state.currentValue +
@@ -1873,7 +2239,7 @@ export default class SixPlayer extends Component {
       }
     }
     if (this.state.player2Throw && this.state.all3Darts2.length) {
-      if (this.state.currentValue2 <= 501) {
+      if (this.state.currentValue2 <= this.props.route.params.player2StartingScore) {
         this.setState({
           currentValue2:
             this.state.currentValue2 +
@@ -1920,6 +2286,198 @@ export default class SixPlayer extends Component {
         }
       }
     }
+    if (this.state.player3Throw && this.state.all3Darts3.length) {
+      if (this.state.currentValue3 <= this.props.route.params.player3StartingScore) {
+        this.setState({
+          currentValue3:
+            this.state.currentValue3 +
+            parseFloat(this.state.dartsAverage3.slice(-1)),
+        });
+        this.state.currentValue3 =
+          this.state.currentValue3 + this.state.dartsAverage3.pop();
+        this.state.all3Darts3.pop();
+      }
+      if (
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) >
+          170 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          159 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          162 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          163 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          165 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          166 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          168 ||
+        this.state.currentValue3 +
+          parseFloat(this.state.dartsAverage3.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts3 = false;
+      }
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue3) {
+          this.setState({ possibleOutShot3: possibleOuts[outs[i]] });
+          this.state.showOuts3 = true;
+        }
+      }
+    }
+    if (this.state.player4Throw && this.state.all3Darts4.length) {
+      if (this.state.currentValue4 <= this.props.route.params.player4StartingScore) {
+        this.setState({
+          currentValue4:
+            this.state.currentValue4 +
+            parseFloat(this.state.dartsAverage4.slice(-1)),
+        });
+        this.state.currentValue4 =
+          this.state.currentValue4 + this.state.dartsAverage4.pop();
+        this.state.all3Darts4.pop();
+      }
+      if (
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) >
+          170 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          159 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          162 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          163 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          165 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          166 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          168 ||
+        this.state.currentValue4 +
+          parseFloat(this.state.dartsAverage4.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts4 = false;
+      }
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue4) {
+          this.setState({ possibleOutShot4: possibleOuts[outs[i]] });
+          this.state.showOuts4 = true;
+        }
+      }
+    }
+    if (this.state.player5Throw && this.state.all3Darts5.length) {
+      if (this.state.currentValue5 <= this.props.route.params.player5StartingScore) {
+        this.setState({
+          currentValue5:
+            this.state.currentValue5 +
+            parseFloat(this.state.dartsAverage5.slice(-1)),
+        });
+        this.state.currentValue5 =
+          this.state.currentValue5 + this.state.dartsAverage5.pop();
+        this.state.all3Darts5.pop();
+      }
+      if (
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) >
+          170 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          159 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          162 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          163 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          165 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          166 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          168 ||
+        this.state.currentValue5 +
+          parseFloat(this.state.dartsAverage5.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts5 = false;
+      }
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue5) {
+          this.setState({ possibleOutShot5: possibleOuts[outs[i]] });
+          this.state.showOuts5 = true;
+        }
+      }
+    }
+    if (this.state.player6Throw && this.state.all3Darts6.length) {
+      if (this.state.currentValue6 <= this.props.route.params.player6StartingScore) {
+        this.setState({
+          currentValue6:
+            this.state.currentValue6 +
+            parseFloat(this.state.dartsAverage6.slice(-1)),
+        });
+        this.state.currentValue6 =
+          this.state.currentValue6 + this.state.dartsAverage6.pop();
+        this.state.all3Darts6.pop();
+      }
+      if (
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) >
+          170 ||
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
+          159 ||
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
+          162 ||
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
+          163 ||
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
+          165 ||
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
+          166 ||
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
+          168 ||
+        this.state.currentValue6 +
+          parseFloat(this.state.dartsAverage6.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts6 = false;
+      }
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue6) {
+          this.setState({ possibleOutShot6: possibleOuts[outs[i]] });
+          this.state.showOuts6 = true;
+        }
+      }
+    }
   };
   player1Text = () => {
     if (this.state.player1Throw) {
@@ -1955,6 +2513,74 @@ export default class SixPlayer extends Component {
       marginBottom: 10,
     };
   };
+  player3Text = () => {
+    if (this.state.player3Throw) {
+      return {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "900",
+        textAlign: "center",
+        marginBottom: 10,
+      };
+    }
+    return {
+      color: "#fff",
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 10,
+    };
+  };
+  player4Text = () => {
+    if (this.state.player4Throw) {
+      return {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "900",
+        textAlign: "center",
+        marginBottom: 10,
+      };
+    }
+    return {
+      color: "#fff",
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 10,
+    };
+  };
+  player5Text = () => {
+    if (this.state.player5Throw) {
+      return {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "900",
+        textAlign: "center",
+        marginBottom: 10,
+      };
+    }
+    return {
+      color: "#fff",
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 10,
+    };
+  };
+  player6Text = () => {
+    if (this.state.player6Throw) {
+      return {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "900",
+        textAlign: "center",
+        marginBottom: 10,
+      };
+    }
+    return {
+      color: "#fff",
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 10,
+    };
+  };
   
   render() {
     
@@ -1965,36 +2591,17 @@ export default class SixPlayer extends Component {
       this.state.currentValue2 -= 200
     }
     if(this.props.route.params.player3StartingScore === 301 && this.state.currentValue3 === "501"){
-      this.state.currentValue2 -= 200
+      this.state.currentValue3 -= 200
     }
     if(this.props.route.params.player4StartingScore === 301 && this.state.currentValue4 === "501"){
-      this.state.currentValue2 -= 200
+      this.state.currentValue4 -= 200
     }
     if(this.props.route.params.player5StartingScore === 301 && this.state.currentValue5 === "501"){
-      this.state.currentValue2 -= 200
+      this.state.currentValue5 -= 200
     }
     if(this.props.route.params.player6StartingScore === 301 && this.state.currentValue6 === "501"){
-      this.state.currentValue2 -= 200
+      this.state.currentValue6 -= 200
     }
-    const numOfPlayers = []
-    if(this.props.route.params.player1Name.length){
-      numOfPlayers.push(this.props.route.params.player1Name)
-    }
-    if(this.props.route.params.player2Name.length){
-        numOfPlayers.push(this.props.route.params.player2Name)
-      }
-    if(this.props.route.params.player3Name.length){
-        numOfPlayers.push(this.props.route.params.player3Name)
-      }
-    if(this.props.route.params.player4Name.length){
-        numOfPlayers.push(this.props.route.params.player4Name)
-      }
-    if(this.props.route.params.player5Name.length){
-        numOfPlayers.push(this.props.route.params.player5Name)
-      }
-    if(this.props.route.params.player6Name.length){
-        numOfPlayers.push(this.props.route.params.player6Name)
-      }
 
     return (
       <View style={styles.container}>
@@ -2042,65 +2649,97 @@ export default class SixPlayer extends Component {
                 {parseFloat(this.state.legsWon2).toLocaleString()}
               </Text>
             </View>
-            <View style={styles.columns3}>
-              <Text style={this.player2Text()}>{this.props.route.params.player3Name}</Text>
-              <Text style={this.player2Text()}>
+            {/* <View style={styles.columns3}>
+              <Text style={this.player3Text()}>{this.props.route.params.player3Name}</Text>
+              <Text style={this.player3Text()}>
                 {parseFloat(this.state.currentValue3).toLocaleString()}
               </Text>
-              <Text style={this.player2Text()}>
+              <Text style={this.player3Text()}>
+                {parseFloat(this.state.legsWon3).toLocaleString()}
+              </Text> */}
+              {this.props.route.params.numOfPlayers > 3 ?
+              <View style={styles.columns3}>
+                <Text style={this.player3Text()}>{this.props.route.params.player3Name}</Text>
+              <Text style={this.player3Text()}>
+                {parseFloat(this.state.currentValue3).toLocaleString()}
+              </Text>
+              <Text style={this.player3Text()}>
                 {parseFloat(this.state.legsWon3).toLocaleString()}
               </Text>
-              <Text style={this.player2Text()}>{this.props.route.params.player4Name}</Text>
-              <Text style={this.player2Text()}>
+              <Text style={this.player4Text()}>{this.props.route.params.player4Name}</Text>
+              <Text style={this.player4Text()}>
                 {parseFloat(this.state.currentValue4).toLocaleString()}
               </Text>
-              <Text style={this.player2Text()}>
+              <Text style={this.player4Text()}>
                 {parseFloat(this.state.legsWon4).toLocaleString()}
-              </Text>
+              </Text> 
+              </View>
+             : <View style={styles.columns3}>
+             <Text style={this.player3Text()}>{this.props.route.params.player3Name}</Text>
+             <Text style={this.player3Text()}>
+               {parseFloat(this.state.currentValue3).toLocaleString()}
+             </Text>
+             <Text style={this.player3Text()}>
+               {parseFloat(this.state.legsWon3).toLocaleString()}
+             </Text>
             </View>
+             }
+              {this.props.route.params.numOfPlayers === 5 &&
             <View style={styles.columns3}>
-              <Text style={this.player2Text()}>{this.props.route.params.player5Name}</Text>
-              <Text style={this.player2Text()}>
+              <Text style={this.player5Text()}>{this.props.route.params.player5Name}</Text>
+              <Text style={this.player5Text()}>
                 {parseFloat(this.state.currentValue5).toLocaleString()}
               </Text>
-              <Text style={this.player2Text()}>
+              <Text style={this.player5Text()}>
                 {parseFloat(this.state.legsWon5).toLocaleString()}
               </Text>
-              <Text style={this.player2Text()}>{this.props.route.params.player6Name}</Text>
-              <Text style={this.player2Text()}>
+              </View>
+              }
+              {this.props.route.params.numOfPlayers > 5 && 
+              <View style={styles.columns3}>
+                <Text style={this.player5Text()}>{this.props.route.params.player5Name}</Text>
+              <Text style={this.player5Text()}>
+                {parseFloat(this.state.currentValue5).toLocaleString()}
+              </Text>
+              <Text style={this.player5Text()}>
+                {parseFloat(this.state.legsWon5).toLocaleString()}
+              </Text>
+              <Text style={this.player6Text()}>{this.props.route.params.player6Name}</Text>
+              <Text style={this.player6Text()}>
                 {parseFloat(this.state.currentValue6).toLocaleString()}
               </Text>
-              <Text style={this.player2Text()}>
+              <Text style={this.player6Text()}>
                 {parseFloat(this.state.legsWon6).toLocaleString()}
               </Text>
             </View>
+              }
           </Row>
-          {this.state.showOuts ? (
+          {(this.state.showOuts && this.state.player1Throw) ? (
             <Text style={styles.outText}>
               {this.props.route.params.player1Name}'s Possible Out:{" "}{this.state.possibleOutShot}
             </Text>
           ) : null}
-          {this.state.showOuts2 ? (
+          {(this.state.showOuts2 && this.state.player2Throw) ? (
             <Text style={styles.outText}>
               {this.props.route.params.player2Name}'s Possible Out:{" "}{this.state.possibleOutShot2}
             </Text>
           ): null}
-          {this.state.showOuts3 ? (
+          {(this.state.showOuts3 && this.state.player3Throw) ? (
             <Text style={styles.outText}>
               {this.props.route.params.player3Name}'s Possible Out:{" "}{this.state.possibleOutShot3}
             </Text>
           ): null}
-          {this.state.showOuts4 ? (
+          {(this.state.showOuts4 && this.state.player4Throw) ? (
             <Text style={styles.outText}>
               {this.props.route.params.player4Name}'s Possible Out:{" "}{this.state.possibleOutShot4}
             </Text>
           ): null}
-          {this.state.showOuts5 ? (
+          {(this.state.showOuts5 && this.state.player5Throw) ? (
             <Text style={styles.outText}>
               {this.props.route.params.player5Name}'s Possible Out:{" "}{this.state.possibleOutShot5}
             </Text>
           ): null}
-          {this.state.showOuts6 ? (
+          {(this.state.showOuts6 && this.state.player6Throw) ? (
             <Text style={styles.outText}>
               {this.props.route.params.player6Name}'s Possible Out:{" "}{this.state.possibleOutShot6}
             </Text>

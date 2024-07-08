@@ -536,7 +536,7 @@ export default class MultiPlayer extends Component {
 
   UndoLastDart = () => {
     if (this.state.player1Throw && !this.state.all3Darts.length) {
-      if (this.state.currentValue2 <= 501) {
+      if (this.state.currentValue2 <= this.props.route.params.player2StartingScore) {
         this.setState({
           currentValue2:
             this.state.currentValue2 +
@@ -587,7 +587,7 @@ export default class MultiPlayer extends Component {
       }
     }
     if (this.state.player2Throw && !this.state.all3Darts2.length) {
-      if (this.state.currentValue <= 501) {
+      if (this.state.currentValue <= this.props.route.params.player1StartingScore) {
         this.setState({
           currentValue:
             this.state.currentValue +
@@ -638,7 +638,7 @@ export default class MultiPlayer extends Component {
       }
     }
     if (this.state.player1Throw && this.state.all3Darts.length) {
-      if (this.state.currentValue <= 501) {
+      if (this.state.currentValue <= this.props.route.params.player1StartingScore) {
         this.setState({
           currentValue:
             this.state.currentValue +
@@ -686,7 +686,7 @@ export default class MultiPlayer extends Component {
       }
     }
     if (this.state.player2Throw && this.state.all3Darts2.length) {
-      if (this.state.currentValue2 <= 501) {
+      if (this.state.currentValue2 <= this.props.route.params.player2StartingScore) {
         this.setState({
           currentValue2:
             this.state.currentValue2 +

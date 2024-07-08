@@ -226,12 +226,12 @@ export default class SinglePlayer extends Component {
   }
 
   UndoLastDart = () => {
-    if(this.state.currentValue <= 501 && this.state.all3Darts.length){
+    if(this.state.currentValue <= this.props.route.params.player1StartingScore && this.state.all3Darts.length){
     this.setState({currentValue: (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)))});
     this.state.currentValue =  (this.state.currentValue + this.state.dartsAverage.pop());
     this.state.all3Darts.pop();
     }
-    if(this.state.currentValue <= 501 && !this.state.all3Darts.length){
+    if(this.state.currentValue <= this.props.route.params.player1StartingScore && !this.state.all3Darts.length){
       this.setState({currentValue: (this.state.currentValue + parseFloat(this.state.dartsAverage.slice(-1)))});
       this.state.currentValue =  (this.state.currentValue + this.state.dartsAverage.pop());
       this.state.all3Darts.push(parseFloat(this.state.dartsAverage.slice(-1)), parseFloat(this.state.dartsAverage.slice(-2)));
