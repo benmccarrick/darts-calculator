@@ -12,6 +12,7 @@ export default class SinglePlayer extends Component {
     this.setState({previousValue: this.state.currentValue});
 
     this.state.all3Darts.push(value)
+    this.state.dartsAverage.push(value)
 
     if(this.state.all3Darts.length === 3){
       setTimeout(
@@ -24,7 +25,7 @@ export default class SinglePlayer extends Component {
       );
     }
 
-    if(this.state.currentValue < 0 || this.state.currentValue === 1){
+    if(this.state.currentValue < 0 || this.state.currentValue === 1 || (type !== "double" && this.state.currentValue <= 0)){
       if (this.state.all3Darts.length === 3) {
         this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
         this.state.dartsAverage.pop();
@@ -44,28 +45,6 @@ export default class SinglePlayer extends Component {
         this.state.dartsAverage.push(0, 0, 0);
       }
         this.setState({all3Darts: []});
-      this.setState({previousValue: this.state.currentValue})
-    }
-    if(type !== "double" && this.state.currentValue <= 0){
-      if (this.state.all3Darts.length === 3) {
-        this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
-        this.state.dartsAverage.pop();
-        this.state.dartsAverage.pop();
-        this.state.dartsAverage.pop();
-        this.state.dartsAverage.push(0, 0, 0);
-      }
-      if (this.state.all3Darts.length === 2) {
-        this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1])
-        this.state.dartsAverage.pop();
-        this.state.dartsAverage.pop();
-        this.state.dartsAverage.push(0, 0, 0);
-      }
-      if (this.state.all3Darts.length === 1) {
-        this.state.currentValue = this.state.currentValue + this.state.all3Darts[0]
-        this.state.dartsAverage.pop();
-        this.state.dartsAverage.push(0, 0, 0);
-      }
-      this.setState({all3Darts: []});
       this.setState({previousValue: this.state.currentValue})
     }
 
@@ -129,8 +108,6 @@ export default class SinglePlayer extends Component {
     if (this.state.modalVisible1){
       this.setState({modalVisible1: false});
     }
-    
-    this.state.dartsAverage.push(value)
     
     if(this.state.currentValue <= 40){
       this.setState({possibleOutShot: null})

@@ -20,7 +20,7 @@ export default class MultiPlayer extends Component {
       this.setState({ previousValue: this.state.currentValue });
 
       this.state.all3Darts.push(value);
-     
+      this.state.dartsAverage.push(value);
 
        if (this.state.all3Darts.length === 3) {
         setTimeout(
@@ -37,31 +37,7 @@ export default class MultiPlayer extends Component {
         this.setState({ all3Darts2: [] });
       }
 
-      if (this.state.currentValue < 0 || this.state.currentValue === 1) {
-        if (this.state.all3Darts.length === 3) {
-          this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.push(0, 0, 0);
-        }
-        if (this.state.all3Darts.length === 2) {
-          this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1])
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.push(0, 0, 0);
-        }
-        if (this.state.all3Darts.length === 1) {
-          this.state.currentValue = this.state.currentValue + this.state.all3Darts[0]
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.push(0, 0, 0);
-        }
-        this.setState({ all3Darts: [] });
-        this.setState({ previousValue: this.state.currentValue });
-        this.setState({ player1Throw: false });
-        this.setState({ player2Throw: true });
-      }
-      if (type !== "double" && this.state.currentValue <= 0) {
+      if (this.state.currentValue < 0 || this.state.currentValue === 1 || (type !== "double" && this.state.currentValue <= 0)) {
         if (this.state.all3Darts.length === 3) {
           this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
           this.state.dartsAverage.pop();
@@ -147,8 +123,6 @@ export default class MultiPlayer extends Component {
         this.setState({ modalVisible1: false });
       }
 
-      this.state.dartsAverage.push(value);
-
       if (this.state.currentValue <= 40) {
         this.setState({ possibleOutShot: null });
         this.setState({ showOuts: false });
@@ -177,21 +151,17 @@ export default class MultiPlayer extends Component {
         if (this.state.all3Darts.length === 1) {
           this.state.checkouts.push(this.state.all3Darts[0]);
         }
-        if(this.props.route.params.player1StartingScore === 301 && this.props.route.params.player2StartingScore === 301){
-          this.setState({ currentValue2: 301 });
+        if(this.props.route.params.player1StartingScore === 301){
           this.setState({ currentValue: 301 });
         }
-        if(this.props.route.params.player1StartingScore === 501 && this.props.route.params.player2StartingScore === 301){
+        else {
+          this.setState({ currentValue: 501 });
+        }
+        if(this.props.route.params.player2StartingScore === 301){
           this.setState({ currentValue2: 301 });
-          this.setState({ currentValue: 501 });
         }
-        if(this.props.route.params.player1StartingScore === 501 && this.props.route.params.player2StartingScore === 501){
+        else {
           this.setState({ currentValue2: 501 });
-          this.setState({ currentValue: 501 });
-        }
-        if(this.props.route.params.player1StartingScore === 301 && this.props.route.params.player2StartingScore === 501){
-          this.setState({ currentValue2: 501 });
-          this.setState({ currentValue: 301 });
         }
         this.setState({ legsWon: parseFloat(this.state.legsWon) + 1 });
         this.setState({ showOuts2: false });
@@ -251,6 +221,7 @@ export default class MultiPlayer extends Component {
       this.setState({ previousValue2: this.state.currentValue2 });
 
       this.state.all3Darts2.push(value);
+      this.state.dartsAverage2.push(value);
 
       if (this.state.all3Darts2.length === 3) {
         setTimeout(
@@ -267,31 +238,7 @@ export default class MultiPlayer extends Component {
         this.setState({ all3Darts: [] });
       }
 
-      if (this.state.currentValue2 < 0 || this.state.currentValue2 === 1) {
-        if (this.state.all3Darts2.length === 3) {
-          this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1] + this.state.all3Darts2[2])
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.push(0, 0, 0);
-        }
-        if (this.state.all3Darts2.length === 2) {
-          this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1])
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.push(0, 0, 0);
-        }
-        if (this.state.all3Darts2.length === 1) {
-          this.state.currentValue2 = this.state.currentValue2 + this.state.all3Darts2[0]
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.push(0, 0, 0);
-        }
-        this.setState({ all3Darts2: [] });
-        this.setState({ previousValue2: this.state.currentValue2 });
-        this.setState({ player2Throw: false });
-        this.setState({ player1Throw: true });
-      }
-      if (type !== "double" && this.state.currentValue2 <= 0) {
+      if (this.state.currentValue2 < 0 || this.state.currentValue2 === 1 || (type !== "double" && this.state.currentValue2 <= 0)) {
         if (this.state.all3Darts2.length === 3) {
           this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1] + this.state.all3Darts2[2])
           this.state.dartsAverage2.pop();
@@ -377,8 +324,6 @@ export default class MultiPlayer extends Component {
         this.setState({ modalVisible1: false });
       }
 
-      this.state.dartsAverage2.push(value);
-
       if (this.state.currentValue2 <= 40) {
         this.setState({ possibleOutShot2: null });
         this.setState({ showOuts2: false });
@@ -407,21 +352,17 @@ export default class MultiPlayer extends Component {
         if (this.state.all3Darts2.length === 1) {
           this.state.checkouts2.push(this.state.all3Darts2[0]);
         }
-        if(this.props.route.params.player1StartingScore === 301 && this.props.route.params.player2StartingScore === 301){
-          this.setState({ currentValue2: 301 });
+        if(this.props.route.params.player1StartingScore === 301){
           this.setState({ currentValue: 301 });
         }
-        if(this.props.route.params.player1StartingScore === 501 && this.props.route.params.player2StartingScore === 301){
+        else {
+          this.setState({ currentValue: 501 });
+        }
+        if(this.props.route.params.player2StartingScore === 301){
           this.setState({ currentValue2: 301 });
-          this.setState({ currentValue: 501 });
         }
-        if(this.props.route.params.player1StartingScore === 501 && this.props.route.params.player2StartingScore === 501){
+        else {
           this.setState({ currentValue2: 501 });
-          this.setState({ currentValue: 501 });
-        }
-        if(this.props.route.params.player1StartingScore === 301 && this.props.route.params.player2StartingScore === 501){
-          this.setState({ currentValue2: 501 });
-          this.setState({ currentValue: 301 });
         }
         this.setState({ legsWon2: parseFloat(this.state.legsWon2) + 1 });
         this.setState({ showOuts: false });
@@ -520,18 +461,8 @@ export default class MultiPlayer extends Component {
 
   ResetGame = () => {
     this.setState(initialState);
-    this.setState({ currentValue: "501" });
-    this.setState({ currentValue2: "501" });
-    this.setState({ dartsAverage: [] });
-    this.setState({ dartsAverage2: [] });
-    this.setState({ all3Darts: [] });
-    this.setState({ all3Darts2: [] });
-    this.setState({ showOuts: false });
-    this.setState({ startingLeg: 0 });
-    this.setState({ highestOut: "0" });
-    this.setState({ highestOut2: "0" });
-    this.setState({ checkouts: [] });
-    this.setState({ checkouts2: [] });
+    this.setState({ currentValue: "501", currentValue2: "501", dartsAverage: [], dartsAverage2: [], all3Darts: [],
+       all3Darts2: [], showOuts: false, startingLeg: 0, highestOut: "0", highestOut2: "0", checkouts: [], checkouts2: []});
   };
 
   UndoLastDart = () => {
@@ -839,23 +770,23 @@ export default class MultiPlayer extends Component {
               </Text>
             </View>
           </Row>
-          {this.state.showOuts ? (
+          {this.state.showOuts && this.state.player1Throw ? (
             <Text style={styles.outText}>
               {this.props.route.params.player1Name}'s Possible Out:{" "}{this.state.possibleOutShot}
             </Text>
           ) : null}
-          {this.state.showOuts2 ? (
+          {this.state.showOuts2 && this.state.player2Throw ? (
             <Text style={styles.outText}>
               {this.props.route.params.player2Name}'s Possible Out:{" "}{this.state.possibleOutShot2}
             </Text>
           ): null}
-          {this.state.all3Darts.length ? (
+          {this.state.all3Darts.length && this.state.player1Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts[0]}{" "}{" "}{this.state.all3Darts[1]}{" "}{" "}
               {this.state.all3Darts[2]}
             </Text>
           ): null}
-          {this.state.all3Darts2.length ? (
+          {this.state.all3Darts2.length && this.state.player2Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts2[0]}{" "}{" "}{this.state.all3Darts2[1]}{" "}{" "}
               {this.state.all3Darts2[2]}

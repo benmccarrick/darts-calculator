@@ -20,6 +20,7 @@ export default class SixPlayer extends Component {
       this.setState({ previousValue: this.state.currentValue });
 
       this.state.all3Darts.push(value);
+      this.state.dartsAverage.push(value);
 
        if (this.state.all3Darts.length === 3 && this.state.currentValue !== 0) {
         setTimeout(
@@ -45,31 +46,7 @@ export default class SixPlayer extends Component {
         this.setState({ all3Darts6: [] });
       }
 
-      if (this.state.currentValue < 0 || this.state.currentValue === 1) {
-        if (this.state.all3Darts.length === 3) {
-          this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.push(0, 0, 0);
-        }
-        if (this.state.all3Darts.length === 2) {
-          this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1])
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.push(0, 0, 0);
-        }
-        if (this.state.all3Darts.length === 1) {
-          this.state.currentValue = this.state.currentValue + this.state.all3Darts[0]
-          this.state.dartsAverage.pop();
-          this.state.dartsAverage.push(0, 0, 0);
-        }
-        this.setState({ all3Darts: [] });
-        this.setState({ previousValue: this.state.currentValue });
-        this.setState({ player1Throw: false });
-        this.setState({ player2Throw: true });
-      }
-      if (type !== "double" && this.state.currentValue <= 0) {
+      if (this.state.currentValue < 0 || this.state.currentValue === 1 || (type !== "double" && this.state.currentValue <= 0)) {
         if (this.state.all3Darts.length === 3) {
           this.state.currentValue = this.state.currentValue + (this.state.all3Darts[0] + this.state.all3Darts[1] + this.state.all3Darts[2])
           this.state.dartsAverage.pop();
@@ -154,8 +131,6 @@ export default class SixPlayer extends Component {
       if (this.state.modalVisible1) {
         this.setState({ modalVisible1: false });
       }
-
-      this.state.dartsAverage.push(value);
 
       if (this.state.currentValue <= 40) {
         this.setState({ possibleOutShot: null });
@@ -297,6 +272,7 @@ export default class SixPlayer extends Component {
       this.setState({ previousValue2: this.state.currentValue2 });
 
       this.state.all3Darts2.push(value);
+      this.state.dartsAverage2.push(value);
 
       if (this.state.all3Darts2.length === 3 && this.state.currentValue2 !== 0) {
         setTimeout(
@@ -313,31 +289,7 @@ export default class SixPlayer extends Component {
         this.setState({ all3Darts: [] });
       }
 
-      if (this.state.currentValue2 < 0 || this.state.currentValue2 === 1) {
-        if (this.state.all3Darts2.length === 3) {
-          this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1] + this.state.all3Darts2[2])
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.push(0, 0, 0);
-        }
-        if (this.state.all3Darts2.length === 2) {
-          this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1])
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.push(0, 0, 0);
-        }
-        if (this.state.all3Darts2.length === 1) {
-          this.state.currentValue2 = this.state.currentValue2 + this.state.all3Darts2[0]
-          this.state.dartsAverage2.pop();
-          this.state.dartsAverage2.push(0, 0, 0);
-        }
-        this.setState({ all3Darts2: [] });
-        this.setState({ previousValue2: this.state.currentValue2 });
-        this.setState({ player2Throw: false });
-        this.setState({ player3Throw: true });
-      }
-      if (type !== "double" && this.state.currentValue2 <= 0) {
+      if (this.state.currentValue2 < 0 || this.state.currentValue2 === 1 || (type !== "double" && this.state.currentValue2 <= 0)) {
         if (this.state.all3Darts2.length === 3) {
           this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1] + this.state.all3Darts2[2])
           this.state.dartsAverage2.pop();
@@ -422,8 +374,6 @@ export default class SixPlayer extends Component {
       if (this.state.modalVisible1) {
         this.setState({ modalVisible1: false });
       }
-
-      this.state.dartsAverage2.push(value);
 
       if (this.state.currentValue2 <= 40) {
         this.setState({ possibleOutShot2: null });
@@ -565,7 +515,7 @@ export default class SixPlayer extends Component {
         this.setState({ previousValue3: this.state.currentValue3 });
   
         this.state.all3Darts3.push(value);
-        
+        this.state.dartsAverage3.push(value);
   
         if (this.state.all3Darts3.length === 3 && this.state.currentValue3 !== 0) {
           setTimeout(
@@ -587,7 +537,7 @@ export default class SixPlayer extends Component {
           this.setState({ all3Darts2: [] });
         }
   
-        if (this.state.currentValue3 < 0 || this.state.currentValue3 === 1) {
+        if (this.state.currentValue3 < 0 || this.state.currentValue3 === 1 || (type !== "double" && this.state.currentValue3 <= 0)) {
           if (this.state.all3Darts3.length === 3) {
             this.state.currentValue3 = this.state.currentValue3 + (this.state.all3Darts3[0] + this.state.all3Darts3[1] + this.state.all3Darts3[2])
             this.state.dartsAverage3.pop();
@@ -609,34 +559,6 @@ export default class SixPlayer extends Component {
           this.setState({ all3Darts3: [] });
           this.setState({ previousValue3: this.state.currentValue3 });
           this.setState({ player3Throw: false });
-          if(this.props.route.params.numOfPlayers > 3){
-            this.setState({ player4Throw: true });
-        }
-        else {
-          this.setState({ player1Throw: true });
-        }
-        }
-        if (type !== "double" && this.state.currentValue3 <= 0) {
-          if (this.state.all3Darts3.length === 3) {
-            this.state.currentValue3 = this.state.currentValue3 + (this.state.all3Darts3[0] + this.state.all3Darts3[1] + this.state.all3Darts3[2])
-            this.state.dartsAverage3.pop();
-            this.state.dartsAverage3.pop();
-            this.state.dartsAverage3.pop();
-            this.state.dartsAverage3.push(0, 0, 0);
-          }
-          if (this.state.all3Darts3.length === 2) {
-            this.state.currentValue3 = this.state.currentValue3 + (this.state.all3Darts3[0] + this.state.all3Darts3[1])
-            this.state.dartsAverage3.pop();
-            this.state.dartsAverage3.pop();
-            this.state.dartsAverage3.push(0, 0, 0);
-          }
-          if (this.state.all3Darts3.length === 1) {
-            this.state.currentValue3 = this.state.currentValue3 + this.state.all3Darts3[0]
-            this.state.dartsAverage3.pop();
-            this.state.dartsAverage3.push(0, 0, 0);
-          }
-          this.setState({ all3Darts3: [] });
-          this.setState({ previousValue3: this.state.currentValue3 });
           if(this.props.route.params.numOfPlayers > 3){
             this.setState({ player4Throw: true });
         }
@@ -705,8 +627,6 @@ export default class SixPlayer extends Component {
         if (this.state.modalVisible1) {
           this.setState({ modalVisible1: false });
         }
-  
-        this.state.dartsAverage3.push(value);
   
         if (this.state.currentValue3 <= 40) {
           this.setState({ possibleOutShot3: null });
@@ -848,6 +768,7 @@ export default class SixPlayer extends Component {
         this.setState({ previousValue4: this.state.currentValue4 });
   
         this.state.all3Darts4.push(value);
+        this.state.dartsAverage4.push(value);
   
         if (this.state.all3Darts4.length === 3 && this.state.currentValue4 !== 0) {
           setTimeout(
@@ -869,7 +790,7 @@ export default class SixPlayer extends Component {
           this.setState({ all3Darts3: [] });
         }
   
-        if (this.state.currentValue4 < 0 || this.state.currentValue4 === 1) {
+        if (this.state.currentValue4 < 0 || this.state.currentValue4 === 1 || (type !== "double" && this.state.currentValue4 <= 0)) {
           if (this.state.all3Darts4.length === 3) {
             this.state.currentValue4 = this.state.currentValue4 + (this.state.all3Darts4[0] + this.state.all3Darts4[1] + this.state.all3Darts4[2])
             this.state.dartsAverage4.pop();
@@ -879,35 +800,6 @@ export default class SixPlayer extends Component {
           }
           if (this.state.all3Darts4.length === 2) {
             this.state.currentValue4 = this.state.currentValue4 + (this.state.all3Darts4[0] + this.state.all3Darts4[1])
-            this.state.dartsAverage4.pop();
-            this.state.dartsAverage4.pop();
-            this.state.dartsAverage4.push(0, 0, 0);
-          }
-          if (this.state.all3Darts4.length === 1) {
-            this.state.currentValue4 = this.state.currentValue4 + this.state.all3Darts4[0]
-            this.state.dartsAverage4.pop();
-            this.state.dartsAverage4.push(0, 0, 0);
-          }
-          this.setState({ all3Darts4: [] });
-          this.setState({ previousValue4: this.state.currentValue4 });
-          this.setState({ player4Throw: false });
-          if(this.props.route.params.numOfPlayers > 4){
-            this.setState({ player5Throw: true });
-        }
-        else {
-          this.setState({ player1Throw: true });
-        }
-        }
-        if (type !== "double" && this.state.currentValue4 <= 0) {
-          if (this.state.all3Darts4.length === 3) {
-            this.state.currentValue4 = this.state.currentValue4 + (this.state.all3Darts4[0] + this.state.all3Darts4[1] + this.state.all3Darts4[2])
-            this.state.dartsAverage4.pop();
-            this.state.dartsAverage4.pop();
-            this.state.dartsAverage4.pop();
-            this.state.dartsAverage4.push(0, 0, 0);
-          }
-          if (this.state.all3Darts2.length === 2) {
-            this.state.currentValue2 = this.state.currentValue2 + (this.state.all3Darts2[0] + this.state.all3Darts2[1])
             this.state.dartsAverage4.pop();
             this.state.dartsAverage4.pop();
             this.state.dartsAverage4.push(0, 0, 0);
@@ -988,8 +880,6 @@ export default class SixPlayer extends Component {
         if (this.state.modalVisible1) {
           this.setState({ modalVisible1: false });
         }
-  
-        this.state.dartsAverage4.push(value);
   
         if (this.state.currentValue4 <= 40) {
           this.setState({ possibleOutShot4: null });
@@ -1131,6 +1021,7 @@ export default class SixPlayer extends Component {
         this.setState({ previousValue5: this.state.currentValue5 });
   
         this.state.all3Darts5.push(value);
+        this.state.dartsAverage5.push(value);
   
         if (this.state.all3Darts5.length === 3 && this.state.currentValue5 !== 0) {
           setTimeout(
@@ -1152,7 +1043,7 @@ export default class SixPlayer extends Component {
           this.setState({ all3Darts4: [] });
         }
   
-        if (this.state.currentValue5 < 0 || this.state.currentValue5 === 1) {
+        if (this.state.currentValue5 < 0 || this.state.currentValue5 === 1 || (type !== "double" && this.state.currentValue5 <= 0)) {
           if (this.state.all3Darts5.length === 3) {
             this.state.currentValue5 = this.state.currentValue5 + (this.state.all3Darts5[0] + this.state.all3Darts5[1] + this.state.all3Darts5[2])
             this.state.dartsAverage5.pop();
@@ -1181,35 +1072,6 @@ export default class SixPlayer extends Component {
           this.setState({ player1Throw: true });
         }
         }
-        if (type !== "double" && this.state.currentValue5 <= 0) {
-            if (this.state.all3Darts5.length === 3) {
-                this.state.currentValue5 = this.state.currentValue5 + (this.state.all3Darts5[0] + this.state.all3Darts5[1] + this.state.all3Darts5[2])
-                this.state.dartsAverage5.pop();
-                this.state.dartsAverage5.pop();
-                this.state.dartsAverage5.pop();
-                this.state.dartsAverage5.push(0, 0, 0);
-              }
-              if (this.state.all3Darts5.length === 2) {
-                this.state.currentValue5 = this.state.currentValue5 + (this.state.all3Darts5[0] + this.state.all3Darts5[1])
-                this.state.dartsAverage5.pop();
-                this.state.dartsAverage5.pop();
-                this.state.dartsAverage5.push(0, 0, 0);
-              }
-              if (this.state.all3Darts5.length === 1) {
-                this.state.currentValue5 = this.state.currentValue5 + this.state.all3Darts5[0]
-                this.state.dartsAverage5.pop();
-                this.state.dartsAverage5.push(0, 0, 0);
-              }
-              this.setState({ all3Darts5: [] });
-              this.setState({ previousValue5: this.state.currentValue5 });
-              this.setState({ player5Throw: false });
-              if(this.props.route.params.numOfPlayers > 5){
-                this.setState({ player6Throw: true });
-            }
-            else {
-              this.setState({ player1Throw: true });
-            }
-            }
   
         if (this.state.modalVisible20) {
           this.setState({ modalVisible20: false });
@@ -1271,8 +1133,6 @@ export default class SixPlayer extends Component {
         if (this.state.modalVisible1) {
           this.setState({ modalVisible1: false });
         }
-  
-        this.state.dartsAverage5.push(value);
   
         if (this.state.currentValue5 <= 40) {
           this.setState({ possibleOutShot5: null });
@@ -1414,6 +1274,7 @@ export default class SixPlayer extends Component {
         this.setState({ previousValue6: this.state.currentValue6 });
   
         this.state.all3Darts6.push(value);
+        this.state.dartsAverage6.push(value);
   
         if (this.state.all3Darts6.length === 3 && this.state.currentValue6 !== 0) {
           setTimeout(
@@ -1430,7 +1291,7 @@ export default class SixPlayer extends Component {
           this.setState({ all3Darts5: [] });
         }
   
-        if (this.state.currentValue6 < 0 || this.state.currentValue6 === 1) {
+        if (this.state.currentValue6 < 0 || this.state.currentValue6 === 1 || (type !== "double" && this.state.currentValue6 <= 0)) {
           if (this.state.all3Darts6.length === 3) {
             this.state.currentValue6 = this.state.currentValue6 + (this.state.all3Darts6[0] + this.state.all3Darts6[1] + this.state.all3Darts6[2])
             this.state.dartsAverage6.pop();
@@ -1454,30 +1315,6 @@ export default class SixPlayer extends Component {
           this.setState({ player6Throw: false });
           this.setState({ player1Throw: true });
         }
-        if (type !== "double" && this.state.currentValue6 <= 0) {
-            if (this.state.all3Darts6.length === 3) {
-                this.state.currentValue6 = this.state.currentValue6 + (this.state.all3Darts6[0] + this.state.all3Darts6[1] + this.state.all3Darts6[2])
-                this.state.dartsAverage6.pop();
-                this.state.dartsAverage6.pop();
-                this.state.dartsAverage6.pop();
-                this.state.dartsAverage6.push(0, 0, 0);
-              }
-              if (this.state.all3Darts6.length === 2) {
-                this.state.currentValue6 = this.state.currentValue6 + (this.state.all3Darts6[0] + this.state.all3Darts6[1])
-                this.state.dartsAverage6.pop();
-                this.state.dartsAverage6.pop();
-                this.state.dartsAverage6.push(0, 0, 0);
-              }
-              if (this.state.all3Darts6.length === 1) {
-                this.state.currentValue6 = this.state.currentValue6 + this.state.all3Darts6[0]
-                this.state.dartsAverage6.pop();
-                this.state.dartsAverage6.push(0, 0, 0);
-              }
-              this.setState({ all3Darts6: [] });
-              this.setState({ previousValue6: this.state.currentValue6 });
-              this.setState({ player6Throw: false });
-              this.setState({ player1Throw: true });
-            }
   
         if (this.state.modalVisible20) {
           this.setState({ modalVisible20: false });
@@ -1539,8 +1376,6 @@ export default class SixPlayer extends Component {
         if (this.state.modalVisible1) {
           this.setState({ modalVisible1: false });
         }
-  
-        this.state.dartsAverage6.push(value);
   
         if (this.state.currentValue6 <= 40) {
           this.setState({ possibleOutShot6: null });
@@ -1722,11 +1557,10 @@ export default class SixPlayer extends Component {
 
   ResetGame = () => {
     this.setState(initialState);
-    this.setState({ currentValue: "501", currentValue2: "501", currentValue3: "501", currentValue4: "501", currentValue5: "501", currentValue6: "501"});
-    this.setState({ dartsAverage: [], dartsAverage2: [], dartsAverage3: [], dartsAverage4: [], dartsAverage5: [], dartsAverage6: [],});
-    this.setState({ all3Darts: [], all3Darts2: [], all3Darts3: [], all3Darts4: [], all3Darts5: [], all3Darts6: []});
-    this.setState({ showOuts: false, showOuts2: false, showOuts3: false, showOuts4: false, showOuts5: false, showOuts6: false, });
-    this.setState({ startingLeg: 0 });
+    this.setState({ currentValue: "501", currentValue2: "501", currentValue3: "501", currentValue4: "501", currentValue5: "501", 
+      currentValue6: "501", dartsAverage: [], dartsAverage2: [], dartsAverage3: [], dartsAverage4: [], dartsAverage5: [], 
+      dartsAverage6: [], all3Darts: [], all3Darts2: [], all3Darts3: [], all3Darts4: [], all3Darts5: [], all3Darts6: [], 
+      showOuts: false, showOuts2: false, showOuts3: false, showOuts4: false, showOuts5: false, showOuts6: false, startingLeg: 0});
   };
 
   UndoLastDart = () => {
@@ -2649,14 +2483,6 @@ export default class SixPlayer extends Component {
                 {parseFloat(this.state.legsWon2).toLocaleString()}
               </Text>
             </View>
-            {/* <View style={styles.columns3}>
-              <Text style={this.player3Text()}>{this.props.route.params.player3Name}</Text>
-              <Text style={this.player3Text()}>
-                {parseFloat(this.state.currentValue3).toLocaleString()}
-              </Text>
-              <Text style={this.player3Text()}>
-                {parseFloat(this.state.legsWon3).toLocaleString()}
-              </Text> */}
               {this.props.route.params.numOfPlayers > 3 ?
               <View style={styles.columns3}>
                 <Text style={this.player3Text()}>{this.props.route.params.player3Name}</Text>
@@ -2744,37 +2570,37 @@ export default class SixPlayer extends Component {
               {this.props.route.params.player6Name}'s Possible Out:{" "}{this.state.possibleOutShot6}
             </Text>
           ): null}
-          {this.state.all3Darts.length ? (
+          {this.state.all3Darts.length && this.state.player1Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts[0]}{" "}{" "}{this.state.all3Darts[1]}{" "}{" "}
               {this.state.all3Darts[2]}
             </Text>
           ): null}
-          {this.state.all3Darts2.length ? (
+          {this.state.all3Darts2.length && this.state.player2Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts2[0]}{" "}{" "}{this.state.all3Darts2[1]}{" "}{" "}
               {this.state.all3Darts2[2]}
             </Text>
           ) : null}
-          {this.state.all3Darts3.length ? (
+          {this.state.all3Darts3.length && this.state.player3Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts3[0]}{" "}{" "}{this.state.all3Darts3[1]}{" "}{" "}
               {this.state.all3Darts3[2]}
             </Text>
           ) : null}
-          {this.state.all3Darts4.length ? (
+          {this.state.all3Darts4.length && this.state.player4Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts4[0]}{" "}{" "}{this.state.all3Darts4[1]}{" "}{" "}
               {this.state.all3Darts4[2]}
             </Text>
           ) : null}
-          {this.state.all3Darts5.length ? (
+          {this.state.all3Darts5.length && this.state.player5Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts5[0]}{" "}{" "}{this.state.all3Darts5[1]}{" "}{" "}
               {this.state.all3Darts5[2]}
             </Text>
           ) : null}
-          {this.state.all3Darts6.length ? (
+          {this.state.all3Darts6.length && this.state.player6Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts6[0]}{" "}{" "}{this.state.all3Darts6[1]}{" "}{" "}
               {this.state.all3Darts6[2]}
