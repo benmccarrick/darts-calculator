@@ -145,6 +145,21 @@ export default class SixPlayer extends Component {
           }.bind(this),
           3000
         );
+        if (this.state.all3Darts.length === 3) {
+          this.state.checkouts.push(
+            this.state.all3Darts[0] +
+              this.state.all3Darts[1] +
+              this.state.all3Darts[2]
+          );
+        }
+        if (this.state.all3Darts.length === 2) {
+          this.state.checkouts.push(
+            this.state.all3Darts[0] + this.state.all3Darts[1]
+          );
+        }
+        if (this.state.all3Darts.length === 1) {
+          this.state.checkouts.push(this.state.all3Darts[0]);
+        }
         if(this.props.route.params.player1StartingScore === 301){
           this.setState({ currentValue: 301 });
         }
@@ -240,6 +255,15 @@ export default class SixPlayer extends Component {
             this.setState({ player6Throw: true });
           }
       }
+      if (this.state.checkouts.length) {
+        let highestCheckout = this.state.checkouts[0];
+        for (let i = 0; i < this.state.checkouts.length; i++) {
+          if (this.state.checkouts[i] > highestCheckout) {
+            highestCheckout = this.state.checkouts[i];
+          }
+        }
+        this.setState({ highestOut: highestCheckout });
+      }
 
       if (
         this.state.all3Darts.length === 3 &&
@@ -248,6 +272,7 @@ export default class SixPlayer extends Component {
           this.state.all3Darts[2] ===
           180
       ) {
+        this.setState({ total180s: parseFloat(this.state.total180s) + 1 });
         this.setState({ modalVisible180: true})
         setTimeout(
           function () {
@@ -388,6 +413,21 @@ export default class SixPlayer extends Component {
           }.bind(this),
           3000
         );
+        if (this.state.all3Darts2.length === 3) {
+          this.state.checkouts2.push(
+            this.state.all3Darts2[0] +
+              this.state.all3Darts2[1] +
+              this.state.all3Darts2[2]
+          );
+        }
+        if (this.state.all3Darts2.length === 2) {
+          this.state.checkouts2.push(
+            this.state.all3Darts2[0] + this.state.all3Darts2[1]
+          );
+        }
+        if (this.state.all3Darts2.length === 1) {
+          this.state.checkouts2.push(this.state.all3Darts2[0]);
+        }
         if(this.props.route.params.player1StartingScore === 301){
             this.setState({ currentValue: 301 });
           }
@@ -483,6 +523,15 @@ export default class SixPlayer extends Component {
             this.setState({ player6Throw: true });
           }
       }
+      if (this.state.checkouts2.length) {
+        let highestCheckout = this.state.checkouts2[0];
+        for (let i = 0; i < this.state.checkouts2.length; i++) {
+          if (this.state.checkouts2[i] > highestCheckout) {
+            highestCheckout = this.state.checkouts2[i];
+          }
+        }
+        this.setState({ highestOut2: highestCheckout });
+      }
 
       if (
         this.state.all3Darts2.length === 3 &&
@@ -491,6 +540,7 @@ export default class SixPlayer extends Component {
           this.state.all3Darts2[2] ===
           180
       ) {
+        this.setState({ total180s2: parseFloat(this.state.total180s2) + 1 });
         this.setState({ modalVisible180: true})
         setTimeout(
           function () {
@@ -641,6 +691,21 @@ export default class SixPlayer extends Component {
             }.bind(this),
             3000
           );
+          if (this.state.all3Darts3.length === 3) {
+            this.state.checkouts3.push(
+              this.state.all3Darts3[0] +
+                this.state.all3Darts3[1] +
+                this.state.all3Darts3[2]
+            );
+          }
+          if (this.state.all3Darts3.length === 2) {
+            this.state.checkouts3.push(
+              this.state.all3Darts3[0] + this.state.all3Darts3[1]
+            );
+          }
+          if (this.state.all3Darts3.length === 1) {
+            this.state.checkouts3.push(this.state.all3Darts3[0]);
+          }
           if(this.props.route.params.player1StartingScore === 301){
             this.setState({ currentValue: 301 });
           }
@@ -736,6 +801,15 @@ export default class SixPlayer extends Component {
             this.setState({ player6Throw: true });
           }
         }
+        if (this.state.checkouts3.length) {
+          let highestCheckout = this.state.checkouts3[0];
+          for (let i = 0; i < this.state.checkouts3.length; i++) {
+            if (this.state.checkouts3[i] > highestCheckout) {
+              highestCheckout = this.state.checkouts3[i];
+            }
+          }
+          this.setState({ highestOut3: highestCheckout });
+        }
   
         if (
           this.state.all3Darts3.length === 3 &&
@@ -744,6 +818,7 @@ export default class SixPlayer extends Component {
             this.state.all3Darts3[2] ===
             180
         ) {
+          this.setState({ total180s3: parseFloat(this.state.total180s3) + 1 });
           this.setState({ modalVisible180: true})
           setTimeout(
             function () {
@@ -894,6 +969,21 @@ export default class SixPlayer extends Component {
             }.bind(this),
             3000
           );
+          if (this.state.all3Darts4.length === 3) {
+            this.state.checkouts4.push(
+              this.state.all3Darts4[0] +
+                this.state.all3Darts4[1] +
+                this.state.all3Darts4[2]
+            );
+          }
+          if (this.state.all3Darts4.length === 2) {
+            this.state.checkouts4.push(
+              this.state.all3Darts4[0] + this.state.all3Darts4[1]
+            );
+          }
+          if (this.state.all3Darts4.length === 1) {
+            this.state.checkouts4.push(this.state.all3Darts4[0]);
+          }
           if(this.props.route.params.player1StartingScore === 301){
             this.setState({ currentValue: 301 });
           }
@@ -989,6 +1079,15 @@ export default class SixPlayer extends Component {
             this.setState({ player6Throw: true });
           }
         }
+        if (this.state.checkouts4.length) {
+          let highestCheckout = this.state.checkouts4[0];
+          for (let i = 0; i < this.state.checkouts4.length; i++) {
+            if (this.state.checkouts4[i] > highestCheckout) {
+              highestCheckout = this.state.checkouts4[i];
+            }
+          }
+          this.setState({ highestOut4: highestCheckout });
+        }
   
         if (
           this.state.all3Darts4.length === 3 &&
@@ -997,6 +1096,7 @@ export default class SixPlayer extends Component {
             this.state.all3Darts4[2] ===
             180
         ) {
+          this.setState({ total180s4: parseFloat(this.state.total180s4) + 1 });
           this.setState({ modalVisible180: true})
           setTimeout(
             function () {
@@ -1147,6 +1247,21 @@ export default class SixPlayer extends Component {
             }.bind(this),
             3000
           );
+          if (this.state.all3Darts5.length === 3) {
+            this.state.checkouts5.push(
+              this.state.all3Darts5[0] +
+                this.state.all3Darts5[1] +
+                this.state.all3Darts5[2]
+            );
+          }
+          if (this.state.all3Darts5.length === 2) {
+            this.state.checkouts5.push(
+              this.state.all3Darts5[0] + this.state.all3Darts5[1]
+            );
+          }
+          if (this.state.all3Darts5.length === 1) {
+            this.state.checkouts5.push(this.state.all3Darts5[0]);
+          }
           if(this.props.route.params.player1StartingScore === 301){
             this.setState({ currentValue: 301 });
           }
@@ -1242,6 +1357,15 @@ export default class SixPlayer extends Component {
             this.setState({ player6Throw: true });
           }
         }
+        if (this.state.checkouts5.length) {
+          let highestCheckout = this.state.checkouts5[0];
+          for (let i = 0; i < this.state.checkouts5.length; i++) {
+            if (this.state.checkouts5[i] > highestCheckout) {
+              highestCheckout = this.state.checkouts5[i];
+            }
+          }
+          this.setState({ highestOut5: highestCheckout });
+        }
   
         if (
           this.state.all3Darts5.length === 3 &&
@@ -1250,6 +1374,7 @@ export default class SixPlayer extends Component {
             this.state.all3Darts5[2] ===
             180
         ) {
+          this.setState({ total180s5: parseFloat(this.state.total180s5) + 1 });
           this.setState({ modalVisible180: true})
           setTimeout(
             function () {
@@ -1390,6 +1515,21 @@ export default class SixPlayer extends Component {
             }.bind(this),
             3000
           );
+          if (this.state.all3Darts6.length === 3) {
+            this.state.checkouts6.push(
+              this.state.all3Darts6[0] +
+                this.state.all3Darts6[1] +
+                this.state.all3Darts6[2]
+            );
+          }
+          if (this.state.all3Darts6.length === 2) {
+            this.state.checkouts6.push(
+              this.state.all3Darts6[0] + this.state.all3Darts6[1]
+            );
+          }
+          if (this.state.all3Darts6.length === 1) {
+            this.state.checkouts6.push(this.state.all3Darts6[0]);
+          }
           if(this.props.route.params.player1StartingScore === 301){
             this.setState({ currentValue: 301 });
           }
@@ -1485,6 +1625,15 @@ export default class SixPlayer extends Component {
             this.setState({ player6Throw: true });
           }
         }
+        if (this.state.checkouts6.length) {
+          let highestCheckout = this.state.checkouts6[0];
+          for (let i = 0; i < this.state.checkouts6.length; i++) {
+            if (this.state.checkouts6[i] > highestCheckout) {
+              highestCheckout = this.state.checkouts6[i];
+            }
+          }
+          this.setState({ highestOut6: highestCheckout });
+        }
   
         if (
           this.state.all3Darts6.length === 3 &&
@@ -1493,6 +1642,7 @@ export default class SixPlayer extends Component {
             this.state.all3Darts6[2] ===
             180
         ) {
+          this.setState({ total180s6: parseFloat(this.state.total180s6) + 1 });
           this.setState({ modalVisible180: true})
           setTimeout(
             function () {
@@ -1513,47 +1663,6 @@ export default class SixPlayer extends Component {
         }
       }
   };
-
-  // threeDartAverage = () => {
-  //   let allDartsAverage = this.state.dartsAverage;
-  //   const averages = [];
-  //   let sum = 0;
-
-  //   for (let i = 0; i < allDartsAverage.length; i++) {
-  //     sum = sum + allDartsAverage[i];
-  //     if ((i + 1) % 3 == 0) {
-  //       averages.push(sum);
-  //       sum = 0;
-  //     }
-  //   }
-
-  //   const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
-
-  //   if (averages.length > 0) {
-  //     return allAverages;
-  //   }
-  //   return 0;
-  // };
-  // threeDartAverage2 = () => {
-  //   let allDartsAverage = this.state.dartsAverage2;
-  //   const averages = [];
-  //   let sum = 0;
-
-  //   for (let i = 0; i < allDartsAverage.length; i++) {
-  //     sum = sum + allDartsAverage[i];
-  //     if ((i + 1) % 3 == 0) {
-  //       averages.push(sum);
-  //       sum = 0;
-  //     }
-  //   }
-
-  //   const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
-
-  //   if (averages.length > 0) {
-  //     return allAverages;
-  //   }
-  //   return 0;
-  // };
 
   ResetGame = () => {
     this.setState(initialState);
@@ -2313,6 +2422,128 @@ export default class SixPlayer extends Component {
       }
     }
   };
+
+  threeDartAverage = () => {
+    let allDartsAverage = this.state.dartsAverage;
+    const averages = [];
+    let sum = 0;
+
+    for (let i = 0; i < allDartsAverage.length; i++) {
+      sum = sum + allDartsAverage[i];
+      if ((i + 1) % 3 == 0) {
+        averages.push(sum);
+        sum = 0;
+      }
+    }
+
+    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+
+    if (averages.length > 0) {
+      return allAverages;
+    }
+    return 0;
+  };
+  threeDartAverage2 = () => {
+    let allDartsAverage = this.state.dartsAverage2;
+    const averages = [];
+    let sum = 0;
+
+    for (let i = 0; i < allDartsAverage.length; i++) {
+      sum = sum + allDartsAverage[i];
+      if ((i + 1) % 3 == 0) {
+        averages.push(sum);
+        sum = 0;
+      }
+    }
+
+    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+
+    if (averages.length > 0) {
+      return allAverages;
+    }
+    return 0;
+  };
+  threeDartAverage3 = () => {
+    let allDartsAverage = this.state.dartsAverage3;
+    const averages = [];
+    let sum = 0;
+
+    for (let i = 0; i < allDartsAverage.length; i++) {
+      sum = sum + allDartsAverage[i];
+      if ((i + 1) % 3 == 0) {
+        averages.push(sum);
+        sum = 0;
+      }
+    }
+
+    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+
+    if (averages.length > 0) {
+      return allAverages;
+    }
+    return 0;
+  };
+  threeDartAverage4 = () => {
+    let allDartsAverage = this.state.dartsAverage4;
+    const averages = [];
+    let sum = 0;
+
+    for (let i = 0; i < allDartsAverage.length; i++) {
+      sum = sum + allDartsAverage[i];
+      if ((i + 1) % 3 == 0) {
+        averages.push(sum);
+        sum = 0;
+      }
+    }
+
+    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+
+    if (averages.length > 0) {
+      return allAverages;
+    }
+    return 0;
+  };
+  threeDartAverage5 = () => {
+    let allDartsAverage = this.state.dartsAverage5;
+    const averages = [];
+    let sum = 0;
+
+    for (let i = 0; i < allDartsAverage.length; i++) {
+      sum = sum + allDartsAverage[i];
+      if ((i + 1) % 3 == 0) {
+        averages.push(sum);
+        sum = 0;
+      }
+    }
+
+    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+
+    if (averages.length > 0) {
+      return allAverages;
+    }
+    return 0;
+  };
+  threeDartAverage6 = () => {
+    let allDartsAverage = this.state.dartsAverage6;
+    const averages = [];
+    let sum = 0;
+
+    for (let i = 0; i < allDartsAverage.length; i++) {
+      sum = sum + allDartsAverage[i];
+      if ((i + 1) % 3 == 0) {
+        averages.push(sum);
+        sum = 0;
+      }
+    }
+
+    const allAverages = averages.reduce((a, b) => a + b, 0) / averages.length;
+
+    if (averages.length > 0) {
+      return allAverages;
+    }
+    return 0;
+  };
+
   player1Text = () => {
     if (this.state.player1Throw) {
       return {
@@ -2440,6 +2671,20 @@ export default class SixPlayer extends Component {
     return (
       <View style={styles.container}>
         <SafeAreaView>
+        <Pressable
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed ? "rgb(210, 230, 255)" : "red",
+                    borderRadius: 20,
+                    padding: 9,
+                    elevation: 0,
+                  },
+                ]}
+                onPress={() => this.setState({ modalVisible21: true })}
+              >
+                <Text style={styles.textStyle}>Player Stats</Text>
+              </Pressable>
+          <View style={styles.thrower}>
           {this.state.player1Throw && (
             <Text style={styles.player1Text}>{this.props.route.params.player1Name}'s Throw</Text>
           )}
@@ -2458,6 +2703,8 @@ export default class SixPlayer extends Component {
           {this.state.player6Throw && (
             <Text style={styles.player2Text}>{this.props.route.params.player6Name}'s Throw</Text>
           )}
+          </View>
+          <View style={styles.scoreboard}>
           <Row>
             <View style={styles.columns}>
               <Text style={styles.value}> </Text>
@@ -2540,6 +2787,7 @@ export default class SixPlayer extends Component {
             </View>
               }
           </Row>
+          </View>
           {(this.state.showOuts && this.state.player1Throw) ? (
             <Text style={styles.outText}>
               {this.props.route.params.player1Name}'s Possible Out:{" "}{this.state.possibleOutShot}
@@ -2741,6 +2989,220 @@ export default class SixPlayer extends Component {
             </Modal>
             </View>
           }
+          <View style={styles.centeredView}>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={this.state.modalVisible21}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                  this.setState({ modalVisible21: false });
+                }}
+              >
+                <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                  <Pressable
+                      style={({ pressed }) => [
+                        {
+                          backgroundColor: pressed
+                            ? "rgb(210, 230, 255)"
+                            : "black",
+                          borderRadius: 20,
+                          padding: 9,
+                          elevation: 0,
+                          marginBottom: 10,
+                        },
+                      ]}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: true })}
+                    >
+                      <Text style={styles.textStyle}>Player 1</Text>
+                    </Pressable>
+                    <Pressable
+                      style={({ pressed }) => [
+                        {
+                          backgroundColor: pressed
+                            ? "rgb(210, 230, 255)"
+                            : "black",
+                          borderRadius: 20,
+                          padding: 9,
+                          elevation: 0,
+                          marginBottom: 10,
+                        },
+                      ]}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: true, displayStats1: false })}
+                    >
+                      <Text style={styles.textStyle}>Player 2</Text>
+                    </Pressable>
+                    <Pressable
+                      style={({ pressed }) => [
+                        {
+                          backgroundColor: pressed
+                            ? "rgb(210, 230, 255)"
+                            : "black",
+                          borderRadius: 20,
+                          padding: 9,
+                          elevation: 0,
+                          marginBottom: 10,
+                        },
+                      ]}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: true, displayStats2: false, displayStats1: false })}
+                    >
+                      <Text style={styles.textStyle}>Player 3</Text>
+                    </Pressable>
+                    {this.props.route.params.numOfPlayers > 3 && <Pressable
+                      style={({ pressed }) => [
+                        {
+                          backgroundColor: pressed
+                            ? "rgb(210, 230, 255)"
+                            : "black",
+                          borderRadius: 20,
+                          padding: 9,
+                          elevation: 0,
+                          marginBottom: 10,
+                        },
+                      ]}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: true, displayStats3: false, displayStats2: false, displayStats1: false })}
+                    >
+                      <Text style={styles.textStyle}>Player 4</Text>
+                    </Pressable>}
+                    {this.props.route.params.numOfPlayers > 4 && <Pressable
+                      style={({ pressed }) => [
+                        {
+                          backgroundColor: pressed
+                            ? "rgb(210, 230, 255)"
+                            : "red",
+                          borderRadius: 20,
+                          padding: 9,
+                          elevation: 0,
+                          marginBottom: 10,
+                        },
+                      ]}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: true, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: false })}
+                    >
+                      <Text style={styles.textStyle}>Player 5</Text>
+                    </Pressable>}
+                    {this.props.route.params.numOfPlayers > 5 && <Pressable
+                      style={({ pressed }) => [
+                        {
+                          backgroundColor: pressed
+                            ? "rgb(210, 230, 255)"
+                            : "darkred",
+                          borderRadius: 20,
+                          padding: 9,
+                          elevation: 0,
+                          marginBottom: 10,
+                        },
+                      ]}
+                      onPress={() => this.setState({ displayStats6: true, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: false })}
+                    >
+                      <Text style={styles.textStyle}>Player 6</Text>
+                    </Pressable>}
+                    <Pressable
+                      style={({ pressed }) => [
+                        {
+                          backgroundColor: pressed
+                            ? "rgb(210, 230, 255)"
+                            : "black",
+                          borderRadius: 20,
+                          padding: 9,
+                          elevation: 0,
+                          marginBottom: 10,
+                        },
+                      ]}
+                      onPress={() => this.setState({ modalVisible21: false })}
+                    >
+                      <Text style={styles.textStyle}>Go Back</Text>
+                    </Pressable>
+                    {this.state.displayStats1 &&
+                    <View>
+                    <Text style={styles.statsText}>
+                    3-Dart Average : {this.threeDartAverage().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 180s : {parseFloat(this.state.total180s).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Highest Checkout : {parseFloat(this.state.highestOut).toLocaleString()}
+                  </Text>
+                  </View>}
+                  {this.state.displayStats2 &&
+                    <View>
+                    <Text style={styles.statsText}>
+                    3-Dart Average : {this.threeDartAverage2().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 180s : {parseFloat(this.state.total180s2).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Highest Checkout : {parseFloat(this.state.highestOut2).toLocaleString()}
+                  </Text>
+                  </View>}
+                  {this.state.displayStats3 &&
+                    <View>
+                    <Text style={styles.statsText}>
+                    3-Dart Average : {this.threeDartAverage3().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 180s : {parseFloat(this.state.total180s3).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Highest Checkout : {parseFloat(this.state.highestOut3).toLocaleString()}
+                  </Text>
+                  </View>}
+                  {this.state.displayStats4 &&
+                    <View>
+                    <Text style={styles.statsText}>
+                    3-Dart Average : {this.threeDartAverage4().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 180s : {parseFloat(this.state.total180s4).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Highest Checkout : {parseFloat(this.state.highestOut4).toLocaleString()}
+                  </Text>
+                  </View>}
+                  {this.state.displayStats5 &&
+                    <View>
+                    <Text style={styles.statsText}>
+                    3-Dart Average : {this.threeDartAverage5().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 180s : {parseFloat(this.state.total180s5).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Highest Checkout : {parseFloat(this.state.highestOut5).toLocaleString()}
+                  </Text>
+                  </View>}
+                  {this.state.displayStats6 &&
+                    <View>
+                    <Text style={styles.statsText}>
+                    3-Dart Average : {this.threeDartAverage6().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 180s : {parseFloat(this.state.total180s6).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Highest Checkout : {parseFloat(this.state.highestOut6).toLocaleString()}
+                  </Text>
+                  </View>}
+                  </View>
+                </View>
+              </Modal>
+              {/* <Pressable
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed ? "rgb(210, 230, 255)" : "red",
+                    borderRadius: 20,
+                    padding: 9,
+                    elevation: 0,
+                  },
+                ]}
+                onPress={() => this.setState({ modalVisible21: true })}
+              >
+                <Text style={styles.textStyle}>Player Stats</Text>
+              </Pressable> */}
+            </View>
+          <View style={styles.scores}>
           <Row>
             <View style={styles.centeredView}>
               <Modal
@@ -4296,6 +4758,7 @@ export default class SixPlayer extends Component {
             <Button text="Undo" onPress={() => this.UndoLastDart()} />
             <Button text="Reset" onPress={() => this.ResetGame()} />
           </Row>
+          </View>
         </SafeAreaView>
       </View>
     );
@@ -4306,7 +4769,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#202020",
-    justifyContent: "flex-end",
+  },
+  scoreboard: {
+    alignItems: "flex-start",
+    marginBottom: 15,
+  },
+  scores: {
+    justifyContent: 'flex-end',
+  },
+  thrower: {
+    marginTop: 30,
   },
   columns: {
     alignItems: "left",
@@ -4325,6 +4797,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     marginBottom: 10,
+  },
+  statsText: {
+    color: "black",
+    fontSize: 26,
+    textAlign: 'center',
+    marginTop: 5,
+    marginBottom: 5
   },
   player1Text: {
     color: "red",

@@ -6,8 +6,9 @@ The app also has the functionality to keep track of statistics such as 3-Dart Av
 
 I have completed the MVP for this project, but have ideas to add more features to this in the future including:
 
-- Add up to a 6 player scoring game
+- Include stats pop up screen for 3-6 player scoring game
 - More stats available to the user including a checkout success percentage, an average for every first, second and third darts thrown in every visit, and favourite double
+- Including login/password details so users can keep track of all of their stats over time
 - Improve the general design and usuability of the app
 
 ### How to run the app locally

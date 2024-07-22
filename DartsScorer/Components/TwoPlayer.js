@@ -11,7 +11,7 @@ import Button from "./Button";
 import Row from "./Row";
 import { initialState, possibleOuts } from "./dartCalculator";
 
-export default class MultiPlayer extends Component {
+export default class TwoPlayer extends Component {
   state = initialState;
 
   HandleTap = (type, value) => {
@@ -718,12 +718,15 @@ export default class MultiPlayer extends Component {
     return (
       <View style={styles.container}>
         <SafeAreaView>
+          <View style={styles.thrower}>
           {this.state.player1Throw && (
             <Text style={styles.player1Text}>{this.props.route.params.player1Name}'s Throw</Text>
           )}
           {this.state.player2Throw && (
             <Text style={styles.player2Text}>{this.props.route.params.player2Name}'s Throw</Text>
           )}
+          </View>
+          <View style={styles.scoreboard}>
           <Row>
             <View style={styles.columns}>
               <Text style={styles.value}> </Text>
@@ -770,28 +773,31 @@ export default class MultiPlayer extends Component {
               </Text>
             </View>
           </Row>
+          </View>
+          <View style={styles.outsAndDarts}>
           {this.state.showOuts && this.state.player1Throw ? (
             <Text style={styles.outText}>
               {this.props.route.params.player1Name}'s Possible Out:{" "}{this.state.possibleOutShot}
             </Text>
-          ) : null}
+          ) : <Text style={styles.outText}> </Text>}
           {this.state.showOuts2 && this.state.player2Throw ? (
             <Text style={styles.outText}>
               {this.props.route.params.player2Name}'s Possible Out:{" "}{this.state.possibleOutShot2}
             </Text>
-          ): null}
+          ): <Text style={styles.outText}> </Text>}
           {this.state.all3Darts.length && this.state.player1Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts[0]}{" "}{" "}{this.state.all3Darts[1]}{" "}{" "}
               {this.state.all3Darts[2]}
             </Text>
-          ): null}
+          ): <Text style={styles.threeDarts}> </Text>}
           {this.state.all3Darts2.length && this.state.player2Throw ? (
             <Text style={styles.threeDarts}>
               {this.state.all3Darts2[0]}{" "}{" "}{this.state.all3Darts2[1]}{" "}{" "}
               {this.state.all3Darts2[2]}
             </Text>
-          ) : null}
+          ) : <Text style={styles.threeDarts}> </Text>}
+          </View>
           {this.state.modalVisible180 && 
             <View style={styles.centeredView}>
             <Modal
@@ -852,6 +858,7 @@ export default class MultiPlayer extends Component {
             </Modal>
             </View>
           }
+          <View style={styles.scores}>
           <Row>
             <View style={styles.centeredView}>
               <Modal
@@ -2407,6 +2414,7 @@ export default class MultiPlayer extends Component {
             <Button text="Undo" onPress={() => this.UndoLastDart()} />
             <Button text="Reset" onPress={() => this.ResetGame()} />
           </Row>
+          </View>
         </SafeAreaView>
       </View>
     );
@@ -2417,19 +2425,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#202020",
-    justifyContent: "flex-end",
+  },
+  scoreboard: {
+    alignItems: "flex-start",
+    marginBottom: 15,
+  },
+  scores: {
+    justifyContent: 'flex-end',
+  },
+  thrower: {
+    marginTop: 30,
   },
   columns: {
     alignItems: "left",
     marginLeft: 30,
+    marginBottom: 0,
   },
   columns2: {
     alignItems: "center",
     marginLeft: 35,
+    
   },
   columns3: {
     alignItems: "center",
     marginLeft: 65,
+    
   },
   value: {
     color: "#fff",
@@ -2441,13 +2461,13 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 26,
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   player2Text: {
     color: "red",
     fontSize: 26,
     textAlign: "center",
-    marginBottom: 30,
+    marginBottom: 20,
   },
   centeredView: {
     flex: 1,
