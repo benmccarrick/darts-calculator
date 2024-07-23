@@ -2671,6 +2671,7 @@ export default class SixPlayer extends Component {
     return (
       <View style={styles.container}>
         <SafeAreaView>
+          <View style={styles.statsButton}>
         <Pressable
                 style={({ pressed }) => [
                   {
@@ -2684,6 +2685,7 @@ export default class SixPlayer extends Component {
               >
                 <Text style={styles.textStyle}>Player Stats</Text>
               </Pressable>
+          </View>
           <View style={styles.thrower}>
           {this.state.player1Throw && (
             <Text style={styles.player1Text}>{this.props.route.params.player1Name}'s Throw</Text>
@@ -2998,102 +3000,95 @@ export default class SixPlayer extends Component {
                   Alert.alert("Modal has been closed.");
                   this.setState({ modalVisible21: false });
                 }}
-              >
+                >
                 <View style={styles.centeredView}>
                   <View style={styles.modalView}>
+                <Row>
                   <Pressable
                       style={({ pressed }) => [
                         {
-                          backgroundColor: pressed
-                            ? "rgb(210, 230, 255)"
-                            : "black",
+                          backgroundColor: this.state.statsButtonColour1,
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
                           marginBottom: 10,
+                          
                         },
                       ]}
-                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: true })}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: true, statsButtonColour6: "black", statsButtonColour5: "black", statsButtonColour4: "black", statsButtonColour3: "black", statsButtonColour2: "black", statsButtonColour1: "blue" })}
                     >
                       <Text style={styles.textStyle}>Player 1</Text>
                     </Pressable>
                     <Pressable
                       style={({ pressed }) => [
                         {
-                          backgroundColor: pressed
-                            ? "rgb(210, 230, 255)"
-                            : "black",
+                          backgroundColor: this.state.statsButtonColour2,
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
                           marginBottom: 10,
+                          
                         },
                       ]}
-                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: true, displayStats1: false })}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: true, displayStats1: false, statsButtonColour6: "black", statsButtonColour5: "black", statsButtonColour4: "black", statsButtonColour3: "black", statsButtonColour2: "blue", statsButtonColour1: "black" })}
                     >
                       <Text style={styles.textStyle}>Player 2</Text>
                     </Pressable>
                     <Pressable
                       style={({ pressed }) => [
                         {
-                          backgroundColor: pressed
-                            ? "rgb(210, 230, 255)"
-                            : "black",
+                          backgroundColor: this.state.statsButtonColour3,
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
                           marginBottom: 10,
                         },
                       ]}
-                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: true, displayStats2: false, displayStats1: false })}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: true, displayStats2: false, displayStats1: false, statsButtonColour6: "black", statsButtonColour5: "black", statsButtonColour4: "black", statsButtonColour3: "blue", statsButtonColour2: "black", statsButtonColour1: "black" })}
                     >
                       <Text style={styles.textStyle}>Player 3</Text>
                     </Pressable>
                     {this.props.route.params.numOfPlayers > 3 && <Pressable
                       style={({ pressed }) => [
                         {
-                          backgroundColor: pressed
-                            ? "rgb(210, 230, 255)"
-                            : "black",
+                          backgroundColor: this.state.statsButtonColour4,
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
                           marginBottom: 10,
                         },
                       ]}
-                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: true, displayStats3: false, displayStats2: false, displayStats1: false })}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: true, displayStats3: false, displayStats2: false, displayStats1: false, statsButtonColour6: "black", statsButtonColour5: "black", statsButtonColour4: "blue", statsButtonColour3: "black", statsButtonColour2: "black", statsButtonColour1: "black" })}
                     >
                       <Text style={styles.textStyle}>Player 4</Text>
                     </Pressable>}
+                    </Row>
+                    <Row>
                     {this.props.route.params.numOfPlayers > 4 && <Pressable
                       style={({ pressed }) => [
                         {
-                          backgroundColor: pressed
-                            ? "rgb(210, 230, 255)"
-                            : "red",
+                          backgroundColor: this.state.statsButtonColour5,
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
                           marginBottom: 10,
                         },
                       ]}
-                      onPress={() => this.setState({ displayStats6: false, displayStats5: true, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: false })}
+                      onPress={() => this.setState({ displayStats6: false, displayStats5: true, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: false, statsButtonColour6: "black", statsButtonColour5: "blue", statsButtonColour4: "black", statsButtonColour3: "black", statsButtonColour2: "black", statsButtonColour1: "black" })}
                     >
                       <Text style={styles.textStyle}>Player 5</Text>
                     </Pressable>}
                     {this.props.route.params.numOfPlayers > 5 && <Pressable
                       style={({ pressed }) => [
                         {
-                          backgroundColor: pressed
-                            ? "rgb(210, 230, 255)"
-                            : "darkred",
+                          backgroundColor: this.state.statsButtonColour6,
                           borderRadius: 20,
                           padding: 9,
                           elevation: 0,
                           marginBottom: 10,
                         },
                       ]}
-                      onPress={() => this.setState({ displayStats6: true, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: false })}
+                      onPress={() => this.setState({ displayStats6: true, displayStats5: false, displayStats4: false, displayStats3: false, displayStats2: false, displayStats1: false, statsButtonColour6: "blue", statsButtonColour5: "black", statsButtonColour4: "black", statsButtonColour3: "black", statsButtonColour2: "black", statsButtonColour1: "black" })}
                     >
                       <Text style={styles.textStyle}>Player 6</Text>
                     </Pressable>}
@@ -3113,6 +3108,7 @@ export default class SixPlayer extends Component {
                     >
                       <Text style={styles.textStyle}>Go Back</Text>
                     </Pressable>
+                    </Row>
                     {this.state.displayStats1 &&
                     <View>
                     <Text style={styles.statsText}>
@@ -3188,19 +3184,6 @@ export default class SixPlayer extends Component {
                   </View>
                 </View>
               </Modal>
-              {/* <Pressable
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed ? "rgb(210, 230, 255)" : "red",
-                    borderRadius: 20,
-                    padding: 9,
-                    elevation: 0,
-                  },
-                ]}
-                onPress={() => this.setState({ modalVisible21: true })}
-              >
-                <Text style={styles.textStyle}>Player Stats</Text>
-              </Pressable> */}
             </View>
           <View style={styles.scores}>
           <Row>
@@ -4778,7 +4761,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   thrower: {
-    marginTop: 30,
+    marginTop: 15,
   },
   columns: {
     alignItems: "left",
@@ -4803,7 +4786,11 @@ const styles = StyleSheet.create({
     fontSize: 26,
     textAlign: 'center',
     marginTop: 5,
-    marginBottom: 5
+    marginBottom: 0
+  },
+  statsButton: {
+    alignItems: 'flex-end',
+    marginTop: 15,
   },
   player1Text: {
     color: "red",
