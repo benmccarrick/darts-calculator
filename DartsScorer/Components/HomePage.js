@@ -617,17 +617,17 @@ const HomePage = () => {
               });
             }
             
-            if(numberOfPlayers === 2){
+          //   if(numberOfPlayers === 2){
 
-            navigation.navigate("Two Player Game", {
-              player1Name: nameTextPlayer1,
-              player2Name: nameTextPlayer2,
-              player1StartingScore: startingScorePlayer1,
-              player2StartingScore: startingScorePlayer2,
-            });
-          }
+          //   navigation.navigate("Two Player Game", {
+          //     player1Name: nameTextPlayer1,
+          //     player2Name: nameTextPlayer2,
+          //     player1StartingScore: startingScorePlayer1,
+          //     player2StartingScore: startingScorePlayer2,
+          //   });
+          // }
 
-          if(numberOfPlayers > 2){
+          if(numberOfPlayers > 1){
             navigation.navigate("Multiplayer Game", {
               player1Name: nameTextPlayer1,
               player2Name: nameTextPlayer2,

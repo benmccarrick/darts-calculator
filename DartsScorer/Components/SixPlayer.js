@@ -304,7 +304,12 @@ export default class SixPlayer extends Component {
           function () {
             this.setState({ timePassed: true });
             this.setState({ player2Throw: false });
-            this.setState({ player3Throw: true });
+            if(this.props.route.params.numOfPlayers > 2){
+              this.setState({ player3Throw: true });
+          }
+          else {
+            this.setState({ player1Throw: true });
+          }
           }.bind(this),
           1500
         );
@@ -336,7 +341,12 @@ export default class SixPlayer extends Component {
         this.setState({ all3Darts2: [] });
         this.setState({ previousValue2: this.state.currentValue2 });
         this.setState({ player2Throw: false });
-        this.setState({ player3Throw: true });
+        if(this.props.route.params.numOfPlayers > 2){
+          this.setState({ playerThrow: true });
+      }
+      else {
+        this.setState({ player1Throw: true });
+      }
       }
 
       if (this.state.modalVisible20) {
@@ -1877,6 +1887,57 @@ export default class SixPlayer extends Component {
         }
       }
     }
+    if (this.state.player1Throw && !this.state.all3Darts.length && this.props.route.params.numOfPlayers === 2) {
+      if (this.state.currentValue2 <= this.props.route.params.player2StartingScore) {
+        this.setState({
+          currentValue2:
+            this.state.currentValue2 +
+            parseFloat(this.state.dartsAverage2.slice(-1)),
+        });
+        this.state.currentValue2 =
+          this.state.currentValue2 + this.state.dartsAverage2.pop();
+        this.state.all3Darts2.pop();
+      }
+      if (
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) >
+          170 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          159 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          162 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          163 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          165 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          166 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          168 ||
+        this.state.currentValue2 +
+          parseFloat(this.state.dartsAverage2.slice(-1)) ===
+          169
+      ) {
+        this.state.showOuts2 = false;
+      }
+      this.setState({ player1Throw: false });
+      this.setState({ player2Throw: true });
+
+      const outs = Object.keys(possibleOuts);
+
+      for (let i = 0; i < outs.length; i++) {
+        if (parseFloat(outs[i]) === this.state.currentValue2) {
+          this.setState({ possibleOutShot2: possibleOuts[outs[i]] });
+          this.state.showOuts2 = true;
+        }
+      }
+    }
     if (this.state.player2Throw && !this.state.all3Darts2.length) {
       if (this.state.currentValue <= this.props.route.params.player1StartingScore) {
         this.setState({
@@ -2732,7 +2793,18 @@ export default class SixPlayer extends Component {
                 {parseFloat(this.state.legsWon2).toLocaleString()}
               </Text>
             </View>
-              {this.props.route.params.numOfPlayers > 3 ?
+            {this.props.route.params.numOfPlayers === 3 &&
+            <View style={styles.columns3}>
+              <Text style={this.player3Text()}>{this.props.route.params.player3Name}</Text>
+              <Text style={this.player3Text()}>
+                {parseFloat(this.state.currentValue3).toLocaleString()}
+              </Text>
+              <Text style={this.player3Text()}>
+                {parseFloat(this.state.legsWon3).toLocaleString()}
+              </Text>
+              </View>
+              }
+              {this.props.route.params.numOfPlayers > 3 &&
               <View style={styles.columns3}>
                 <Text style={this.player3Text()}>{this.props.route.params.player3Name}</Text>
               <Text style={this.player3Text()}>
@@ -2749,15 +2821,6 @@ export default class SixPlayer extends Component {
                 {parseFloat(this.state.legsWon4).toLocaleString()}
               </Text> 
               </View>
-             : <View style={styles.columns3}>
-             <Text style={this.player3Text()}>{this.props.route.params.player3Name}</Text>
-             <Text style={this.player3Text()}>
-               {parseFloat(this.state.currentValue3).toLocaleString()}
-             </Text>
-             <Text style={this.player3Text()}>
-               {parseFloat(this.state.legsWon3).toLocaleString()}
-             </Text>
-            </View>
              }
               {this.props.route.params.numOfPlayers === 5 &&
             <View style={styles.columns3}>
@@ -3034,7 +3097,7 @@ export default class SixPlayer extends Component {
                     >
                       <Text style={styles.textStyle}>Player 2</Text>
                     </Pressable>
-                    <Pressable
+                    {this.props.route.params.numOfPlayers > 2 && <Pressable
                       style={({ pressed }) => [
                         {
                           backgroundColor: this.state.statsButtonColour3,
@@ -3047,7 +3110,7 @@ export default class SixPlayer extends Component {
                       onPress={() => this.setState({ displayStats6: false, displayStats5: false, displayStats4: false, displayStats3: true, displayStats2: false, displayStats1: false, statsButtonColour6: "black", statsButtonColour5: "black", statsButtonColour4: "black", statsButtonColour3: "blue", statsButtonColour2: "black", statsButtonColour1: "black" })}
                     >
                       <Text style={styles.textStyle}>Player 3</Text>
-                    </Pressable>
+                    </Pressable>}
                     {this.props.route.params.numOfPlayers > 3 && <Pressable
                       style={({ pressed }) => [
                         {
