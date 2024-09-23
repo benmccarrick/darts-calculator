@@ -156,6 +156,31 @@ export default class SinglePlayer extends Component {
         3000
       );
     }
+    if (
+      this.state.all3Darts.length === 3 &&
+      (this.state.all3Darts[0] +
+        this.state.all3Darts[1] +
+        this.state.all3Darts[2] >=
+        100 && this.state.all3Darts[0] +
+        this.state.all3Darts[1] +
+        this.state.all3Darts[2] <=
+        139)
+    ) {
+      this.setState({ total100s: parseFloat(this.state.total100s) + 1 });
+    }
+    if (
+      this.state.all3Darts.length === 3 &&
+      (this.state.all3Darts[0] +
+        this.state.all3Darts[1] +
+        this.state.all3Darts[2] >=
+        140 && this.state.all3Darts[0] +
+        this.state.all3Darts[1] +
+        this.state.all3Darts[2] <=
+        179)
+    ) {
+      this.setState({ total140s: parseFloat(this.state.total140s) + 1 });
+    }
+
     
     const outs = Object.keys(possibleOuts)
 
@@ -249,6 +274,12 @@ export default class SinglePlayer extends Component {
           <Text style={styles.legValue}>3 Dart Average: {this.threeDartAverage().toFixed(2)}</Text>
           <Text style={styles.legValue}>
             Legs Completed: {parseFloat(this.state.legsWon).toLocaleString()}
+            </Text>
+            <Text style={styles.legValue}>
+            Total 100+: {parseFloat(this.state.total100s).toLocaleString()}
+            </Text>
+            <Text style={styles.legValue}>
+            Total 140+: {parseFloat(this.state.total140s).toLocaleString()}
             </Text>
             <Text style={styles.legValue}>
             Total 180s: {parseFloat(this.state.total180s).toLocaleString()}
@@ -1552,7 +1583,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 42,
     textAlign: "center",
-    marginBottom: 60,
+    marginBottom: 10,
   },
   threeDartValue: {
     color: "#fff",

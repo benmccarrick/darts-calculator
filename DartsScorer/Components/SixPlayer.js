@@ -282,6 +282,30 @@ export default class SixPlayer extends Component {
           3000
         );
       }
+      if (
+        this.state.all3Darts.length === 3 &&
+        (this.state.all3Darts[0] +
+          this.state.all3Darts[1] +
+          this.state.all3Darts[2] >=
+          100 && this.state.all3Darts[0] +
+          this.state.all3Darts[1] +
+          this.state.all3Darts[2] <=
+          139)
+      ) {
+        this.setState({ total100s: parseFloat(this.state.total100s) + 1 });
+      }
+      if (
+        this.state.all3Darts.length === 3 &&
+        (this.state.all3Darts[0] +
+          this.state.all3Darts[1] +
+          this.state.all3Darts[2] >=
+          140 && this.state.all3Darts[0] +
+          this.state.all3Darts[1] +
+          this.state.all3Darts[2] <=
+          179)
+      ) {
+        this.setState({ total140s: parseFloat(this.state.total140s) + 1 });
+      }
 
       const outs = Object.keys(possibleOuts);
 
@@ -559,6 +583,30 @@ export default class SixPlayer extends Component {
           }.bind(this),
           3000
         );
+      }
+      if (
+        this.state.all3Darts2.length === 3 &&
+        (this.state.all3Darts2[0] +
+          this.state.all3Darts2[1] +
+          this.state.all3Darts2[2] >=
+          100 && this.state.all3Darts2[0] +
+          this.state.all3Darts2[1] +
+          this.state.all3Darts2[2] <=
+          139)
+      ) {
+        this.setState({ total100s2: parseFloat(this.state.total100s2) + 1 });
+      }
+      if (
+        this.state.all3Darts2.length === 3 &&
+        (this.state.all3Darts2[0] +
+          this.state.all3Darts2[1] +
+          this.state.all3Darts2[2] >=
+          140 && this.state.all3Darts2[0] +
+          this.state.all3Darts2[1] +
+          this.state.all3Darts2[2] <=
+          179)
+      ) {
+        this.setState({ total140s2: parseFloat(this.state.total140s2) + 1 });
       }
 
       const outs = Object.keys(possibleOuts);
@@ -838,6 +886,30 @@ export default class SixPlayer extends Component {
             3000
           );
         }
+        if (
+          this.state.all3Darts3.length === 3 &&
+          (this.state.all3Darts3[0] +
+            this.state.all3Darts3[1] +
+            this.state.all3Darts3[2] >=
+            100 && this.state.all3Darts3[0] +
+            this.state.all3Darts3[1] +
+            this.state.all3Darts3[2] <=
+            139)
+        ) {
+          this.setState({ total100s3: parseFloat(this.state.total100s3) + 1 });
+        }
+        if (
+          this.state.all3Darts3.length === 3 &&
+          (this.state.all3Darts3[0] +
+            this.state.all3Darts3[1] +
+            this.state.all3Darts3[2] >=
+            140 && this.state.all3Darts3[0] +
+            this.state.all3Darts3[1] +
+            this.state.all3Darts3[2] <=
+            179)
+        ) {
+          this.setState({ total140s3: parseFloat(this.state.total140s3) + 1 });
+        }
   
         const outs = Object.keys(possibleOuts);
   
@@ -1115,6 +1187,30 @@ export default class SixPlayer extends Component {
             }.bind(this),
             3000
           );
+        }
+        if (
+          this.state.all3Darts4.length === 3 &&
+          (this.state.all3Darts4[0] +
+            this.state.all3Darts4[1] +
+            this.state.all3Darts4[2] >=
+            100 && this.state.all3Darts4[0] +
+            this.state.all3Darts4[1] +
+            this.state.all3Darts4[2] <=
+            139)
+        ) {
+          this.setState({ total100s4: parseFloat(this.state.total100s4) + 1 });
+        }
+        if (
+          this.state.all3Darts4.length === 3 &&
+          (this.state.all3Darts4[0] +
+            this.state.all3Darts4[1] +
+            this.state.all3Darts4[2] >=
+            140 && this.state.all3Darts4[0] +
+            this.state.all3Darts4[1] +
+            this.state.all3Darts4[2] <=
+            179)
+        ) {
+          this.setState({ total140s4: parseFloat(this.state.total140s4) + 1 });
         }
   
         const outs = Object.keys(possibleOuts);
@@ -1394,6 +1490,30 @@ export default class SixPlayer extends Component {
             3000
           );
         }
+        if (
+          this.state.all3Darts5.length === 3 &&
+          (this.state.all3Darts5[0] +
+            this.state.all3Darts5[1] +
+            this.state.all3Darts5[2] >=
+            100 && this.state.all3Darts5[0] +
+            this.state.all3Darts5[1] +
+            this.state.all3Darts5[2] <=
+            139)
+        ) {
+          this.setState({ total100s5: parseFloat(this.state.total100s5) + 1 });
+        }
+        if (
+          this.state.all3Darts5.length === 3 &&
+          (this.state.all3Darts5[0] +
+            this.state.all3Darts5[1] +
+            this.state.all3Darts5[2] >=
+            140 && this.state.all3Darts5[0] +
+            this.state.all3Darts5[1] +
+            this.state.all3Darts5[2] <=
+            179)
+        ) {
+          this.setState({ total140s5: parseFloat(this.state.total140s5) + 1 });
+        }
   
         const outs = Object.keys(possibleOuts);
   
@@ -1661,6 +1781,30 @@ export default class SixPlayer extends Component {
             }.bind(this),
             3000
           );
+        }
+        if (
+          this.state.all3Darts6.length === 3 &&
+          (this.state.all3Darts6[0] +
+            this.state.all3Darts6[1] +
+            this.state.all3Darts6[2] >=
+            100 && this.state.all3Darts6[0] +
+            this.state.all3Darts6[1] +
+            this.state.all3Darts6[2] <=
+            139)
+        ) {
+          this.setState({ total100s6: parseFloat(this.state.total100s6) + 1 });
+        }
+        if (
+          this.state.all3Darts6.length === 3 &&
+          (this.state.all3Darts6[0] +
+            this.state.all3Darts6[1] +
+            this.state.all3Darts6[2] >=
+            140 && this.state.all3Darts6[0] +
+            this.state.all3Darts6[1] +
+            this.state.all3Darts6[2] <=
+            179)
+        ) {
+          this.setState({ total140s6: parseFloat(this.state.total140s6) + 1 });
         }
   
         const outs = Object.keys(possibleOuts);
@@ -3178,6 +3322,12 @@ export default class SixPlayer extends Component {
                     3-Dart Average : {this.threeDartAverage().toFixed(2)}
                   </Text>
                   <Text style={styles.statsText}>
+                    Total 100+ : {parseFloat(this.state.total100s).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 140+ : {parseFloat(this.state.total140s).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
                     Total 180s : {parseFloat(this.state.total180s).toLocaleString()}
                   </Text>
                   <Text style={styles.statsText}>
@@ -3188,6 +3338,12 @@ export default class SixPlayer extends Component {
                     <View>
                     <Text style={styles.statsText}>
                     3-Dart Average : {this.threeDartAverage2().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 100+ : {parseFloat(this.state.total100s2).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 140+ : {parseFloat(this.state.total140s2).toLocaleString()}
                   </Text>
                   <Text style={styles.statsText}>
                     Total 180s : {parseFloat(this.state.total180s2).toLocaleString()}
@@ -3202,6 +3358,12 @@ export default class SixPlayer extends Component {
                     3-Dart Average : {this.threeDartAverage3().toFixed(2)}
                   </Text>
                   <Text style={styles.statsText}>
+                    Total 100+ : {parseFloat(this.state.total100s3).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 140+ : {parseFloat(this.state.total140s3).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
                     Total 180s : {parseFloat(this.state.total180s3).toLocaleString()}
                   </Text>
                   <Text style={styles.statsText}>
@@ -3212,6 +3374,12 @@ export default class SixPlayer extends Component {
                     <View>
                     <Text style={styles.statsText}>
                     3-Dart Average : {this.threeDartAverage4().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 100+ : {parseFloat(this.state.total100s4).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 140+ : {parseFloat(this.state.total140s4).toLocaleString()}
                   </Text>
                   <Text style={styles.statsText}>
                     Total 180s : {parseFloat(this.state.total180s4).toLocaleString()}
@@ -3226,6 +3394,12 @@ export default class SixPlayer extends Component {
                     3-Dart Average : {this.threeDartAverage5().toFixed(2)}
                   </Text>
                   <Text style={styles.statsText}>
+                    Total 100+ : {parseFloat(this.state.total100s5).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 140+ : {parseFloat(this.state.total140s5).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
                     Total 180s : {parseFloat(this.state.total180s5).toLocaleString()}
                   </Text>
                   <Text style={styles.statsText}>
@@ -3236,6 +3410,12 @@ export default class SixPlayer extends Component {
                     <View>
                     <Text style={styles.statsText}>
                     3-Dart Average : {this.threeDartAverage6().toFixed(2)}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 100+ : {parseFloat(this.state.total100s6).toLocaleString()}
+                  </Text>
+                  <Text style={styles.statsText}>
+                    Total 140+ : {parseFloat(this.state.total140s6).toLocaleString()}
                   </Text>
                   <Text style={styles.statsText}>
                     Total 180s : {parseFloat(this.state.total180s6).toLocaleString()}

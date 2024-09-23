@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomePage from './Components/HomePage';
 import SinglePlayer from './Components/SinglePlayer';
 import SixPlayer from './Components/SixPlayer';
-import TwoPlayer from './Components/TwoPlayer';
+// import TwoPlayer from './Components/TwoPlayer';
 
 export default function App() {
 
@@ -22,11 +22,11 @@ export default function App() {
         component={SinglePlayer}
         options={{headerShown: 'false'}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
         name="Two Player Game"
         component={TwoPlayer}
         options={{headerShown: 'false'}}
-        />
+        /> */}
         <Stack.Screen
         name="Multiplayer Game"
         component={SixPlayer}
